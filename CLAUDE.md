@@ -26,6 +26,21 @@ This governs every design and copy choice. No urgency tricks. No countdown timer
 - Form posts to a third-party service (Formspree / Buttondown / ConvertKit — TBD by Niklas). The user sets up that account himself; Claude Code only wires the form `action` to the endpoint Niklas provides. Do NOT create accounts.
 - Keep it lightweight. No heavy dependencies.
 
+## Design tokens
+
+Fonts: **Dongle** (headlines/display), **Poppins** (body/UI) — loaded from Google Fonts.
+
+Palette (defined as CSS custom properties in `styles.css`):
+| Variable | Hex | Use |
+|---|---|---|
+| `--color-green` | `#caef8c` | accent |
+| `--color-yellow-light` | `#f5ec89` | accent |
+| `--color-yellow` | `#f9d040` | primary CTA |
+| `--color-coral` | `#ff9063` | hover / secondary |
+| `--color-rose` | `#da6b7d` | accent |
+| `--color-ink` | `#1a1a1a` | text |
+| `--color-bg` | `#ffffff` | page background |
+
 ## Build order (do these as separate steps, not all at once)
 
 1. Scaffold: single `index.html`, `styles.css`, `script.js`. Clean CSS reset. No content yet.
