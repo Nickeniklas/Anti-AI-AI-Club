@@ -2,7 +2,7 @@
 
 Project context for building the day-0 pre-launch landing page. Read this before generating or editing anything.
 
-> Section copy and the verified stats live in `copy.md`. Read `copy.md` before writing or editing any section. `index.html` is the source of truth for copy that's already built; `copy.md` holds the drafts and anything not yet built; this file holds the durable instructions.
+> Section copy and the verified stats live in `copy.md`. Read `copy.md` before writing or editing any section. `index.html` is the source of truth for copy that's already built; `copy.md` holds the drafts and anything not yet built; this file holds the durable instructions. Colour usage rules (section backgrounds, accent rules, what to avoid) are in `colour-instructions.md` — read it before touching any colour or background.
 
 ## What this is
 
@@ -44,9 +44,36 @@ Palette (defined as CSS custom properties in `styles.css`):
 | `--color-ink` | `#1a1a1a` | text |
 | `--color-bg` | `#ffffff` | page background |
 
+Grey utility variables (also in `styles.css` — use these, never hardcode hex):
+| Variable | Hex | Use |
+|---|---|---|
+| `--color-text-muted` | `#555555` | body text on light backgrounds |
+| `--color-text-faint` | `#888888` | microcopy, secondary labels |
+| `--color-text-ghost` | `#cccccc` | decorative elements (e.g. dash prefixes) |
+| `--color-text-dark-body` | `#aaaaaa` | body text on dark (ink) backgrounds |
+
+Full colour usage rules — section backgrounds, accent rules, what to avoid — are in `colour-instructions.md`.
+
+## Current build status
+
+| Section | Status |
+|---|---|
+| 1. Hero | **Built** |
+| 2. Value Proposition | Placeholder |
+| 3. Problem / Solution | Placeholder |
+| 4. What You'll Get | Placeholder |
+| 5. Social Proof | Placeholder |
+| 6. About / Story | Placeholder |
+| 7. Pricing | Placeholder |
+| 8. The Form | Placeholder |
+| 9. FAQ | Placeholder |
+| 10. Footer | Placeholder |
+
+Section backgrounds for all sections are pre-wired in `styles.css`. Build sections in order, one at a time. Confirm look before moving on.
+
 ## Build order (do these as separate steps, not all at once)
 
-1. Scaffold: single `index.html`, `styles.css`, `script.js`. Clean CSS reset. No content yet.
+1. ~~Scaffold: single `index.html`, `styles.css`, `script.js`. Clean CSS reset.~~ **Done.**
 2. Build each section one at a time, mobile-first, using the copy in `copy.md`. Confirm look before moving on.
 3. Build the **form LAST and carefully** — it's the only thing that must actually work. At-least-one-checkbox is the only required input; email is optional and last.
 4. Final pass: responsiveness + mobile widths.

@@ -8,6 +8,11 @@
   --color-ink:          #1a1a1a;
   --color-bg:           #ffffff;
 
+  --color-text-muted:   #555555;
+  --color-text-faint:   #888888;
+  --color-text-ghost:   #cccccc;
+  --color-text-dark-body: #aaaaaa;
+
   --font-display: 'Dongle', sans-serif;
   --font-body:    'Poppins', sans-serif;
 }
@@ -54,6 +59,18 @@ a {
   text-decoration: none;
 }
 
+/* Section backgrounds */
+#hero          { background: rgba(249, 208, 64, 0.10); }
+#value-prop,
+#problem-solution,
+#social-proof,
+#about,
+#faq           { background: var(--color-bg); }
+#what-youll-get { background: rgba(202, 239, 140, 0.15); }
+#pricing        { background: rgba(245, 236, 137, 0.15); }
+#form,
+footer          { background: var(--color-ink); color: var(--color-bg); }
+
 /* Hero */
 #hero {
   padding: 5rem 1.25rem 4rem;
@@ -77,11 +94,21 @@ a {
   letter-spacing: -0.01em;
 }
 
-.hero-sub {
+.hero-intro {
   font-size: clamp(1rem, 2.5vw, 1.125rem);
-  color: #555;
-  max-width: 560px;
-  line-height: 1.65;
+  color: var(--color-text-muted);
+}
+
+.hero-bullets {
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  color: var(--color-text-muted);
+  line-height: 1.9;
+  text-align: left;
+}
+
+.hero-bullets li::before {
+  content: '— ';
+  color: var(--color-text-ghost);
 }
 
 .btn-primary {
@@ -103,5 +130,5 @@ a {
 
 .hero-micro {
   font-size: 0.8rem;
-  color: #888;
+  color: var(--color-text-faint);
 }

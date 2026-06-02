@@ -12,7 +12,10 @@ All section copy and the verified stats for the landing page. Read this before w
 
 ### 1. Hero
 - **Headline:** Two AI companies are now worth what the whole world will spend on AI this year.
-- **Subheadline:** A small club for people who want the real data on AI — how fast it's growing, what it's doing to work, and how it's tangled up with power. Critical, calm, and allergic to hype.
+- **Subheadline (3 bullets):**
+  - How fast it's actually growing
+  - Real numbers, with sources
+  - No hype. No fear.
 - **CTA button:** Tell us what to cover
 - **Microcopy:** Takes 10 seconds. One question, no email needed.
 - BUILD NOTE: headline references Anthropic + OpenAI ≈ $1.82T combined valuation vs ~$2.5T forecast global AI spend in 2026. Re-verify both figures before launch; if they drift, rephrase rather than fudge.
