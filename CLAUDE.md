@@ -61,21 +61,33 @@ Full colour usage rules — section backgrounds, accent rules, what to avoid —
 | 1. Hero | **Built** |
 | 2. Value Proposition | **Built** |
 | 3. Problem / Solution | **Built** |
-| 4. What You'll Get | Placeholder |
-| 5. Social Proof | Placeholder |
-| 6. About / Story | Placeholder |
-| 7. Pricing | Placeholder |
-| 8. The Form | Placeholder |
+| 4. What You'll Get | **Built** |
+| 5. Social Proof | **Built** |
+| 6. About / Story | **Built** |
+| 7. Pricing | **Built** |
+| 8. The Form | **Built** |
 | 9. FAQ | Placeholder |
 | 10. Footer | Placeholder |
 
 Section backgrounds for all sections are pre-wired in `styles.css`. Build sections in order, one at a time. Confirm look before moving on.
 
+## What still needs doing before launch
+
+- **Wire the form endpoint** — `<form action="#">` in `index.html` needs the Formspree URL once Niklas sets up the account. Only Niklas sets up that account; Claude Code only wires the `action`.
+- **Build Section 9 — FAQ**
+- **Build Section 10 — Footer** (contact/submit links use `antibsai@gmail.com`)
+- **Re-verify all stats** in `copy.md` before going live — figures move fast
+- **Final responsiveness pass** — mobile widths, section spacing
+
+## Contact / email
+
+`antibsai@gmail.com` — the real contact address. Used in the form success confirmation (`index.html`). Will also be used in footer contact and "Submit an article" links.
+
 ## Build order (do these as separate steps, not all at once)
 
 1. ~~Scaffold: single `index.html`, `styles.css`, `script.js`. Clean CSS reset.~~ **Done.**
-2. Build each section one at a time, mobile-first, using the copy in `copy.md`. Confirm look before moving on.
-3. Build the **form LAST and carefully** — it's the only thing that must actually work. At-least-one-checkbox is the only required input; email is optional and last.
+2. ~~Build each section one at a time, mobile-first, using the copy in `copy.md`.~~ **Sections 1–8 done.**
+3. ~~Build the form~~ **Done.** At-least-one-checkbox validation and async Formspree submit are in `script.js`. Endpoint still needs to be set in `action`.
 4. Final pass: responsiveness + mobile widths.
 
 ## Design direction

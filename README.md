@@ -8,7 +8,7 @@ A single-page static site. One job: let a visitor weigh in on what we should cov
 |---|---|
 | `index.html` | The page. Source of truth for copy that's already built. |
 | `styles.css` | All styles. CSS custom properties for every token — no hardcoded hex. |
-| `script.js` | Minimal JS. Currently just `'use strict';` — form behaviour goes here when built. |
+| `script.js` | Form validation and async submit handler. |
 | `copy.md` | All section copy and verified stats. Read before editing any text. |
 | `CLAUDE.md` | Durable instructions for Claude Code. Positioning, rules, build order. |
 | `colour-instructions.md` | Colour usage rules. Section backgrounds, accent rules, what to avoid. |
@@ -24,18 +24,20 @@ No build step. Open `index.html` in a browser. That's it.
 | 1. Hero | Built |
 | 2. Value Proposition | Built |
 | 3. Problem / Solution | Built |
-| 4. What You'll Get | Placeholder only |
-| 5. Social Proof | Placeholder only |
-| 6. About / Story | Placeholder only |
-| 7. Pricing | Placeholder only |
-| 8. The Form | Placeholder only |
-| 9. FAQ | Placeholder only |
-| 10. Footer | Placeholder only |
+| 4. What You'll Get | Built |
+| 5. Social Proof | Built |
+| 6. About / Story | Built |
+| 7. Pricing | Built |
+| 8. The Form | Built |
+| 9. FAQ | Placeholder |
+| 10. Footer | Placeholder |
 
-Section backgrounds for all sections are pre-wired in `styles.css` — they'll apply automatically as each section is built.
+Section backgrounds for all sections are pre-wired in `styles.css`.
 
-## What the form needs (when you get there)
+## What still needs doing before launch
 
-- Formspree (or similar) endpoint — Niklas sets up the account and provides the URL; wire it to the form `action`
-- At-least-one-checkbox required; worry text and email are both optional
-- On success: show the confirmation copy from `copy.md` section 8, not a redirect
+- **Wire the form endpoint** — set `action="#"` in the `<form>` to the Formspree URL once the account is set up
+- **Build Section 9 — FAQ**
+- **Build Section 10 — Footer** (contact/submit links should point to `antibsai@gmail.com`)
+- **Re-verify all stats** in `copy.md` — figures move fast; check sources before going live
+- **Final responsiveness pass** — mobile widths, section spacing

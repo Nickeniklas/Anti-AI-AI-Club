@@ -116,7 +116,70 @@
   </section>
 
   <!-- 8. The Form -->
-  <section id="form"></section>
+  <section id="form">
+    <div class="form-inner">
+      <h2 class="form-heading">What should we cover?</h2>
+      <p class="form-subtext">Pick what you actually care about. That's the whole ask — takes about 10 seconds.</p>
+
+      <!-- Set action to your Formspree endpoint, e.g. https://formspree.io/f/XXXXXXXX -->
+      <form id="topic-form" action="#" method="POST" novalidate>
+
+        <fieldset class="form-fieldset">
+          <legend class="form-legend">Pick what you care about <span class="form-required">*</span></legend>
+          <ul class="checkbox-list">
+            <li>
+              <input type="checkbox" id="topic-jobs" name="topics" value="AI & jobs / the labour market">
+              <label for="topic-jobs">AI &amp; jobs / the labour market</label>
+            </li>
+            <li>
+              <input type="checkbox" id="topic-economics" name="topics" value="The real economics">
+              <label for="topic-economics">The real economics (market size, the money, the bubble talk)</label>
+            </li>
+            <li>
+              <input type="checkbox" id="topic-power" name="topics" value="AI & power / politics / surveillance">
+              <label for="topic-power">AI &amp; power / politics / surveillance</label>
+            </li>
+            <li>
+              <input type="checkbox" id="topic-copyright" name="topics" value="Copyright, data, and who owns what">
+              <label for="topic-copyright">Copyright, data, and who owns what</label>
+            </li>
+            <li>
+              <input type="checkbox" id="topic-environment" name="topics" value="Environmental cost">
+              <label for="topic-environment">Environmental cost</label>
+            </li>
+            <li>
+              <input type="checkbox" id="topic-hype" name="topics" value="Hype-checking & broken promises">
+              <label for="topic-hype">Hype-checking &amp; broken promises</label>
+            </li>
+            <li>
+              <input type="checkbox" id="topic-important" name="topics" value="Just give me the important stuff">
+              <label for="topic-important">Just give me the important stuff</label>
+            </li>
+          </ul>
+          <p class="form-error" id="checkbox-error" hidden>Please pick at least one topic.</p>
+        </fieldset>
+
+        <div class="form-field">
+          <label for="worry" class="form-label">What worries you most about AI? <span class="form-optional">Optional</span></label>
+          <textarea id="worry" name="worry" rows="3" placeholder="Optional — one line is fine. Helps us write for you."></textarea>
+        </div>
+
+        <div class="form-field">
+          <label for="email" class="form-label">Want to hear from us? Drop an email. <span class="form-optional">Totally optional ✳</span></label>
+          <input type="email" id="email" name="email" placeholder="you@email.com — only if you want to">
+          <p class="form-helper">✳ Completely optional. We'll only ever email you when we've got something genuinely worth showing — and never anything else.</p>
+        </div>
+
+        <button type="submit" class="btn-form-submit">Send it in</button>
+      </form>
+
+      <!-- Success state — shown after submit, form hidden -->
+      <div id="form-success" hidden>
+        <p class="form-success-main">Got it — thanks for telling us what matters to you. If you left an email, you'll only hear from us when there's something real worth sharing.</p>
+        <p class="form-success-sub">Want to help shape it more? Send us an article worth reading: <a href="mailto:antibsai@gmail.com" class="form-success-link">antibsai@gmail.com</a>.</p>
+      </div>
+    </div>
+  </section>
 
   <!-- 9. FAQ -->
   <section id="faq"></section>

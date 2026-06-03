@@ -70,7 +70,7 @@ All section copy and the verified stats for the landing page. Read this before w
 - **Field 3 — Email** (OPTIONAL, and placed LAST on purpose). Label something like: **"Want to hear from us? Drop an email. Totally optional ✳"** Placeholder: `you@email.com — only if you want to`
   - The asterisk/note must make it unmistakable that this is optional and low-commitment. Suggested helper line: `✳ Completely optional. We'll only ever email you when we've got something genuinely worth showing — and never anything else.`
 - **Submit button:** Send it in
-- **Confirmation (on success):** Got it — thanks for telling us what matters to you. If you left an email, you'll only hear from us when there's something real worth sharing. Want to help shape it more? Send us an article worth reading: [hello@yourdomain].
+- **Confirmation (on success):** Got it — thanks for telling us what matters to you. If you left an email, you'll only hear from us when there's something real worth sharing. Want to help shape it more? Send us an article worth reading: antibsai@gmail.com.
 - BUILD NOTES:
   - At-least-one-checkbox is required; email and worry text are optional and must never block submit. A submission with zero email is valid and useful (anonymous topic vote).
   - The checkboxes are the core market-research signal. Make sure the form service stores topic picks, the worry text, AND the optional email — not just whatever's filled.
