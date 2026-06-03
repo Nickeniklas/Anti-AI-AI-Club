@@ -132,3 +132,69 @@ footer          { background: var(--color-ink); color: var(--color-bg); }
   font-size: 0.8rem;
   color: var(--color-text-faint);
 }
+
+/* Value Proposition */
+#value-prop {
+  padding: 4rem 1.25rem;
+  text-align: center;
+}
+
+.value-prop-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.value-prop-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.value-prop-body {
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  color: var(--color-text-muted);
+  max-width: 580px;
+  line-height: 1.7;
+}
+
+.pillars {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  text-align: left;
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .pillars {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.pillar {
+  border-left: 3px solid var(--color-green);
+  padding-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.pillar strong {
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--color-ink);
+}
+
+.pillar span {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}

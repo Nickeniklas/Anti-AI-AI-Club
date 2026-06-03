@@ -22,11 +22,11 @@ All section copy and the verified stats for the landing page. Read this before w
 
 ### 2. Value Proposition
 - **Heading:** Not anti-AI. Anti-bullshit about AI.
-- Body: Most coverage is selling you a dream or selling you dread. We're after a third thing — what's actually true. We track the figures most takes skip: how big and how fast the AI market really is, its real effect on jobs, and how it's used by governments and the powerful.
+- Body: Most AI coverage either sells you a dream or sells you dread. We're not doing either. We just track the numbers most people skip: how big the market actually is, what it's doing to jobs, and who's using it for power.
 - Three pillars:
-  - **Data over vibes.** Real numbers, with sources. If we can't back it up, we don't print it.
-  - **Calm, not doom.** The point is to leave you informed, not anxious.
-  - **Critical, not hateful.** AI is part of the world now. That's exactly why the scrutiny matters.
+  - **Data over vibes.** Real numbers with real sources. If we can't back it up, we don't post it.
+  - **Calm, not doom.** We want you informed, not anxious.
+  - **Critical, not hateful.** AI is here to stay. That's exactly why it's worth scrutinising.
 
 ### 3. Problem / Solution
 - **Heading:** You don't want hype. You don't want a panic attack either.
