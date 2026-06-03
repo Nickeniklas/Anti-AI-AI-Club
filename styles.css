@@ -352,3 +352,72 @@ footer          { background: var(--color-ink); color: var(--color-bg); }
   text-align: left;
   font-style: italic;
 }
+
+/* About / Story */
+#about {
+  padding: 4rem 1.25rem;
+  text-align: center;
+}
+
+.about-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.about-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.about-body {
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  color: var(--color-text-muted);
+  max-width: 540px;
+  line-height: 1.7;
+}
+
+.about-manifesto {
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  color: var(--color-ink);
+  max-width: 540px;
+  line-height: 1.8;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Pricing */
+#pricing {
+  padding: 4rem 1.25rem;
+  text-align: center;
+}
+
+.pricing-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.pricing-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.pricing-body {
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  color: var(--color-text-muted);
+  max-width: 520px;
+  line-height: 1.7;
+}
