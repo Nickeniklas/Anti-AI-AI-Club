@@ -22,8 +22,8 @@ No build step. Open `index.html` in a browser. That's it.
 | Section | Status |
 |---|---|
 | 1. Hero | Built |
-| 2. Value Proposition | Placeholder only |
-| 3. Problem / Solution | Placeholder only |
+| 2. Value Proposition | Built |
+| 3. Problem / Solution | Built |
 | 4. What You'll Get | Placeholder only |
 | 5. Social Proof | Placeholder only |
 | 6. About / Story | Placeholder only |

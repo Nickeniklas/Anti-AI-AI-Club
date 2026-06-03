@@ -59,8 +59,8 @@ Full colour usage rules — section backgrounds, accent rules, what to avoid —
 | Section | Status |
 |---|---|
 | 1. Hero | **Built** |
-| 2. Value Proposition | Placeholder |
-| 3. Problem / Solution | Placeholder |
+| 2. Value Proposition | **Built** |
+| 3. Problem / Solution | **Built** |
 | 4. What You'll Get | Placeholder |
 | 5. Social Proof | Placeholder |
 | 6. About / Story | Placeholder |

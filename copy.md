@@ -31,7 +31,7 @@ All section copy and the verified stats for the landing page. Read this before w
 ### 3. Problem / Solution
 - **Heading:** You don't want hype. You don't want a panic attack either.
 - Body: If you're skeptical about AI, your options are bad. Boosters say it'll fix everything. Doomers say it'll end everything. Almost nobody just shows you the numbers and lets you think. So you tune out and get blindsided, or scroll yourself into anxiety without learning anything.
-- Resolution: **We're the calm middle.** One small, curated place for the real data on AI's scale, its effect on labour, and its links to power. Read it, get the picture, get on with your day actually informed.
+- Resolution: We're the calm middle. One small, curated place for the real data on AI's scale, its effect on labour, and its links to power. Read it, get the picture, get on with your day actually informed.
 
 ### 4. What You'll Get
 (Day-one honesty: mark what's live vs planned.)
@@ -43,7 +43,7 @@ All section copy and the verified stats for the landing page. Read this before w
 ### 5. Social Proof
 - Day 0: NO testimonials. Do not fabricate any.
 - **Heading:** Get in before there's anything to brag about.
-- Body: We're starting with a small pile of hand-picked articles and a clear point of view. The proof comes later, built with people who show up early. Weigh in now and help decide what this becomes — topics, format, tone.
+- Body: Right now it's just a small pile of hand-picked articles and a clear point of view. So weigh in now and help decide what this becomes: the topics, the format, the tone.
 - BUILD NOTE: leave a swappable slot here for a real signal post-launch (response count, founding-member quote, etc.).
 
 ### 6. About / Story
