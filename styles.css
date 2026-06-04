@@ -64,12 +64,8 @@ a {
 /* Section backgrounds */
 #hero          { background: rgba(249, 208, 64, 0.10); }
 #value-prop,
-#problem-solution,
-#social-proof,
 #about,
 #faq           { background: var(--color-bg); }
-#what-youll-get { background: rgba(202, 239, 140, 0.15); }
-#pricing        { background: rgba(245, 236, 137, 0.15); }
 #form,
 footer          { background: var(--color-ink); color: var(--color-bg); }
 
@@ -201,160 +197,6 @@ footer          { background: var(--color-ink); color: var(--color-bg); }
   line-height: 1.6;
 }
 
-/* Problem / Solution */
-#problem-solution {
-  padding: 4rem 1.25rem;
-  text-align: center;
-}
-
-.ps-inner {
-  max-width: 680px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.ps-heading {
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 5vw, 2.8rem);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-}
-
-.ps-body {
-  font-size: clamp(1rem, 2.5vw, 1.125rem);
-  color: var(--color-text-muted);
-  max-width: 580px;
-  line-height: 1.7;
-}
-
-.ps-resolution {
-  font-size: clamp(1rem, 2.5vw, 1.125rem);
-  color: var(--color-ink);
-  max-width: 560px;
-  line-height: 1.7;
-  padding-top: 0.75rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-/* What You'll Get */
-#what-youll-get {
-  padding: 4rem 1.25rem;
-}
-
-.wyg-inner {
-  max-width: 720px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-}
-
-.wyg-heading {
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 5vw, 2.8rem);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  text-align: center;
-}
-
-.wyg-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
-@media (min-width: 640px) {
-  .wyg-list {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.75rem;
-  }
-}
-
-.wyg-item {
-  border-left: 3px solid var(--color-green);
-  padding-left: 1.1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.wyg-tag {
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  padding: 0.15rem 0.5rem;
-  border-radius: 3px;
-  align-self: flex-start;
-}
-
-.wyg-tag--live {
-  background: var(--color-green);
-  color: var(--color-ink);
-}
-
-.wyg-tag--planned {
-  background: transparent;
-  color: var(--color-text-faint);
-  border: 1px solid var(--color-text-ghost);
-}
-
-.wyg-title {
-  font-weight: 500;
-  font-size: 1rem;
-  color: var(--color-ink);
-}
-
-.wyg-desc {
-  font-size: 0.9rem;
-  color: var(--color-text-muted);
-  line-height: 1.6;
-}
-
-/* Social Proof */
-#social-proof {
-  padding: 4rem 1.25rem;
-  text-align: center;
-}
-
-.sp-inner {
-  max-width: 600px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.sp-heading {
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 5vw, 2.8rem);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-}
-
-.sp-body {
-  font-size: clamp(1rem, 2.5vw, 1.125rem);
-  color: var(--color-text-muted);
-  max-width: 540px;
-  line-height: 1.7;
-}
-
-.sp-signal {
-  font-size: 1rem;
-  color: var(--color-text-faint);
-  border-left: 3px solid var(--color-yellow-light);
-  padding: 0.75rem 1.25rem;
-  text-align: left;
-  font-style: italic;
-}
-
 /* About / Story */
 #about {
   padding: 4rem 1.25rem;
@@ -392,36 +234,6 @@ footer          { background: var(--color-ink); color: var(--color-bg); }
   line-height: 1.8;
   padding-top: 0.75rem;
   border-top: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-/* Pricing */
-#pricing {
-  padding: 4rem 1.25rem;
-  text-align: center;
-}
-
-.pricing-inner {
-  max-width: 600px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
-}
-
-.pricing-heading {
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 5vw, 2.8rem);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-}
-
-.pricing-body {
-  font-size: clamp(1rem, 2.5vw, 1.125rem);
-  color: var(--color-text-muted);
-  max-width: 520px;
-  line-height: 1.7;
 }
 
 /* The Form */
