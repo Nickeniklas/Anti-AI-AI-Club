@@ -1,8 +1,12 @@
 'use strict';
 
-const form = document.getElementById('topic-form');
+const form          = document.getElementById('topic-form');
 const checkboxError = document.getElementById('checkbox-error');
-const formSuccess = document.getElementById('form-success');
+const submitError   = document.getElementById('submit-error');
+const formSuccess   = document.getElementById('form-success');
+const submitBtn     = form.querySelector('button[type="submit"]');
+const formHeading   = document.querySelector('.form-heading');
+const formSubtext   = document.querySelector('.form-subtext');
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -14,28 +18,38 @@ form.addEventListener('submit', async (e) => {
     return;
   }
   checkboxError.hidden = true;
+  submitError.hidden = true;
 
-  const data = new FormData(form);
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending…';
 
   try {
     const res = await fetch(form.action, {
       method: 'POST',
-      body: data,
+      body: new FormData(form),
       headers: { Accept: 'application/json' },
     });
 
     if (res.ok) {
       form.hidden = true;
+      formHeading.hidden = true;
+      formSubtext.hidden = true;
       formSuccess.hidden = false;
+      formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     } else {
-      alert('Something went wrong — please try again.');
+      submitError.hidden = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send it in';
     }
   } catch {
-    alert('Something went wrong — please check your connection and try again.');
+    submitError.hidden = false;
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send it in';
   }
 });
 
 form.addEventListener('change', () => {
-  const checked = form.querySelectorAll('input[name="topics"]:checked');
-  if (checked.length > 0) checkboxError.hidden = true;
+  if (form.querySelectorAll('input[name="topics"]:checked').length > 0) {
+    checkboxError.hidden = true;
+  }
 });
