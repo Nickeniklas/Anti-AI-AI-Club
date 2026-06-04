@@ -19,25 +19,20 @@ No build step. Open `index.html` in a browser. That's it.
 
 ## Current build status
 
+v0.1 — all sections built and live.
+
 | Section | Status |
 |---|---|
 | 1. Hero | Built |
 | 2. Value Proposition | Built |
-| 3. Problem / Solution | Built |
-| 4. What You'll Get | Built |
-| 5. Social Proof | Built |
-| 6. About / Story | Built |
-| 7. Pricing | Built |
-| 8. The Form | Built |
-| 9. FAQ | Placeholder |
-| 10. Footer | Placeholder |
-
-Section backgrounds for all sections are pre-wired in `styles.css`.
+| 3. About / Story | Built |
+| 4. The Form | Built |
+| 5. FAQ | Built |
+| 6. Footer | Built |
 
 ## What still needs doing before launch
 
-- **Wire the form endpoint** — set `action="#"` in the `<form>` to the Formspree URL once the account is set up
-- **Build Section 9 — FAQ**
-- **Build Section 10 — Footer** (contact/submit links should point to `antibsai@gmail.com`)
 - **Re-verify all stats** in `copy.md` — figures move fast; check sources before going live
 - **Final responsiveness pass** — mobile widths, section spacing
+- **Add social links to footer** — placeholder comment in HTML; platforms TBD
+- **Privacy and Terms pages** — footer links currently point to `#`

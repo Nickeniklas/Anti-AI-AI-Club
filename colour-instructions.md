@@ -10,12 +10,9 @@ The page alternates between four backgrounds to create rhythm without each secti
 | Section | Background | Notes |
 |---|---|---|
 | Hero | `--color-yellow` at 10% opacity | Use `background: rgba(249, 208, 64, 0.10)` — not the full yellow |
-| Value Prop, Problem/Solution | white (`--color-bg`) | Pure white. Let the copy do the work |
-| What You'll Get | `--color-green` at 15% opacity | Use `background: rgba(202, 239, 140, 0.15)` |
-| Social Proof, About, FAQ | white (`--color-bg`) | White again. Alternating white/tinted creates the rhythm |
-| Pricing | `--color-yellow-light` at 15% opacity | Use `background: rgba(245, 236, 137, 0.15)` — warm but not promotional |
-| Waitlist | `--color-ink` (full) | The one fully dark section. High contrast is intentional |
-| Footer | `--color-ink` (full) | Matches the waitlist block — ties the bottom of the page together |
+| Value Prop, About, FAQ | white (`--color-bg`) | Pure white. Let the copy do the work |
+| Form | `--color-ink` (full) | The one fully dark section. High contrast is intentional |
+| Footer | `--color-ink` (full) | Matches the form block — ties the bottom of the page together |
 
 ### CTAs and interactive elements
 

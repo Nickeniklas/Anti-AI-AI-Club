@@ -28,19 +28,19 @@ All section copy and the verified stats for the landing page. Read this before w
   - **Calm, not doom.** We want you informed, not anxious.
   - **Critical, not hateful.** AI is here to stay. That's exactly why it's worth scrutinising.
 
-### 3. Problem / Solution
+### 3. Problem / Solution — REMOVED FROM LIVE PAGE
 - **Heading:** You don't want hype. You don't want a panic attack either.
 - Body: If you're skeptical about AI, your options are bad. Boosters say it'll fix everything. Doomers say it'll end everything. Almost nobody just shows you the numbers and lets you think. So you tune out and get blindsided, or scroll yourself into anxiety without learning anything.
 - Resolution: We're the calm middle. One small, curated place for the real data on AI's scale, its effect on labour, and its links to power. Read it, get the picture, get on with your day actually informed.
 
-### 4. What You'll Get
+### 4. What You'll Get — REMOVED FROM LIVE PAGE
 (Day-one honesty: mark what's live vs planned.)
 - **The numbers, in context** *(core idea)* — The figures that matter, explained in a sentence or two. [FLAGSHIP STAT — see Verified Stats below.]
 - **Labour & power focus** *(core idea)* — The two things most coverage underplays: what AI does to work, and how it's used by states and the powerful.
 - **Curated, by a human** *(live now)* — No algorithm, no firehose. A person reads the noise and picks what's worth your attention. Started with a small article collection.
 - **A club of fellow skeptics** *(planned)* — A grounded place to talk with people who share the same wary, data-first view. No flame wars, no cheerleading.
 
-### 5. Social Proof
+### 5. Social Proof — REMOVED FROM LIVE PAGE
 - Day 0: NO testimonials. Do not fabricate any.
 - **Heading:** Get in before there's anything to brag about.
 - Body: Right now it's just a small pile of hand-picked articles and a clear point of view. So weigh in now and help decide what this becomes: the topics, the format, the tone.
@@ -50,7 +50,7 @@ All section copy and the verified stats for the landing page. Read this before w
 - **Heading:** Why this exists.
 - Body: Every AI newsletter seems to be selling a course or selling fear. Nobody was just laying out the numbers for people who are skeptical but not in denial. This started as a personal pile of interesting articles and a feeling that the public conversation was missing the actual data. Now it's becoming a small club for everyone who feels the same: uneasy about AI, unwilling to pretend it'll vanish, tired of takes with no figures behind them. We're critical because we take it seriously. We're not hateful because this is the world we live in now. We just think you deserve the real picture.
 
-### 7. Pricing
+### 7. Pricing — REMOVED FROM LIVE PAGE
 - **Heading:** Free at launch. For real.
 - Body: We're not solving monetization on day one and won't pretend to. The first version is free for everyone here early. If a paid tier ever makes sense, the people who showed up early hear first and get a fair deal. No surprises.
 - CTA: (none — let the section sit; the form below is the only CTA)

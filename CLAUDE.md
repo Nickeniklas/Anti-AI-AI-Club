@@ -25,8 +25,8 @@ This governs every design and copy choice. No urgency tricks. No countdown timer
 
 - **Static HTML / CSS / JS only.** No framework, no build step, no backend.
 - Single page. Mobile-first, responsive.
-- Form posts to a third-party service (Formspree or similar — TBD by Niklas). The user sets up that account himself; Claude Code only wires the form `action` to the endpoint Niklas provides. Do NOT create accounts.
-- The form must store the topic checkboxes and the optional worry text and the optional email. Email is NOT required and must never block submission.
+- Form posts to Formspree. Endpoint is live: `https://formspree.io/f/mdavorwl`. Only Niklas manages the Formspree account; Claude Code only updates the `action` attribute if the URL ever changes.
+- The form stores topic checkboxes, optional worry text, and optional email. Email is NOT required and must never block submission.
 - Keep it lightweight. No heavy dependencies.
 
 ## Design tokens
@@ -56,39 +56,27 @@ Full colour usage rules — section backgrounds, accent rules, what to avoid —
 
 ## Current build status
 
+All sections built. The page is at v0.1 — trimmed to the essentials after the initial build.
+
 | Section | Status |
 |---|---|
 | 1. Hero | **Built** |
 | 2. Value Proposition | **Built** |
-| 3. Problem / Solution | **Built** |
-| 4. What You'll Get | **Built** |
-| 5. Social Proof | **Built** |
-| 6. About / Story | **Built** |
-| 7. Pricing | **Built** |
-| 8. The Form | **Built** |
-| 9. FAQ | Placeholder |
-| 10. Footer | Placeholder |
-
-Section backgrounds for all sections are pre-wired in `styles.css`. Build sections in order, one at a time. Confirm look before moving on.
+| 3. About / Story | **Built** |
+| 4. The Form | **Built** |
+| 5. FAQ | **Built** |
+| 6. Footer | **Built** |
 
 ## What still needs doing before launch
 
-- **Wire the form endpoint** — `<form action="#">` in `index.html` needs the Formspree URL once Niklas sets up the account. Only Niklas sets up that account; Claude Code only wires the `action`.
-- **Build Section 9 — FAQ**
-- **Build Section 10 — Footer** (contact/submit links use `antibsai@gmail.com`)
 - **Re-verify all stats** in `copy.md` before going live — figures move fast
 - **Final responsiveness pass** — mobile widths, section spacing
+- **Add social links to footer** — placeholder comment is in the HTML; Niklas decides which platforms to use
+- **Privacy and Terms pages** — footer links currently point to `#`
 
 ## Contact / email
 
-`antibsai@gmail.com` — the real contact address. Used in the form success confirmation (`index.html`). Will also be used in footer contact and "Submit an article" links.
-
-## Build order (do these as separate steps, not all at once)
-
-1. ~~Scaffold: single `index.html`, `styles.css`, `script.js`. Clean CSS reset.~~ **Done.**
-2. ~~Build each section one at a time, mobile-first, using the copy in `copy.md`.~~ **Sections 1–8 done.**
-3. ~~Build the form~~ **Done.** At-least-one-checkbox validation and async Formspree submit are in `script.js`. Endpoint still needs to be set in `action`.
-4. Final pass: responsiveness + mobile widths.
+`antibsai@gmail.com` — the real contact address. Used in the form success confirmation, and in footer "Submit an article" and "Contact" links.
 
 ## Design direction
 
@@ -100,16 +88,12 @@ Section backgrounds for all sections are pre-wired in `styles.css`. Build sectio
 
 1. Hero
 2. Value Proposition
-3. Problem / Solution
-4. What You'll Get
-5. Social Proof
-6. About / Story
-7. Pricing
-8. The Form (main conversion block)
-9. FAQ
-10. Footer
+3. About / Story
+4. The Form (main conversion block)
+5. FAQ
+6. Footer
 
-(Copy for each section is in `copy.md`.)
+(Copy for each section is in `copy.md`. Sections that were cut — Problem/Solution, What You'll Get, Social Proof, Pricing — are still in `copy.md` marked REMOVED, kept for reference.)
 
 ## Standing rules
 
