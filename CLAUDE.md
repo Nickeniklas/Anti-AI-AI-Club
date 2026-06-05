@@ -24,8 +24,8 @@ This governs every design and copy choice. No urgency tricks. No countdown timer
 ## Tech stack
 
 - **Static HTML / CSS / JS only.** No framework, no build step, no backend.
-- Multipage: `index.html` (landing page) + `articles.html` (curated feed). Mobile-first, responsive.
-- Shared topnav (`#site-nav`) on both pages — sticky, brand left, links right, yellow "Weigh in" pill CTA.
+- Multipage: `index.html` (landing page) + `articles.html` (curated feed) + `ai-defaults.html` (AI defaults tracker). Mobile-first, responsive.
+- Shared topnav (`#site-nav`) on all three pages — sticky, brand left, links right. Links: Articles, AI Defaults, yellow "Weigh in" pill CTA.
 - Form posts to Formspree. Endpoint is live: `https://formspree.io/f/mdavorwl`. Only Niklas manages the Formspree account; Claude Code only updates the `action` attribute if the URL ever changes.
 - The form stores topic checkboxes, optional worry text, and optional email. Email is NOT required and must never block submission.
 - Keep it lightweight. No heavy dependencies.
@@ -63,13 +63,14 @@ All sections built. The site is at v0.1.
 
 | Section | Status |
 |---|---|
-| Topnav | **Built** — sticky, shared with articles.html |
+| Topnav | **Built** — sticky, shared across all three pages |
 | 1. Hero | **Built** |
 | 2. Value Proposition | **Built** |
 | 3. Feed Preview | **Built** — 3 teasers + "Read all in the feed" CTA to articles.html |
-| 4. The Form | **Built** |
-| 5. FAQ | **Built** |
-| 6. Footer | **Built** |
+| 4. Defaults Preview | **Built** — 3 entries (GitHub Copilot, Windows 11, Atlassian) + "See the full list" CTA to ai-defaults.html |
+| 5. The Form | **Built** |
+| 6. FAQ | **Built** |
+| 7. Footer | **Built** |
 
 **articles.html**
 
@@ -79,13 +80,25 @@ All sections built. The site is at v0.1.
 | Feed | **Built** — 10 items grouped into 5 collapsible `<details>` sections (Articles & Opinion, Research & Policy, Industry, From the Web, Culture & Repos). Each item: type tag, title, source, editorial note. Groups default closed. |
 | Footer | **Built** |
 
+**ai-defaults.html**
+
+| Section | Status |
+|---|---|
+| Topnav | **Built** — shared |
+| Header | **Built** — page h1, description, "last checked" datestamp |
+| Legend | **Built** — 4 tag types: On by default (coral), Off by default (green), Opt-out is tiered (yellow), Can re-enable after updates (rose) |
+| Pattern note | **Built** — callout explaining the two recurring patterns (update resets, tiered opt-out) |
+| Entries | **Built** — 5 entries: Windows 11, GitHub Copilot, Atlassian, Microsoft SharePoint, Google Chrome & Search |
+| Footer | **Built** |
+
 ## What still needs doing before launch
 
 - **Re-verify all stats** in `copy.md` before going live — figures move fast
-- **Final responsiveness pass** — mobile widths, section spacing; check both pages
-- **Add social links to footer** — placeholder comment in both HTML files; Niklas decides which platforms
-- **Privacy and Terms pages** — footer links point to `#` on both pages
+- **Final responsiveness pass** — mobile widths, section spacing; check all three pages
+- **Add social links to footer** — placeholder comment in all HTML files; Niklas decides which platforms
+- **Privacy and Terms pages** — footer links point to `#` on all pages
 - **Keep articles.html fresh** — add new items as they come in, remove stale ones
+- **Keep ai-defaults.html fresh** — add new entries as they surface; re-verify toggle paths and dates per entry
 
 ## Contact / email
 
@@ -103,15 +116,25 @@ All sections built. The site is at v0.1.
 1. Hero
 2. Value Proposition
 3. Feed Preview — 3 teasers linking to articles.html
-4. The Form (main conversion block)
-5. FAQ
-6. Footer
+4. Defaults Preview — 3 entries (GitHub Copilot, Windows 11, Atlassian) linking to ai-defaults.html
+5. The Form (main conversion block)
+6. FAQ
+7. Footer
 
 **articles.html** — page title "Hand-picked articles"
 1. Feed — 10 items in 5 collapsible groups (default closed, `<details>`/`<summary>`). Groups: Articles & Opinion, Research & Policy, Industry, From the Web, Culture & Repos.
 2. Footer
 
-(Copy for index.html sections is in `copy.md`. Sections cut from the landing page — About/Story, Problem/Solution, What You'll Get, Social Proof, Pricing — are still in `copy.md` marked REMOVED, kept for reference. Articles feed copy lives in `articles.html` directly.)
+**ai-defaults.html** — page title "AI defaults — what's on, and how to turn it off"
+1. Header (h1, description, last-checked datestamp)
+2. Legend (4 tag types)
+3. Pattern note (callout about recurring patterns)
+4. Entries (one `<article class="entry">` per product)
+5. Footer
+
+All styles live in `styles.css`. The ai-defaults page has no inline `<style>` block.
+
+(Copy for index.html sections is in `copy.md`. Sections cut from the landing page — About/Story, Problem/Solution, What You'll Get, Social Proof, Pricing — are still in `copy.md` marked REMOVED, kept for reference. Articles feed copy and AI defaults copy live in their respective HTML files directly.)
 
 ## Standing rules
 
@@ -121,3 +144,5 @@ All sections built. The site is at v0.1.
 - Email is always optional and always the last field. Never make it required, never gate submission on it, never reintroduce a "waitlist" framing that implies a committed newsletter.
 - Keep the calm/grounded voice everywhere. No hype, no doom, no urgency manipulation. Let the figures carry it.
 - Avoid "nearly quadrupled" and similar reflexive intensifiers unless the exact figure is stated right next to it with a source. The number should do the work, not the adjective.
+- Avoid em dashes in body copy. Use a comma, a period, or a new sentence instead.
+- Don't open section descriptions with "A running list of..." — explain the phenomenon in plain sentences instead. Body copy should tell the visitor what's actually going on, not just name it cleverly.

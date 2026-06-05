@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI defaults — what's on, and how to turn it off · Anti-AI, AI Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <nav id="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">Anti-AI, AI Club</a>
+      <ul class="nav-links">
+        <li><a href="articles.html">Articles</a></li>
+        <li><a href="ai-defaults.html" aria-current="page">AI Defaults</a></li>
+        <li><a href="index.html#form" class="nav-cta">Weigh in</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <div class="defaults-wrap">
+      <header class="page-head">
+        <h1>What's on by default, and how to turn it off.</h1>
+        <p>Software companies keep enabling AI features without making a big deal of it. Some collect or train on your data. Some come back on after a software update. Below is what we've tracked, and the specific settings to change.</p>
+        <p class="last-checked">Last checked: 5 June 2026. These change often. Dates and sources are noted per entry.</p>
+      </header>
+
+      <div class="legend">
+        <span class="tag tag--on">On by default</span>
+        <span class="tag tag--off">Off by default</span>
+        <span class="tag tag--tiered">Opt-out is tiered (paid only)</span>
+        <span class="tag tag--resets">Can re-enable after updates</span>
+      </div>
+
+      <p class="pattern-note"><strong>Worth knowing:</strong> many entries re-enable after software updates, so it's worth rechecking after major releases. Several also only allow paying customers to opt out entirely. The "Opt-out is tiered" tag marks these.</p>
+
+      <!-- ENTRY TEMPLATE — copy this block to add a new row -->
+      <!--
+      <article class="entry">
+        <div class="entry-head">
+          <h2>Product</h2>
+          <div class="entry-tags">
+            <span class="tag tag--on">On by default</span>
+          </div>
+        </div>
+        <p class="feature">Feature name</p>
+        <p class="what">What it does, in a sentence.</p>
+        <p class="how"><strong>Turn it off:</strong> the steps.</p>
+        <p class="src">Source: name, date. <a href="#">link</a></p>
+      </article>
+      -->
+
+      <article class="entry">
+        <div class="entry-head">
+          <h2>Windows 11</h2>
+          <div class="entry-tags">
+            <span class="tag tag--resets">Can re-enable after updates</span>
+          </div>
+        </div>
+        <p class="feature">Recall + Copilot + Click To Do</p>
+        <p class="what">Recall screenshots your activity into a searchable timeline. On the latest builds it's off by default on Copilot+ PCs, but the framework ships present on standard Windows 11, and Copilot is embedded in several places. AI features are scattered across separate settings menus.</p>
+        <p class="how"><strong>Turn it off:</strong> Settings → Privacy &amp; security → Recall &amp; snapshots → toggle off Save snapshots → Delete snapshots. Re-check after every major Windows update, as updates have reversed privacy settings before. Copilot and Click To Do must be disabled separately.</p>
+        <p class="src">Sources: Proton, PCWorld (Apr 2026), Tuta.</p>
+      </article>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h2>GitHub Copilot</h2>
+          <div class="entry-tags">
+            <span class="tag tag--on">On by default</span>
+            <span class="tag tag--tiered">Opt-out is tiered (paid only)</span>
+          </div>
+        </div>
+        <p class="feature">Training on your interaction data</p>
+        <p class="what">Since 24 April 2026, Free, Pro, and Pro+ users have their prompts, code snippets, and file context used for AI model training unless they opt out. Business and Enterprise tiers are exempt.</p>
+        <p class="how"><strong>Turn it off:</strong> one toggle in Copilot data settings. If you'd previously opted out of data collection for product improvements, that preference carries over automatically.</p>
+        <p class="src">Sources: TechSpot, danilchenko.dev (Mar 2026).</p>
+      </article>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h2>Atlassian</h2>
+          <div class="entry-tags">
+            <span class="tag tag--on">On by default</span>
+            <span class="tag tag--tiered">Opt-out is tiered (paid only)</span>
+          </div>
+        </div>
+        <p class="feature">AI training data collection (Jira, Confluence, Rovo)</p>
+        <p class="what">From 17 August 2026, default training-data collection turns on across cloud products. Free and Standard can't opt out of metadata collection at all; Premium gets in-app data off by default but still can't escape metadata; only Enterprise gets full opt-out. Data retained up to 7 years.</p>
+        <p class="how"><strong>Turn it off (where allowed):</strong> admin panel → Data Contribution Settings.</p>
+        <p class="src">Source: byteiota (Apr 2026).</p>
+      </article>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h2>Microsoft SharePoint</h2>
+          <div class="entry-tags">
+            <span class="tag tag--on">On by default</span>
+          </div>
+        </div>
+        <p class="feature">Copilot in SharePoint / Knowledge Agent</p>
+        <p class="what">Shifting from opt-in to opt-out for licensed Copilot Premium users, rolling out to all site collections from mid-June 2026. The KnowledgeAgentScope setting changes from "NoSites" to "AllSites" by default.</p>
+        <p class="how"><strong>Turn it off:</strong> SharePoint admins review tenant settings and opt out, or limit Copilot to selected sites. Existing tenant- and site-level opt-outs should be honored at rollout.</p>
+        <p class="src">Source: Topedia (May 2026).</p>
+      </article>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h2>Google Chrome &amp; Search</h2>
+          <div class="entry-tags">
+            <span class="tag tag--on">On by default</span>
+            <span class="tag tag--resets">Can re-enable after updates</span>
+          </div>
+        </div>
+        <p class="feature">AI Mode &amp; AI Overviews</p>
+        <p class="what">AI Mode in Chrome lives in three places — the omnibox (address bar), the AI Mode tab on search results, and the right-click menu — each with a separate control.</p>
+        <p class="how"><strong>Turn it off:</strong> open chrome://flags, search "AI Mode" / "omnibox AI", set the relevant flag to Disabled, relaunch. Also opt out at the Google account level so it doesn't return on next sign-in. Google sometimes re-enables after major updates.</p>
+        <p class="src">Source: bushe.co (May 2026).</p>
+      </article>
+
+      <p class="add-note">More entries get added as they surface. To add one, copy the commented template block at the top of the source.</p>
+    </div>
+  </main>
+
+  <footer id="footer">
+    <div class="footer-inner">
+
+      <div class="footer-brand">
+        <span class="footer-name">Anti-AI, AI Club</span>
+        <span class="footer-strapline">The numbers behind the hype. Critical, calm, not hateful.</span>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="mailto:antibsai@gmail.com">Submit an article</a>
+        <a href="mailto:antibsai@gmail.com">Contact</a>
+      </nav>
+
+      <!-- Add social links here once you've decided which platforms to use -->
+
+      <div class="footer-legal">
+        <p class="footer-microcopy">Any email you shared stays private. We won't spam you or pass it on.</p>
+        <div class="footer-legal-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <span>© 2026 Anti-AI, AI Club</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>
