@@ -76,7 +76,7 @@ All sections built. The site is at v0.1.
 | Section | Status |
 |---|---|
 | Topnav | **Built** — shared |
-| Feed | **Built** — 10 items: type tag, title, source, editorial note |
+| Feed | **Built** — 10 items grouped into 5 collapsible `<details>` sections (Articles & Opinion, Research & Policy, Industry, From the Web, Culture & Repos). Each item: type tag, title, source, editorial note. Groups default closed. |
 | Footer | **Built** |
 
 ## What still needs doing before launch
@@ -107,8 +107,8 @@ All sections built. The site is at v0.1.
 5. FAQ
 6. Footer
 
-**articles.html**
-1. Feed — full curated list (10 items at launch, grows over time)
+**articles.html** — page title "Hand-picked articles"
+1. Feed — 10 items in 5 collapsible groups (default closed, `<details>`/`<summary>`). Groups: Articles & Opinion, Research & Policy, Industry, From the Web, Culture & Repos.
 2. Footer
 
 (Copy for index.html sections is in `copy.md`. Sections cut from the landing page — About/Story, Problem/Solution, What You'll Get, Social Proof, Pricing — are still in `copy.md` marked REMOVED, kept for reference. Articles feed copy lives in `articles.html` directly.)

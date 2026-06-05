@@ -7,7 +7,7 @@ A multipage static site. Landing page (`index.html`) lets visitors weigh in on w
 | File | Purpose |
 |---|---|
 | `index.html` | Landing page. Source of truth for copy that's already built. |
-| `articles.html` | Curated feed page. 10 items with type tags and editorial notes. |
+| `articles.html` | "Hand-picked articles" page. 10 items in 5 collapsible category groups (`<details>`/`<summary>`). Default closed. |
 | `styles.css` | All styles for both pages. CSS custom properties for every token — no hardcoded hex. |
 | `script.js` | Form validation and async submit handler. |
 | `copy.md` | Landing page section copy and verified stats. Read before editing any text. |
@@ -39,7 +39,7 @@ v0.1 — all sections built and live.
 | Section | Status |
 |---|---|
 | Topnav | Built |
-| Feed (10 items) | Built |
+| Feed (10 items, 5 collapsible groups) | Built |
 | Footer | Built |
 
 ## What still needs doing before launch
