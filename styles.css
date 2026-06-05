@@ -64,7 +64,7 @@ a {
 /* Section backgrounds */
 #hero          { background: rgba(249, 208, 64, 0.10); }
 #value-prop,
-#about,
+#feed-preview,
 #faq           { background: var(--color-bg); }
 #form,
 footer          { background: var(--color-ink); color: var(--color-bg); }
@@ -773,4 +773,51 @@ footer {
   color: var(--color-text-muted);
   line-height: 1.6;
   margin-top: 0.2rem;
+}
+
+/* ── Feed Preview (index.html teaser) ────────── */
+#feed-preview {
+  padding: 4rem 1.25rem;
+}
+
+.feed-preview-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.75rem;
+}
+
+.feed-preview-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.feed-preview-body {
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin-top: -0.5rem;
+}
+
+.feed-preview-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.feed-preview-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  align-items: flex-start;
+}
+
+.feed-preview-item:first-child {
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
 }
