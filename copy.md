@@ -46,7 +46,9 @@ All section copy and the verified stats for the landing page. Read this before w
 - Body: Right now it's just a small pile of hand-picked articles and a clear point of view. So weigh in now and help decide what this becomes: the topics, the format, the tone.
 - BUILD NOTE: leave a swappable slot here for a real signal post-launch (response count, founding-member quote, etc.).
 
-### 6. About / Story
+### 6. About / Story — REMOVED FROM LIVE PAGE
+- Replaced on index.html by the Feed Preview section (3 article teasers + CTA to articles.html).
+- Copy preserved below for reference.
 - **Heading:** Why this exists.
 - Body: Every AI newsletter seems to be selling a course or selling fear. Nobody was just laying out the numbers for people who are skeptical but not in denial. This started as a personal pile of interesting articles and a feeling that the public conversation was missing the actual data. Now it's becoming a small club for everyone who feels the same: uneasy about AI, unwilling to pretend it'll vanish, tired of takes with no figures behind them. We're critical because we take it seriously. We're not hateful because this is the world we live in now. We just think you deserve the real picture.
 

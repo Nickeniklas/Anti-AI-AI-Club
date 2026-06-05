@@ -6,7 +6,7 @@ Project context for building the day-0 pre-launch landing page. Read this before
 
 ## What this is
 
-A single-page pre-launch landing site for **Anti-AI, AI Club** — a small club for the *actual data* on AI. The site's one job: let an interested visitor weigh in on what we should cover, and optionally leave an email if they want to hear from us. No newsletter is committed to yet. The point right now is to test whether the idea lands and learn what people care about.
+A multipage pre-launch landing site for **Anti-AI, AI Club** — a small club for the *actual data* on AI. The site's one job: let an interested visitor weigh in on what we should cover, and optionally leave an email if they want to hear from us. No newsletter is committed to yet. The point right now is to test whether the idea lands and learn what people care about.
 
 ## Positioning (don't drift from this)
 
@@ -24,7 +24,8 @@ This governs every design and copy choice. No urgency tricks. No countdown timer
 ## Tech stack
 
 - **Static HTML / CSS / JS only.** No framework, no build step, no backend.
-- Single page. Mobile-first, responsive.
+- Multipage: `index.html` (landing page) + `articles.html` (curated feed). Mobile-first, responsive.
+- Shared topnav (`#site-nav`) on both pages — sticky, brand left, links right, yellow "Weigh in" pill CTA.
 - Form posts to Formspree. Endpoint is live: `https://formspree.io/f/mdavorwl`. Only Niklas manages the Formspree account; Claude Code only updates the `action` attribute if the URL ever changes.
 - The form stores topic checkboxes, optional worry text, and optional email. Email is NOT required and must never block submission.
 - Keep it lightweight. No heavy dependencies.
@@ -56,23 +57,35 @@ Full colour usage rules — section backgrounds, accent rules, what to avoid —
 
 ## Current build status
 
-All sections built. The page is at v0.1 — trimmed to the essentials after the initial build.
+All sections built. The site is at v0.1.
+
+**index.html**
 
 | Section | Status |
 |---|---|
+| Topnav | **Built** — sticky, shared with articles.html |
 | 1. Hero | **Built** |
 | 2. Value Proposition | **Built** |
-| 3. About / Story | **Built** |
+| 3. Feed Preview | **Built** — 3 teasers + "Read all in the feed" CTA to articles.html |
 | 4. The Form | **Built** |
 | 5. FAQ | **Built** |
 | 6. Footer | **Built** |
 
+**articles.html**
+
+| Section | Status |
+|---|---|
+| Topnav | **Built** — shared |
+| Feed | **Built** — 10 items: type tag, title, source, editorial note |
+| Footer | **Built** |
+
 ## What still needs doing before launch
 
 - **Re-verify all stats** in `copy.md` before going live — figures move fast
-- **Final responsiveness pass** — mobile widths, section spacing
-- **Add social links to footer** — placeholder comment is in the HTML; Niklas decides which platforms to use
-- **Privacy and Terms pages** — footer links currently point to `#`
+- **Final responsiveness pass** — mobile widths, section spacing; check both pages
+- **Add social links to footer** — placeholder comment in both HTML files; Niklas decides which platforms
+- **Privacy and Terms pages** — footer links point to `#` on both pages
+- **Keep articles.html fresh** — add new items as they come in, remove stale ones
 
 ## Contact / email
 
@@ -86,14 +99,19 @@ All sections built. The page is at v0.1 — trimmed to the essentials after the 
 
 ## Sections (page order)
 
+**index.html**
 1. Hero
 2. Value Proposition
-3. About / Story
+3. Feed Preview — 3 teasers linking to articles.html
 4. The Form (main conversion block)
 5. FAQ
 6. Footer
 
-(Copy for each section is in `copy.md`. Sections that were cut — Problem/Solution, What You'll Get, Social Proof, Pricing — are still in `copy.md` marked REMOVED, kept for reference.)
+**articles.html**
+1. Feed — full curated list (10 items at launch, grows over time)
+2. Footer
+
+(Copy for index.html sections is in `copy.md`. Sections cut from the landing page — About/Story, Problem/Solution, What You'll Get, Social Proof, Pricing — are still in `copy.md` marked REMOVED, kept for reference. Articles feed copy lives in `articles.html` directly.)
 
 ## Standing rules
 
