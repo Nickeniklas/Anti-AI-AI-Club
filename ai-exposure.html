@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI exposure heatmap — Anti-AI, AI Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- ECharts 5.5.1 — verify SRI hash at https://www.jsdelivr.com/package/npm/echarts before go-live -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+</head>
+<body>
+
+  <nav id="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">Anti-AI, AI Club</a>
+      <ul class="nav-links">
+        <li><a href="articles.html">Articles</a></li>
+        <li><a href="ai-defaults.html">AI Defaults</a></li>
+        <li><a href="ai-exposure.html" aria-current="page">Heatmap</a></li>
+        <li><a href="index.html#form" class="nav-cta">Weigh in</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <div class="exposure-wrap">
+
+      <header class="page-head">
+        <h1>Where AI actually lands at work.</h1>
+        <p>Most coverage about AI and work focuses on which jobs will change. This map shows something more specific: which occupational categories are already seeing AI use, and how far that usage falls short of what the tasks theoretically allow. The bigger the cell, the more exposure. The colour shows how much of the potential is already active.</p>
+        <p class="last-checked">Data: Anthropic Economic Index, Feb–Mar 2026 report. Retrieved June 2026. Theoretical capability for 14 of 22 categories estimated from Eloundou et al. 2023 (see source note below).</p>
+      </header>
+
+      <div class="exposure-controls">
+        <div class="metric-toggle" role="group" aria-label="Cell size metric">
+          <button class="toggle-btn toggle-btn--active" data-metric="observed">Observed exposure</button>
+          <button class="toggle-btn" data-metric="theoretical">Theoretical capability</button>
+        </div>
+        <p id="metric-description" class="metric-description">Cell size = share of tasks in each category where Claude is actively being used today.</p>
+      </div>
+
+      <div class="exposure-legend-bar">
+        <div class="legend-gradient-track"></div>
+        <div class="legend-labels">
+          <span>Low active usage ratio (coral)</span>
+          <span>High active usage ratio (green)</span>
+        </div>
+        <p class="legend-note">Colour = how much of the theoretical potential is being used in practice. It is a proxy for augmentation intensity, not automation risk. Click any cell to drill into individual occupations. Use the breadcrumb to go back.</p>
+      </div>
+
+      <div id="exposure-chart" role="img" aria-label="Treemap of AI exposure across 22 occupational categories"></div>
+
+      <div class="exposure-caption">
+        <p>The bigger the cell, the more of that category's work involves tasks where AI is actively being used. The toggle above switches cell size between observed exposure (what is happening now) and theoretical capability (what the tasks would allow).</p>
+        <p>Colour shows how much of the theoretical potential is already being applied. Green cells are where AI use is high relative to what is theoretically possible — these tend to be where people are actively using AI as a tool. Coral cells have significant theoretical potential that has not yet shown up in actual usage.</p>
+        <p>What the map shows is where AI shows up, not which jobs are at risk. High exposure in a category means its tasks are ones AI can assist with. It does not determine whether workers will be displaced or augmented. In the underlying data, about 57% of AI interactions follow an augmentation pattern and 43% show automation patterns. That aggregate split is consistent with the observation that most current AI use involves a person directing the tool rather than the tool replacing the person.</p>
+      </div>
+
+      <div class="exposure-source">
+        <p><strong>Primary source:</strong> Anthropic Economic Index, labor market impacts data, Feb–Mar 2026 (<a href="https://huggingface.co/datasets/Anthropic/EconomicIndex" target="_blank" rel="noopener">Hugging Face, CC-BY</a>). Observed exposure for the eight highest-exposure categories uses employment-weighted averages from the published report. The remaining 14 categories use simple averages from the released job_exposure.csv file, which may differ from employment-weighted figures. Theoretical capability for eight categories (Computer and Mathematical, Office and Administrative Support, Business and Financial, Management, Architecture and Engineering, Legal, Arts/Design/Media, Sales) comes from the AEI report directly. The remaining 14 use estimates from Eloundou et al. 2023 (<a href="https://doi.org/10.1126/science.adj0998" target="_blank" rel="noopener">Science, 2024</a>), a peer-reviewed O*NET task analysis using GPT-4 that should be read as a lower bound. The aggregate automation vs augmentation split (57% / 43%) is from the Anthropic Economic Index primitives report, January 2026.</p>
+        <p>The dataset is based on real Claude.ai conversations mapped to occupational categories. It skews toward early, white-collar users. It captures where AI use is currently most visible, not necessarily where it will land over time. The ILO (World Employment and Social Outlook 2024) and Yale's Budget Lab separately identify broadly the same categories as highest-exposure, which gives these figures additional weight.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-name">Anti-AI, AI Club</span>
+        <span class="footer-strapline">The numbers behind the hype. Critical, calm, not hateful.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="mailto:antibsai@gmail.com">Submit an article</a>
+        <a href="mailto:antibsai@gmail.com">Contact</a>
+      </nav>
+      <!-- Add social links here once you've decided which platforms to use -->
+      <div class="footer-legal">
+        <p class="footer-microcopy">Any email you shared stays private. We won't spam you or pass it on.</p>
+        <div class="footer-legal-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <span>© 2026 Anti-AI, AI Club</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    // Data inlined from data/ai-exposure.json (source of truth for numbers and citations)
+    var DATA = {
+      maxRatio: 43.4,
+      categories: [
+        { soc: '15', name: 'Computer & Mathematical',     observed: 35.8, theoretical: 94.3, ratio: 38.0, theoreticalSource: 'aei-report',    children: [ { soc: '15-1251', name: 'Computer Programmers',                   observed: 74.5 }, { soc: '15-1243', name: 'Database Architects',                       observed: 57.9 }, { soc: '15-1253', name: 'Software QA Analysts and Testers',          observed: 51.9 }, { soc: '15-1212', name: 'Information Security Analysts',             observed: 48.6 }, { soc: '15-1254', name: 'Web Developers',                            observed: 48.0 } ] },
+        { soc: '43', name: 'Office & Admin Support',       observed: 34.3, theoretical: 90.0, ratio: 38.1, theoreticalSource: 'aei-report',    children: [ { soc: '43-4051', name: 'Customer Service Representatives',        observed: 70.1 }, { soc: '43-9021', name: 'Data Entry Keyers',                         observed: 67.1 }, { soc: '43-9111', name: 'Statistical Assistants',                    observed: 51.0 }, { soc: '43-9031', name: 'Desktop Publishers',                        observed: 46.4 }, { soc: '43-6014', name: 'Secretaries and Admin Assistants',          observed: 45.3 } ] },
+        { soc: '13', name: 'Business & Financial',         observed: 28.4, theoretical: 94.3, ratio: 30.1, theoreticalSource: 'aei-report',    children: [ { soc: '13-1161', name: 'Market Research Analysts',               observed: 64.8 }, { soc: '13-2051', name: 'Financial and Investment Analysts',          observed: 57.2 }, { soc: '13-1071', name: 'Human Resources Specialists',               observed: 40.3 }, { soc: '13-2052', name: 'Personal Financial Advisors',               observed: 35.0 }, { soc: '13-2011', name: 'Accountants and Auditors',                  observed: 34.8 } ] },
+        { soc: '41', name: 'Sales',                        observed: 26.9, theoretical: 62.0, ratio: 43.4, theoreticalSource: 'aei-report',    children: [ { soc: '41-4012', name: 'Sales Reps, Wholesale and Manufacturing', observed: 62.8 }, { soc: '41-3031', name: 'Securities and Financial Sales Agents',      observed: 44.1 }, { soc: '41-3041', name: 'Travel Agents',                             observed: 40.5 }, { soc: '41-9031', name: 'Sales Engineers',                           observed: 32.2 }, { soc: '41-2031', name: 'Retail Salespersons',                       observed: 32.2 } ] },
+        { soc: '23', name: 'Legal',                        observed: 20.4, theoretical: 89.0, ratio: 22.9, theoreticalSource: 'aei-report',    children: [ { soc: '23-1023', name: 'Judges and Magistrates',                 observed: 31.1 }, { soc: '23-1021', name: 'Administrative Law Judges',                 observed: 30.5 }, { soc: '23-2011', name: 'Paralegals and Legal Assistants',           observed: 29.3 }, { soc: '23-1022', name: 'Arbitrators and Mediators',                 observed: 24.3 }, { soc: '23-1012', name: 'Judicial Law Clerks',                       observed: 17.0 } ] },
+        { soc: '27', name: 'Arts, Design, Media',          observed: 19.2, theoretical: 83.7, ratio: 22.9, theoreticalSource: 'aei-report',    children: [ { soc: '27-3042', name: 'Technical Writers',                     observed: 47.5 }, { soc: '27-3031', name: 'Public Relations Specialists',              observed: 45.3 }, { soc: '27-3091', name: 'Interpreters and Translators',              observed: 43.0 }, { soc: '27-1024', name: 'Graphic Designers',                         observed: 36.7 }, { soc: '27-1014', name: 'Special Effects Artists and Animators',     observed: 35.7 } ] },
+        { soc: '25', name: 'Education & Library',          observed: 18.2, theoretical: 65.0, ratio: 28.0, theoreticalSource: 'eloundou-2023', children: [ { soc: '25-1022', name: 'Math Science Teachers, Postsecondary',  observed: 43.0 }, { soc: '25-4012', name: 'Curators',                                  observed: 41.2 }, { soc: '25-3041', name: 'Tutors',                                    observed: 40.8 }, { soc: '25-1123', name: 'English Language Teachers, Postsecondary',  observed: 36.2 }, { soc: '25-1032', name: 'Engineering Teachers, Postsecondary',       observed: 35.9 } ] },
+        { soc: '19', name: 'Life, Physical, Social Science', observed: 12.7, theoretical: 66.0, ratio: 19.2, theoreticalSource: 'eloundou-2023', children: [ { soc: '19-3094', name: 'Political Scientists',                 observed: 45.2 }, { soc: '19-4061', name: 'Social Science Research Assistants',        observed: 43.9 }, { soc: '19-3022', name: 'Survey Researchers',                        observed: 43.2 }, { soc: '19-2011', name: 'Astronomers',                               observed: 38.5 }, { soc: '19-3041', name: 'Sociologists',                              observed: 38.3 } ] },
+        { soc: '11', name: 'Management',                   observed: 9.7,  theoretical: 91.3, ratio: 10.6, theoreticalSource: 'aei-report',    children: [ { soc: '11-3031', name: 'Financial Managers',                   observed: 39.1 }, { soc: '11-3131', name: 'Training and Development Managers',         observed: 37.8 }, { soc: '11-2021', name: 'Marketing Managers',                        observed: 31.9 }, { soc: '11-2032', name: 'Public Relations Managers',                 observed: 23.2 }, { soc: '11-3061', name: 'Purchasing Managers',                       observed: 20.0 } ] },
+        { soc: '51', name: 'Production',                   observed: 6.9,  theoretical: 40.0, ratio: 17.3, theoreticalSource: 'eloundou-2023', children: [ { soc: '51-9162', name: 'CNC Tool Programmers',                 observed: 12.1 }, { soc: '51-5111', name: 'Prepress Technicians and Workers',          observed: 10.2 }, { soc: '51-8092', name: 'Gas Plant Operators',                       observed: 7.2  }, { soc: '51-2011', name: 'Aircraft Structure Assemblers',             observed: 4.9  }, { soc: '51-1011', name: 'First-Line Supervisors of Production',      observed: 3.8  } ] },
+        { soc: '21', name: 'Community & Social Service',   observed: 5.2,  theoretical: 51.0, ratio: 10.2, theoreticalSource: 'eloundou-2023', children: [ { soc: '21-2021', name: 'Directors, Religious Activities',      observed: 15.3 }, { soc: '21-1091', name: 'Health Education Specialists',              observed: 13.8 }, { soc: '21-1012', name: 'Educational and Career Counselors',         observed: 11.8 }, { soc: '21-2011', name: 'Clergy',                                    observed: 11.2 }, { soc: '21-1022', name: 'Healthcare Social Workers',                 observed: 9.2  } ] },
+        { soc: '31', name: 'Healthcare Support',           observed: 4.9,  theoretical: 40.0, ratio: 12.3, theoreticalSource: 'eloundou-2023', children: [ { soc: '31-9094', name: 'Medical Transcriptionists',             observed: 63.6 }, { soc: '31-2012', name: 'Occupational Therapy Aides',               observed: 6.6  }, { soc: '31-9092', name: 'Medical Assistants',                        observed: 4.8  }, { soc: '31-9095', name: 'Pharmacy Aides',                            observed: 2.2  }, { soc: '31-9096', name: 'Veterinary Assistants',                     observed: 1.8  } ] },
+        { soc: '29', name: 'Healthcare Practitioners',     observed: 4.1,  theoretical: 54.0, ratio: 7.6,  theoreticalSource: 'eloundou-2023', children: [ { soc: '29-2072', name: 'Medical Records Specialists',           observed: 66.7 }, { soc: '29-9021', name: 'Health Information Technologists',          observed: 30.6 }, { soc: '29-2051', name: 'Dietetic Technicians',                      observed: 24.5 }, { soc: '29-1224', name: 'Radiologists',                              observed: 19.9 }, { soc: '29-1222', name: 'Physicians, Pathologists',                  observed: 15.8 } ] },
+        { soc: '17', name: 'Architecture & Engineering',   observed: 4.3,  theoretical: 84.8, ratio: 5.1,  theoreticalSource: 'aei-report',    children: [ { soc: '17-2061', name: 'Computer Hardware Engineers',          observed: 14.5 }, { soc: '17-2031', name: 'Bioengineers and Biomedical Engineers',      observed: 13.3 }, { soc: '17-2072', name: 'Electronics Engineers',                     observed: 10.0 }, { soc: '17-2141', name: 'Mechanical Engineers',                      observed: 8.1  }, { soc: '17-1021', name: 'Cartographers and Photogrammetrists',       observed: 8.0  } ] },
+        { soc: '39', name: 'Personal Care & Service',      observed: 1.9,  theoretical: 30.0, ratio: 6.3,  theoreticalSource: 'eloundou-2023', children: [ { soc: '39-6012', name: 'Concierges',                           observed: 18.8 }, { soc: '39-6011', name: 'Baggage Porters and Bellhops',              observed: 7.3  }, { soc: '39-9041', name: 'Residential Advisors',                      observed: 6.7  }, { soc: '39-3091', name: 'Amusement and Recreation Attendants',       observed: 6.2  }, { soc: '39-1014', name: 'Supervisors of Entertainment Workers',       observed: 4.4  } ] },
+        { soc: '37', name: 'Building & Grounds',           observed: 1.1,  theoretical: 17.0, ratio: 6.5,  theoreticalSource: 'eloundou-2023', children: [ { soc: '37-1012', name: 'Supervisors of Landscaping',           observed: 10.8 }, { soc: '37-2021', name: 'Pest Control Workers',                      observed: 4.6  }, { soc: '37-1011', name: 'Supervisors of Housekeeping',               observed: 4.4  }, { soc: '37-2011', name: 'Janitors and Cleaners',                     observed: 0.0  }, { soc: '37-2012', name: 'Maids and Housekeeping Cleaners',            observed: 0.0  } ] },
+        { soc: '33', name: 'Protective Service',           observed: 1.2,  theoretical: 22.0, ratio: 5.5,  theoreticalSource: 'eloundou-2023', children: [ { soc: '33-3051', name: 'Police and Sheriff Patrol Officers',   observed: 12.3 }, { soc: '33-9099', name: 'Protective Service Workers, All Other',      observed: 5.7  }, { soc: '33-3021', name: 'Detectives and Criminal Investigators',      observed: 3.7  }, { soc: '33-1011', name: 'Supervisors of Correctional Officers',       observed: 3.1  }, { soc: '33-1012', name: 'Supervisors of Police and Detectives',       observed: 2.4  } ] },
+        { soc: '35', name: 'Food Preparation',             observed: 1.1,  theoretical: 19.0, ratio: 5.8,  theoreticalSource: 'eloundou-2023', children: [ { soc: '35-9011', name: 'Dining Room and Cafeteria Attendants', observed: 7.3  }, { soc: '35-1012', name: 'Supervisors of Food Preparation',           observed: 5.6  }, { soc: '35-2014', name: 'Cooks, Restaurant',                         observed: 1.2  }, { soc: '35-1011', name: 'Chefs and Head Cooks',                      observed: 0.5  }, { soc: '35-3021', name: 'Combined Food Preparation Workers',          observed: 0.0  } ] },
+        { soc: '49', name: 'Installation, Maintenance & Repair', observed: 0.7, theoretical: 23.0, ratio: 3.0, theoreticalSource: 'eloundou-2023', children: [ { soc: '49-2011', name: 'Computer and Office Machine Repairers', observed: 10.7 }, { soc: '49-1011', name: 'Supervisors of Mechanics and Repairers',    observed: 10.2 }, { soc: '49-9061', name: 'Camera and Photo Equipment Repairers',       observed: 4.1  }, { soc: '49-2022', name: 'Telecom Equipment Installers',              observed: 3.3  }, { soc: '49-2098', name: 'Security and Fire Alarm Installers',         observed: 3.0  } ] },
+        { soc: '53', name: 'Transportation',               observed: 0.6,  theoretical: 17.0, ratio: 3.5,  theoreticalSource: 'eloundou-2023', children: [ { soc: '53-6061', name: 'Passenger Attendants',                 observed: 11.7 }, { soc: '53-2031', name: 'Flight Attendants',                         observed: 9.1  }, { soc: '53-2022', name: 'Airfield Operations Specialists',           observed: 4.8  }, { soc: '53-3032', name: 'Heavy and Tractor-Trailer Truck Drivers',   observed: 0.3  }, { soc: '53-7062', name: 'Laborers and Material Movers',               observed: 0.0  } ] },
+        { soc: '47', name: 'Construction & Extraction',    observed: 0.4,  theoretical: 25.0, ratio: 1.6,  theoreticalSource: 'eloundou-2023', children: [ { soc: '47-2221', name: 'Structural Iron and Steel Workers',   observed: 4.9  }, { soc: '47-4011', name: 'Construction and Building Inspectors',       observed: 4.8  }, { soc: '47-2132', name: 'Insulation Workers, Mechanical',            observed: 4.4  }, { soc: '47-1011', name: 'Supervisors of Construction',               observed: 3.0  }, { soc: '47-2061', name: 'Construction Laborers',                     observed: 2.8  } ] },
+        { soc: '45', name: 'Farming, Fishing & Forestry',  observed: 0.2,  theoretical: 13.0, ratio: 1.5,  theoreticalSource: 'eloundou-2023', children: [ { soc: '45-2092', name: 'Farmworkers and Laborers, Crop',        observed: 2.0  }, { soc: '45-2041', name: 'Graders and Sorters, Agricultural Products', observed: 0.0  }, { soc: '45-3031', name: 'Fishing and Hunting Workers',               observed: 0.0  }, { soc: '45-4011', name: 'Forest and Conservation Workers',            observed: 0.0  } ] }
+      ]
+    };
+
+    // Color scale: coral (#ff9063) = low ratio, green (#caef8c) = high ratio
+    var COLOR_CORAL = [255, 144, 99];
+    var COLOR_GREEN  = [202, 239, 140];
+
+    function ratioToColor(ratio) {
+      var t = Math.min(ratio / DATA.maxRatio, 1);
+      var r = Math.round(COLOR_CORAL[0] + t * (COLOR_GREEN[0] - COLOR_CORAL[0]));
+      var g = Math.round(COLOR_CORAL[1] + t * (COLOR_GREEN[1] - COLOR_CORAL[1]));
+      var b = Math.round(COLOR_CORAL[2] + t * (COLOR_GREEN[2] - COLOR_CORAL[2]));
+      return 'rgb(' + r + ',' + g + ',' + b + ')';
+    }
+
+    function buildTreeData(metric) {
+      return DATA.categories.map(function (cat) {
+        var sizeVal = metric === 'observed' ? cat.observed : cat.theoretical;
+        var color   = ratioToColor(cat.ratio);
+        return {
+          name:      cat.name,
+          value:     sizeVal,
+          itemStyle: { color: color },
+          extra: {
+            observed: cat.observed,
+            theoretical: cat.theoretical,
+            ratio: cat.ratio,
+            soc: cat.soc,
+            theoreticalSource: cat.theoreticalSource
+          },
+          children: cat.children.map(function (occ) {
+            return {
+              name:      occ.name,
+              value:     Math.max(occ.observed, 0.05),
+              itemStyle: { color: color },
+              extra: {
+                observed:   occ.observed,
+                parentName: cat.name,
+                soc:        occ.soc
+              }
+            };
+          })
+        };
+      });
+    }
+
+    var chartEl = document.getElementById('exposure-chart');
+    var chart   = echarts.init(chartEl);
+    var currentMetric = 'observed';
+    var isDrilledIn   = false;
+
+    function tooltipFormatter(info) {
+      var d     = info.data;
+      var extra = d.extra || {};
+      if (extra.parentName) {
+        return '<div style="font-family:Poppins,sans-serif;font-size:12px">' +
+          '<strong>' + d.name + '</strong>' +
+          '<br><span style="color:#555">SOC ' + extra.soc + '</span>' +
+          '<br><span style="color:#555">Observed exposure: <strong>' + extra.observed.toFixed(1) + '%</strong></span>' +
+          '</div>';
+      }
+      var theoryNote = extra.theoreticalSource === 'eloundou-2023'
+        ? '<br><span style="color:#aaa;font-size:10px">Theoretical est. from Eloundou et al. 2023</span>'
+        : '';
+      return '<div style="font-family:Poppins,sans-serif;font-size:12px">' +
+        '<strong style="font-size:13px">' + d.name + '</strong>' +
+        '<br><span style="color:#555">SOC group ' + extra.soc + '</span>' +
+        '<br><span style="color:#555">Observed exposure: <strong>' + extra.observed + '%</strong></span>' +
+        '<br><span style="color:#555">Theoretical capability: <strong>' + extra.theoretical + '%</strong></span>' +
+        '<br><span style="color:#555">Active usage ratio: <strong>' + extra.ratio.toFixed(1) + '%</strong></span>' +
+        theoryNote +
+        '<br><span style="color:#aaa;font-size:10px">Tap to see individual occupations</span>' +
+        '</div>';
+    }
+
+    function getOption(metric) {
+      return {
+        tooltip: {
+          show: true,
+          confine: true,
+          backgroundColor: '#ffffff',
+          borderColor: '#e8e8e8',
+          borderWidth: 1,
+          padding: [10, 14],
+          extraCssText: 'box-shadow: 0 4px 12px rgba(0,0,0,0.10);',
+          formatter: tooltipFormatter
+        },
+        series: [{
+          type: 'treemap',
+          roam: false,
+          nodeClick: 'zoomToNode',
+          breadcrumb: {
+            show: true,
+            bottom: 6,
+            height: 26,
+            emptyItemWidth: 22,
+            itemStyle: {
+              color: '#f9d040',
+              borderWidth: 0,
+              shadowBlur: 0,
+              textStyle: {
+                color: '#1a1a1a',
+                fontFamily: 'Poppins, sans-serif',
+                fontSize: 11,
+                fontWeight: '500'
+              }
+            }
+          },
+          visibleMin: 200,
+          itemStyle: {
+            borderColor: '#ffffff',
+            borderWidth: 3,
+            gapWidth: 3
+          },
+          emphasis: {
+            itemStyle: {
+              borderColor: '#1a1a1a',
+              borderWidth: 2
+            }
+          },
+          label: {
+            show: true,
+            fontFamily: 'Poppins, sans-serif',
+            fontSize: 11,
+            color: '#1a1a1a',
+            padding: [6, 8],
+            overflow: 'truncate',
+            formatter: function (params) {
+              return params.name + '\n' + (params.value || 0).toFixed(1) + '%';
+            }
+          },
+          upperLabel: {
+            show: true,
+            height: 26,
+            fontFamily: 'Poppins, sans-serif',
+            fontSize: 11,
+            fontWeight: '500',
+            color: '#1a1a1a',
+            backgroundColor: 'rgba(255,255,255,0.72)',
+            padding: [0, 8]
+          },
+          levels: [
+            {
+              itemStyle: { borderWidth: 5, gapWidth: 5, borderColor: '#ffffff' }
+            },
+            {
+              itemStyle: { borderWidth: 2, gapWidth: 2, borderColor: '#ffffff' },
+              label: { fontSize: 10 }
+            }
+          ],
+          data: buildTreeData(metric)
+        }]
+      };
+    }
+
+    chart.setOption(getOption(currentMetric));
+
+    chart.on('treemapZoomToNode', function (params) {
+      isDrilledIn = (params.targetNode !== null);
+      var toggle = document.querySelector('.metric-toggle');
+      toggle.style.opacity       = isDrilledIn ? '0.38' : '1';
+      toggle.style.pointerEvents = isDrilledIn ? 'none' : 'auto';
+    });
+
+    function updateMetricDesc(metric) {
+      var el = document.getElementById('metric-description');
+      el.textContent = metric === 'observed'
+        ? 'Cell size = share of tasks in each category where Claude is actively being used today.'
+        : 'Cell size = share of tasks AI could theoretically assist with, based on O*NET task analysis. Toggle disabled while drilled in.';
+    }
+
+    document.querySelectorAll('.toggle-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (isDrilledIn) return;
+        currentMetric = this.dataset.metric;
+        document.querySelectorAll('.toggle-btn').forEach(function (b) {
+          b.classList.toggle('toggle-btn--active', b.dataset.metric === currentMetric);
+        });
+        updateMetricDesc(currentMetric);
+        chart.setOption(getOption(currentMetric), { notMerge: true });
+      });
+    });
+
+    window.addEventListener('resize', function () { chart.resize(); });
+  }());
+  </script>
+
+</body>
+</html>
