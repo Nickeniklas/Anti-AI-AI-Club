@@ -15,11 +15,19 @@
         "name": "Eloundou et al. 2023 — GPTs are GPTs",
         "url": "https://doi.org/10.1126/science.adj0998",
         "notes": "Used for theoretical capability estimates where AEI public files do not provide a category-level figure (those files are LFS-stored and not directly fetchable). Eloundou uses O*NET task analysis with GPT-4 and is a lower bound relative to Claude-specific AEI estimates."
+      },
+      {
+        "id": "aei-dataset",
+        "name": "Anthropic Economic Index — job_exposure.csv",
+        "url": "https://huggingface.co/datasets/Anthropic/EconomicIndex",
+        "license": "CC-BY",
+        "retrieved": "2026-06-05",
+        "notes": "Per-occupation and per-category observed exposure from the released dataset files, used where the AEI report does not give a category-level figure in its prose or figures."
       }
     ],
     "caveat": "Exposure measures where AI shows up in tasks and interactions — not a forecast of job losses. High theoretical exposure in a category means the tasks are ones AI could in principle assist with; it does not determine whether workers in those roles will be displaced or augmented.",
     "colorAxis": "ratio",
-    "colorAxisNote": "Per-category automation vs augmentation split is not present in the publicly accessible dataset files. Colour encodes the observed-to-theoretical ratio: how much of the theoretical AI potential is actively being used today. Green = high active usage relative to potential (augmentation-heavy). Coral = significant potential not yet realised.",
+    "colorAxisNote": "Per-category automation vs augmentation split is not present in the publicly accessible dataset files. Colour encodes the observed-to-theoretical ratio: how much of the theoretical AI potential for a category is already showing up in real usage. Green = AI is already highly active in this category relative to its ceiling. Coral = much of the theoretical potential is not yet realised. This is a usage-intensity measure, not a judgment of whether the effect is good or bad for workers.",
     "aggregateAutomationShare": {
       "augmentation": 57,
       "automation": 43,
@@ -184,7 +192,7 @@
         { "soc": "51-5111", "name": "Prepress Technicians and Workers", "observed": 10.2 },
         { "soc": "51-8092", "name": "Gas Plant Operators", "observed": 7.2 },
         { "soc": "51-2011", "name": "Aircraft Structure Assemblers", "observed": 4.9 },
-        { "soc": "51-1011", "name": "First-Line Supervisors of Production", "observed": 3.8 }
+        { "soc": "51-8093", "name": "Petroleum Pump System Operators", "observed": 4.1 }
       ]
     },
     {
@@ -296,7 +304,7 @@
         { "soc": "33-9099", "name": "Protective Service Workers, All Other", "observed": 5.7 },
         { "soc": "33-3021", "name": "Detectives and Criminal Investigators", "observed": 3.7 },
         { "soc": "33-1011", "name": "Supervisors of Correctional Officers", "observed": 3.1 },
-        { "soc": "33-1012", "name": "Supervisors of Police and Detectives", "observed": 2.4 }
+        { "soc": "33-1012", "name": "Supervisors of Police and Detectives", "observed": 0.0 }
       ]
     },
     {
@@ -308,10 +316,10 @@
       "observedSource": "aei-dataset",
       "theoreticalSource": "eloundou-2023",
       "children": [
-        { "soc": "35-9011", "name": "Dining Room and Cafeteria Attendants", "observed": 7.3 },
+        { "soc": "35-9031", "name": "Hosts and Hostesses, Restaurant", "observed": 7.3 },
         { "soc": "35-1012", "name": "Supervisors of Food Preparation", "observed": 5.6 },
         { "soc": "35-2014", "name": "Cooks, Restaurant", "observed": 1.2 },
-        { "soc": "35-1011", "name": "Chefs and Head Cooks", "observed": 0.5 },
+        { "soc": "35-1011", "name": "Chefs and Head Cooks", "observed": 0.0 },
         { "soc": "35-3021", "name": "Combined Food Preparation Workers", "observed": 0.0 }
       ]
     },
@@ -343,7 +351,7 @@
         { "soc": "53-6061", "name": "Passenger Attendants", "observed": 11.7 },
         { "soc": "53-2031", "name": "Flight Attendants", "observed": 9.1 },
         { "soc": "53-2022", "name": "Airfield Operations Specialists", "observed": 4.8 },
-        { "soc": "53-3032", "name": "Heavy and Tractor-Trailer Truck Drivers", "observed": 0.3 },
+        { "soc": "53-3032", "name": "Heavy and Tractor-Trailer Truck Drivers", "observed": 0.0 },
         { "soc": "53-7062", "name": "Laborers and Material Movers", "observed": 0.0 }
       ]
     },
@@ -374,7 +382,6 @@
       "children": [
         { "soc": "45-2092", "name": "Farmworkers and Laborers, Crop", "observed": 2.0 },
         { "soc": "45-2041", "name": "Graders and Sorters, Agricultural Products", "observed": 0.0 },
-        { "soc": "45-3031", "name": "Fishing and Hunting Workers", "observed": 0.0 },
         { "soc": "45-4011", "name": "Forest and Conservation Workers", "observed": 0.0 }
       ]
     }
