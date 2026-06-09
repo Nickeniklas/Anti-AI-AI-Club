@@ -8,7 +8,7 @@
         "url": "https://huggingface.co/datasets/Anthropic/EconomicIndex",
         "license": "CC-BY",
         "retrieved": "2026-06-05",
-        "notes": "Observed exposure for the top eight categories uses employment-weighted averages from the published AEI report (Feb–Mar 2026). Remaining categories use simple averages from job_exposure.csv in the same dataset. Theoretical capability for eight categories comes directly from the AEI report. Children (individual occupations) use per-occupation observed_exposure from job_exposure.csv."
+        "notes": "Observed exposure for seven categories (Computer and Mathematical, Office and Administrative Support, Business and Financial, Sales, Legal, Arts/Design/Media, and Education and Library) uses employment-weighted averages stated in the published AEI report (Feb–Mar 2026). Every other category, including Production, uses a simple average computed directly from job_exposure.csv, the same basis used for the individual occupations shown under every category regardless of which source its category-level figure comes from. Theoretical capability for eight categories (the same seven, minus Education and Library, plus Management and Architecture and Engineering) is stated directly in the AEI report; the remaining 14 use estimates from Eloundou et al. 2023."
       },
       {
         "id": "eloundou-2023",
@@ -182,9 +182,9 @@
     {
       "soc": "51",
       "name": "Production",
-      "observed": 6.9,
+      "observed": 0.8,
       "theoretical": 40.0,
-      "ratio": 17.3,
+      "ratio": 2.0,
       "observedSource": "aei-dataset",
       "theoreticalSource": "eloundou-2023",
       "children": [

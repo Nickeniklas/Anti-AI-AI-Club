@@ -24,8 +24,9 @@ This governs every design and copy choice. No urgency tricks. No countdown timer
 ## Tech stack
 
 - **Static HTML / CSS / JS only.** No framework, no build step, no backend.
-- Multipage: `index.html` (landing page) + `articles.html` (curated feed) + `ai-defaults.html` (AI defaults tracker). Mobile-first, responsive.
-- Shared topnav (`#site-nav`) on all three pages — sticky, brand left, links right. Links: Articles, AI Defaults, yellow "Weigh in" pill CTA.
+- Multipage: `index.html` (landing page) + `articles.html` (curated feed) + `ai-defaults.html` (AI defaults tracker) + `ai-exposure.html` (AI exposure heatmap). Mobile-first, responsive.
+- Shared topnav (`#site-nav`) on all four pages — sticky, brand left, links right. Links: Articles, AI Defaults, Heatmap, yellow "Weigh in" pill CTA.
+- `ai-exposure.html` renders an ECharts treemap (loaded from a pinned jsDelivr CDN URL) over data hardcoded in `data/ai-exposure.json` — no runtime fetch dependency. The JSON file is the canonical source of numbers and citations; the page's inline `DATA` object is a literal copy of it and must be kept in sync by hand whenever the JSON changes.
 - Form posts to Formspree. Endpoint is live: `https://formspree.io/f/mdavorwl`. Only Niklas manages the Formspree account; Claude Code only updates the `action` attribute if the URL ever changes.
 - The form stores topic checkboxes, optional worry text, and optional email. Email is NOT required and must never block submission.
 - Keep it lightweight. No heavy dependencies.
@@ -63,7 +64,7 @@ All sections built. The site is at v0.1.
 
 | Section | Status |
 |---|---|
-| Topnav | **Built** — sticky, shared across all three pages |
+| Topnav | **Built** — sticky, shared across all four pages |
 | 1. Hero | **Built** |
 | 2. Value Proposition | **Built** |
 | 3. Feed Preview | **Built** — 3 teasers + "Read all in the feed" CTA to articles.html |
@@ -91,14 +92,28 @@ All sections built. The site is at v0.1.
 | Entries | **Built** — 5 entries: Windows 11, GitHub Copilot, Atlassian, Microsoft SharePoint, Google Chrome & Search |
 | Footer | **Built** |
 
+**ai-exposure.html**
+
+| Section | Status |
+|---|---|
+| Topnav | **Built** — shared |
+| Header | **Built** — page h1, description |
+| Toggle | **Built** — switches the treemap between observed and theoretical exposure. Buttons are always active (never disabled). Clicking while drilled into a category resets the view to root and applies the new metric — this is intentional UX, not a bug. Do not re-add disable/greyed-out logic: ECharts breadcrumb clicks don't emit events that can reliably re-enable buttons, so the only correct state is always-on. |
+| Legend | **Built** — colour scale from coral (potential largely untapped) to green (AI already highly active), keyed to the observed/theoretical ratio |
+| Chart | **Built** — Apache ECharts treemap with drill-down (`nodeClick: 'zoomToNode'`) and breadcrumb navigation; data comes from `data/ai-exposure.json`, duplicated inline as the `DATA` object so the page has no runtime fetch dependency |
+| Caption / source notes | **Built** — explains what the colour does and doesn't mean, the separate 57/43 augmentation/automation aggregate, and links back to `_meta.sources` for provenance |
+| Footer | **Built** |
+
 ## What still needs doing before launch
 
-- **Re-verify all stats** in `copy.md` before going live — figures move fast
-- **Final responsiveness pass** — mobile widths, section spacing; check all three pages
+- **Re-verify all stats** in `copy.md` and `data/ai-exposure.json` before going live — figures move fast
+- **Add an SRI hash** to the ECharts CDN `<script>` tag in `ai-exposure.html` (currently flagged with a comment to verify at jsDelivr before go-live)
+- **Final responsiveness pass** — mobile widths, section spacing; check all four pages
 - **Add social links to footer** — placeholder comment in all HTML files; Niklas decides which platforms
 - **Privacy and Terms pages** — footer links point to `#` on all pages
 - **Keep articles.html fresh** — add new items as they come in, remove stale ones
 - **Keep ai-defaults.html fresh** — add new entries as they surface; re-verify toggle paths and dates per entry
+- **Keep ai-exposure.html fresh** — re-verify category and occupation figures against the source datasets periodically; update `data/ai-exposure.json` and the inline `DATA` copy together
 
 ## Contact / email
 
@@ -132,9 +147,16 @@ All sections built. The site is at v0.1.
 4. Entries (one `<article class="entry">` per product)
 5. Footer
 
-All styles live in `styles.css`. The ai-defaults page has no inline `<style>` block.
+**ai-exposure.html** — page title "Where AI actually lands at work."
+1. Header (h1, intro copy, metric toggle between "Observed exposure" and "Theoretical capability", metric description)
+2. Legend (colour gradient track + labels + legend note explaining the observed/theoretical ratio)
+3. Chart (`#exposure-chart` — ECharts treemap of 22 occupational categories with drill-down to individual occupations and breadcrumb navigation)
+4. Caption / source notes (what colour does and doesn't mean, the separate 57/43 augmentation/automation aggregate, links to provenance)
+5. Footer
 
-(Copy for index.html sections is in `copy.md`. Sections cut from the landing page — About/Story, Problem/Solution, What You'll Get, Social Proof, Pricing — are still in `copy.md` marked REMOVED, kept for reference. Articles feed copy and AI defaults copy live in their respective HTML files directly.)
+All styles live in `styles.css`; none of the four pages has an inline `<style>` block. `ai-exposure.html` does carry an inline `<script>` block: it configures the ECharts treemap and holds a `DATA` object that is a literal, hand-kept-in-sync copy of `data/ai-exposure.json` (so the page renders with no runtime fetch).
+
+(Copy for index.html sections is in `copy.md`. Sections cut from the landing page — About/Story, Problem/Solution, What You'll Get, Social Proof, Pricing — are still in `copy.md` marked REMOVED, kept for reference. Articles feed copy, AI defaults copy, and AI exposure heatmap copy live in their respective HTML files directly; the heatmap's underlying numbers and source citations live in `data/ai-exposure.json`.)
 
 ## Standing rules
 

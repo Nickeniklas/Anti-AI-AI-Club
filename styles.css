@@ -1006,7 +1006,7 @@ footer {
 
 /* ── AI Exposure Map (ai-exposure.html) ─────── */
 .exposure-wrap {
-  max-width: 1040px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 4rem 1.25rem 5rem;
   display: flex;
@@ -1111,7 +1111,7 @@ footer {
 
 #exposure-chart {
   width: 100%;
-  height: clamp(400px, 60vh, 620px);
+  height: clamp(420px, 65vh, 800px);
   border-radius: 6px;
   overflow: hidden;
 }

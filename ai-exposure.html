@@ -105,7 +105,7 @@
         { soc: '25', name: 'Education & Library',          observed: 18.2, theoretical: 65.0, ratio: 28.0, theoreticalSource: 'eloundou-2023', children: [ { soc: '25-1022', name: 'Math Science Teachers, Postsecondary',  observed: 43.0 }, { soc: '25-4012', name: 'Curators',                                  observed: 41.2 }, { soc: '25-3041', name: 'Tutors',                                    observed: 40.8 }, { soc: '25-1123', name: 'English Language Teachers, Postsecondary',  observed: 36.2 }, { soc: '25-1032', name: 'Engineering Teachers, Postsecondary',       observed: 35.9 } ] },
         { soc: '19', name: 'Life, Physical, Social Science', observed: 12.7, theoretical: 66.0, ratio: 19.2, theoreticalSource: 'eloundou-2023', children: [ { soc: '19-3094', name: 'Political Scientists',                 observed: 45.2 }, { soc: '19-4061', name: 'Social Science Research Assistants',        observed: 43.9 }, { soc: '19-3022', name: 'Survey Researchers',                        observed: 43.2 }, { soc: '19-2011', name: 'Astronomers',                               observed: 38.5 }, { soc: '19-3041', name: 'Sociologists',                              observed: 38.3 } ] },
         { soc: '11', name: 'Management',                   observed: 9.7,  theoretical: 91.3, ratio: 10.6, theoreticalSource: 'aei-report',    children: [ { soc: '11-3031', name: 'Financial Managers',                   observed: 39.1 }, { soc: '11-3131', name: 'Training and Development Managers',         observed: 37.8 }, { soc: '11-2021', name: 'Marketing Managers',                        observed: 31.9 }, { soc: '11-2032', name: 'Public Relations Managers',                 observed: 23.2 }, { soc: '11-3061', name: 'Purchasing Managers',                       observed: 20.0 } ] },
-        { soc: '51', name: 'Production',                   observed: 6.9,  theoretical: 40.0, ratio: 17.3, theoreticalSource: 'eloundou-2023', children: [ { soc: '51-9162', name: 'CNC Tool Programmers',                 observed: 12.1 }, { soc: '51-5111', name: 'Prepress Technicians and Workers',          observed: 10.2 }, { soc: '51-8092', name: 'Gas Plant Operators',                       observed: 7.2  }, { soc: '51-2011', name: 'Aircraft Structure Assemblers',             observed: 4.9  }, { soc: '51-8093', name: 'Petroleum Pump System Operators',           observed: 4.1  } ] },
+        { soc: '51', name: 'Production',                   observed: 0.8,  theoretical: 40.0, ratio: 2.0,  theoreticalSource: 'eloundou-2023', children: [ { soc: '51-9162', name: 'CNC Tool Programmers',                 observed: 12.1 }, { soc: '51-5111', name: 'Prepress Technicians and Workers',          observed: 10.2 }, { soc: '51-8092', name: 'Gas Plant Operators',                       observed: 7.2  }, { soc: '51-2011', name: 'Aircraft Structure Assemblers',             observed: 4.9  }, { soc: '51-8093', name: 'Petroleum Pump System Operators',           observed: 4.1  } ] },
         { soc: '21', name: 'Community & Social Service',   observed: 5.2,  theoretical: 51.0, ratio: 10.2, theoreticalSource: 'eloundou-2023', children: [ { soc: '21-2021', name: 'Directors, Religious Activities',      observed: 15.3 }, { soc: '21-1091', name: 'Health Education Specialists',              observed: 13.8 }, { soc: '21-1012', name: 'Educational and Career Counselors',         observed: 11.8 }, { soc: '21-2011', name: 'Clergy',                                    observed: 11.2 }, { soc: '21-1022', name: 'Healthcare Social Workers',                 observed: 9.2  } ] },
         { soc: '31', name: 'Healthcare Support',           observed: 4.9,  theoretical: 40.0, ratio: 12.3, theoreticalSource: 'eloundou-2023', children: [ { soc: '31-9094', name: 'Medical Transcriptionists',             observed: 63.6 }, { soc: '31-2012', name: 'Occupational Therapy Aides',               observed: 6.6  }, { soc: '31-9092', name: 'Medical Assistants',                        observed: 4.8  }, { soc: '31-9095', name: 'Pharmacy Aides',                            observed: 2.2  }, { soc: '31-9096', name: 'Veterinary Assistants',                     observed: 1.8  } ] },
         { soc: '29', name: 'Healthcare Practitioners',     observed: 4.1,  theoretical: 54.0, ratio: 7.6,  theoreticalSource: 'eloundou-2023', children: [ { soc: '29-2072', name: 'Medical Records Specialists',           observed: 66.7 }, { soc: '29-9021', name: 'Health Information Technologists',          observed: 30.6 }, { soc: '29-2051', name: 'Dietetic Technicians',                      observed: 24.5 }, { soc: '29-1224', name: 'Radiologists',                              observed: 19.9 }, { soc: '29-1222', name: 'Physicians, Pathologists',                  observed: 15.8 } ] },
@@ -167,7 +167,6 @@
     var chartEl = document.getElementById('exposure-chart');
     var chart   = echarts.init(chartEl);
     var currentMetric = 'observed';
-    var isDrilledIn   = false;
 
     function tooltipFormatter(info) {
       var d     = info.data;
@@ -275,23 +274,15 @@
 
     chart.setOption(getOption(currentMetric));
 
-    chart.on('treemapZoomToNode', function (params) {
-      isDrilledIn = (params.targetNode !== null);
-      var toggle = document.querySelector('.metric-toggle');
-      toggle.style.opacity       = isDrilledIn ? '0.38' : '1';
-      toggle.style.pointerEvents = isDrilledIn ? 'none' : 'auto';
-    });
-
     function updateMetricDesc(metric) {
       var el = document.getElementById('metric-description');
       el.textContent = metric === 'observed'
         ? 'Cell size = share of tasks in each category where Claude is actively being used today.'
-        : 'Cell size = share of tasks AI could theoretically assist with, based on O*NET task analysis. Toggle disabled while drilled in.';
+        : 'Cell size = share of tasks AI could theoretically assist with, based on O*NET task analysis.';
     }
 
     document.querySelectorAll('.toggle-btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
-        if (isDrilledIn) return;
         currentMetric = this.dataset.metric;
         document.querySelectorAll('.toggle-btn').forEach(function (b) {
           b.classList.toggle('toggle-btn--active', b.dataset.metric === currentMetric);
