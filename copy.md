@@ -19,6 +19,23 @@ All section copy and the verified stats for the landing page. Read this before w
 - **CTA button:** Tell us what to cover
 - **Microcopy:** Takes 10 seconds. One question, no email needed.
 
+### 1b. Featured (front-page story) — Claude Fable 5
+
+First news item to earn a front-page block. Sits between Hero and Value Prop. White background.
+
+- **Kicker:** Featured · 9 Jun 2026
+- **Heading:** The most capable model yet just shipped to everyone. Here are the numbers nobody's leading with.
+- **Lede:** Anthropic released Claude Fable 5, a model from a new tier they call Mythos-class. It's the strongest thing they've ever put in front of the general public. The launch post is full of capability claims. The parts worth tracking are the access, the price, and the catch.
+- **Stat chips:**
+  - **$10 / $50** — Per million input / output tokens. Less than half what the Mythos Preview model cost.
+  - **< 5%** — Of sessions hit a safeguard that quietly hands your request to a smaller model instead.
+  - **23 Jun** — The date it gets pulled from Pro, Max, Team and Enterprise plans. After that you pay in usage credits.
+- **Body:** The honest part is in the fine print. Anthropic says the safeguards are tuned to be cautious, so some harmless requests will get caught and silently routed to Claude Opus 4.8. A near-identical model with the cyber safeguards removed, called Mythos 5, goes to a small set of government and infrastructure partners, not to you. And the free ride on subscription plans is temporary by design. It's "available everywhere today," then rationed in two weeks because they expect demand they can't predict.
+- **Takeaway:** None of that is a scandal. It's just the shape of a frontier launch once you read past the benchmark charts: priced to spread fast, gated where it's dangerous, and free only until the capacity math stops working.
+- **CTA:** Read Anthropic's announcement → (https://www.anthropic.com/news/claude-fable-5-mythos-5)
+
+Source: Anthropic, "Claude Fable 5 and Claude Mythos 5," 9 Jun 2026. All figures pulled from that post.
+
 ### 2. Value Proposition
 - **Heading:** Not anti-AI. Anti-bullshit about AI.
 - Body: Most AI coverage either sells you a dream or sells you dread. We're not doing either. We just track the numbers most people skip: how big the market actually is, what it's doing to jobs, and who's using it for power.

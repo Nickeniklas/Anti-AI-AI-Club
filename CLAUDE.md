@@ -66,6 +66,7 @@ All sections built. The site is at v0.1.
 |---|---|
 | Topnav | **Built** — sticky, shared across all four pages |
 | 1. Hero | **Built** |
+| 1b. Featured (Fable 5) | **Built** |
 | 2. Value Proposition | **Built** |
 | 3. Feed Preview | **Built** — 3 teasers + "Read all in the feed" CTA to articles.html |
 | 4. Defaults Preview | **Built** — 3 entries (GitHub Copilot, Windows 11, Atlassian) + "See the full list" CTA to ai-defaults.html |
@@ -129,6 +130,7 @@ All sections built. The site is at v0.1.
 
 **index.html**
 1. Hero
+1b. Featured — front-page story block (first news item to earn a full slot; sits between Hero and Value Prop)
 2. Value Proposition
 3. Feed Preview — 3 teasers linking to articles.html
 4. Defaults Preview — 3 entries (GitHub Copilot, Windows 11, Atlassian) linking to ai-defaults.html

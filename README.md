@@ -31,6 +31,7 @@ v0.1 — all sections built and live.
 |---|---|
 | Topnav | Built |
 | 1. Hero | Built |
+| 1b. Featured (Fable 5) | Built |
 | 2. Value Proposition | Built |
 | 3. Feed Preview (articles) | Built |
 | 4. Defaults Preview | Built |
@@ -73,5 +74,6 @@ v0.1 — all sections built and live.
 - **Final responsiveness pass** — mobile widths, section spacing; check all four pages
 - **Add social links to footer** — placeholder comment in all HTML files; platforms TBD
 - **Privacy and Terms pages** — footer links point to `#` on all pages
+- **Keep articles.html fresh** — add new items as they come in, remove stale ones
 - **Keep ai-defaults.html fresh** — add new entries as they surface; re-verify toggle paths
 - **Keep ai-exposure.html fresh** — re-verify category and occupation figures periodically; update `data/ai-exposure.json` and the inline `DATA` copy together
