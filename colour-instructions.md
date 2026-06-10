@@ -1,6 +1,45 @@
 
 ## Colour usage
 
+This file covers two colour systems: the **paper system** for `index.html` (the new standard — dark by default, with a light toggle) and the **legacy system** for `articles.html`, `ai-defaults.html`, and `ai-exposure.html` (light-only, pending migration to the paper system). In both systems, use only the CSS custom properties defined in `styles.css` — never hardcode hex values directly.
+
+---
+
+## Paper system (index.html)
+
+Tokens are listed in full in `CLAUDE.md` → Design tokens (`:root` for dark/default, `html.theme-light` for the light overrides). Both themes are real, supported themes — check contrast in both, not just the default dark one.
+
+### Section backgrounds
+
+| Section | Background | Notes |
+|---|---|---|
+| Nav, Masthead (left), Featured, Doors | `--bg` (page background) | `--bg2` is used for subtle hover states (e.g. a door card on hover), not as a section background |
+| Masthead right panel (the `$1.82T` figure) | `--panel-bg` | **Stays dark in both themes** — the one fixed-dark panel, and the masthead's visual anchor |
+| Form strip, stat cards | `--surface` | A step apart from `--bg` — lighter than `--bg` in dark mode, "more white" than `--bg` in light mode |
+| Footer | `--panel-bg` | Stays dark in both themes, same as the masthead panel — ties the top and bottom of the page together |
+
+### Accent and CTAs
+
+- `--accent` (`#f4c430`, warm yellow) is the single accent colour: primary CTA buttons, the active/checked state of topic chips, the brand dot. It does not change between themes.
+- Text on an `--accent` fill is always `--accent-ink` (near-black), in both themes, for contrast.
+- Button hover steps to `--accent-dim`.
+
+### Text
+
+- `--ink` / `--ink2` / `--ink3` are the text colours for content on `--bg`, `--bg2`, and `--surface`. Use `--ink` for headings and primary copy, `--ink2` for secondary copy and chip labels, `--ink3` for placeholders and the least important microcopy.
+- On `--panel-bg` (masthead panel, footer), use `--panel-fg` / `--panel-dim` instead. Never use `--ink`/`--ink2`/`--ink3` there — those flip to dark in light mode and would be invisible against the always-dark panel.
+
+### What to avoid (paper system)
+
+- **Never hardcode a hex colour in new paper-system CSS.** Every colour that should change between themes is a token; every colour that shouldn't (the panel, the accent) already has its own token.
+- **Don't cross the `--ink*` / `--panel-*` text pairs with the wrong background** — `--ink*` is for `--bg`/`--bg2`/`--surface`, `--panel-fg`/`--panel-dim` is for `--panel-bg`. Mixing them works in one theme and breaks in the other.
+- **Watch for legacy selectors leaking in.** The pre-redesign stylesheet has some bare-tag/ID rules (e.g. `footer { background: var(--color-ink) }`) using the *legacy* fixed-hex tokens. An ID selector can outrank a `body.redesign .foo` class rule regardless of source order — if a paper-system element keeps an old ID (for JS hooks, anchors, etc.), check that no legacy rule still targets that ID's colour or background.
+- **Don't add another "always dark" panel.** `--panel-bg` is reserved for the masthead figure and footer, on purpose — it's what makes those two spots read as a matching pair. More fixed-dark blocks would dilute that.
+
+---
+
+## Legacy system (articles.html, ai-defaults.html, ai-exposure.html)
+
 The palette is defined in `styles.css` as CSS custom properties. Use only those variables in HTML and CSS — never hardcode hex values directly.
 
 ### The rule of five sections

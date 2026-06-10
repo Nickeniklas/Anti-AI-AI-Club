@@ -6,308 +6,176 @@
   <title>Anti-AI, AI Club</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&family=Poppins:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <script>
+    // Applied before paint to avoid a light/dark flash. Default is dark.
+    (function () {
+      try {
+        if (localStorage.getItem('theme') === 'light') {
+          document.documentElement.classList.add('theme-light');
+        }
+      } catch (e) {}
+    })();
+  </script>
 </head>
-<body>
+<body class="redesign">
 
-  <nav id="site-nav">
-    <div class="nav-inner">
-      <a href="index.html" class="nav-brand">Anti-AI, AI Club</a>
-      <ul class="nav-links">
-        <li><a href="articles.html">Articles</a></li>
-        <li><a href="ai-defaults.html">AI Defaults</a></li>
-        <li><a href="ai-exposure.html">Heatmap</a></li>
-        <li><a href="#form" class="nav-cta">Weigh in</a></li>
-      </ul>
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      <span class="brand-dot" aria-hidden="true"></span>
+      Anti-AI, AI Club
+    </a>
+    <ul class="nav-links">
+      <li><a href="articles.html">Articles</a></li>
+      <li><a href="ai-defaults.html">AI Defaults</a></li>
+      <li><a href="ai-exposure.html">Heatmap</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button type="button" class="theme-toggle" id="theme-toggle">
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+        </svg>
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <span class="sr-only">Toggle light / dark theme</span>
+      </button>
+      <a href="#form" class="btn">Weigh in</a>
     </div>
   </nav>
 
-  <!-- 1. Hero -->
-  <section id="hero">
-    <div class="hero-inner">
-      <h1>AI is here to stay. The hype around it is blinding everyone to the actual numbers.</h1>
-      <p class="hero-intro"><strong>Anti-AI, AI Club</strong> — we track the data most coverage skips:</p>
-      <ul class="hero-bullets">
-        <li>How fast it's actually growing</li>
-        <li>Real numbers, with sources</li>
-        <li>No hype. No fear.</li>
-      </ul>
-      <a href="#form" class="btn-primary">Tell us what to cover</a>
-      <p class="hero-micro">Takes 10 seconds. One question, no email needed.</p>
+  <!-- Masthead -->
+  <section class="masthead">
+    <div class="mh-l">
+      <span class="eyebrow">Critical, calm, not hateful</span>
+      <h1>Not anti-AI.<br>Anti-bullshit<br>about AI.</h1>
+      <p class="sub">We track the data most coverage skips: sourced, dated, updated.</p>
+      <div class="cta">
+        <a href="#form" class="btn">Tell us what to cover →</a>
+      </div>
     </div>
-  </section>
-
-  <!-- 1b. Featured (front-page hero story) -->
-  <section id="featured" aria-labelledby="featured-heading">
-    <div class="featured-inner">
-
-      <span class="featured-kicker">Featured · 9 Jun 2026</span>
-
-      <h2 class="featured-heading" id="featured-heading">
-        The most capable model yet just shipped to everyone. Here are the numbers nobody's leading with.
-      </h2>
-
-      <p class="featured-lede">
-        Anthropic released Claude Fable 5, a model from a new tier they call Mythos-class. It's the strongest
-        thing they've ever put in front of the general public. The launch post is full of capability claims.
-        The parts worth tracking are the access, the price, and the catch.
-      </p>
-
-      <ul class="featured-stats">
-        <li class="featured-stat">
-          <span class="featured-stat-num">$10 / $50</span>
-          <span class="featured-stat-label">Per million input / output tokens. Less than half what the Mythos Preview model cost.</span>
-        </li>
-        <li class="featured-stat">
-          <span class="featured-stat-num">&lt; 5%</span>
-          <span class="featured-stat-label">Of sessions hit a safeguard that quietly hands your request to a smaller model instead.</span>
-        </li>
-        <li class="featured-stat">
-          <span class="featured-stat-num">23 Jun</span>
-          <span class="featured-stat-label">The date it gets pulled from Pro, Max, Team and Enterprise plans. After that you pay in usage credits.</span>
-        </li>
-      </ul>
-
-      <p class="featured-body">
-        The honest part is in the fine print. Anthropic says the safeguards are tuned to be cautious, so some
-        harmless requests will get caught and silently routed to Claude Opus 4.8. A near-identical model with the
-        cyber safeguards removed, called Mythos 5, goes to a small set of government and infrastructure partners,
-        not to you. And the free ride on subscription plans is temporary by design. It's "available everywhere today,"
-        then rationed in two weeks because they expect demand they can't predict.
-      </p>
-
-      <p class="featured-takeaway">
-        None of that is a scandal. It's just the shape of a frontier launch once you read past the benchmark charts:
-        priced to spread fast, gated where it's dangerous, and free only until the capacity math stops working.
-      </p>
-
-      <a href="https://www.anthropic.com/news/claude-fable-5-mythos-5" class="btn-primary" target="_blank" rel="noopener">
-        Read Anthropic's announcement →
-      </a>
-
-    </div>
-  </section>
-
-  <!-- 2. Value Proposition -->
-  <section id="value-prop">
-    <div class="value-prop-inner">
-      <h2 class="value-prop-heading">Not anti-AI. Anti-bullshit about AI.</h2>
-      <p class="value-prop-body">Most AI coverage either sells you a dream or sells you dread. We're not doing either. We just track the numbers most people skip: how big the market actually is, what it's doing to jobs, and who's using it for power.</p>
-      <ul class="pillars">
-        <li class="pillar">
-          <strong>Data over vibes.</strong>
-          <span>Real numbers with real sources. If we can't back it up, we don't post it.</span>
-        </li>
-        <li class="pillar">
-          <strong>Calm, not doom.</strong>
-          <span>We want you informed, not anxious.</span>
-        </li>
-        <li class="pillar">
-          <strong>Critical, not hateful.</strong>
-          <span>AI is here to stay. That's exactly why it's worth scrutinising.</span>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- 3. Feed Preview -->
-  <section id="feed-preview">
-    <div class="feed-preview-inner">
-      <h2 class="feed-preview-heading">Hand-picked articles</h2>
-      <p class="feed-preview-body">A running mix of articles, research, tweets, and repos. All on AI.</p>
-      <ul class="feed-preview-list">
-        <li class="feed-preview-item">
-          <span class="feed-tag">Article</span>
-          <a href="https://mastrojs.github.io/blog/2026-05-23-is-AI-causing-a-repeat-of-frontends-lost-decade/" class="feed-title" target="_blank" rel="noopener">Is AI Causing a Repeat of Frontend's Lost Decade?</a>
-        </li>
-        <li class="feed-preview-item">
-          <span class="feed-tag">Opinion</span>
-          <a href="https://www.nytimes.com/2026/04/30/opinion/ai-labor-work-force-silicon-valley.html" class="feed-title" target="_blank" rel="noopener">Silicon Valley Is Bracing for a Permanent Underclass</a>
-        </li>
-        <li class="feed-preview-item">
-          <span class="feed-tag">Research</span>
-          <a href="https://www.anthropic.com/research/disempowerment-patterns" class="feed-title" target="_blank" rel="noopener">Disempowerment Patterns in Real-World AI Usage</a>
-        </li>
-      </ul>
-      <a href="articles.html" class="btn-primary">Read all in the feed →</a>
-    </div>
-  </section>
-
-  <!-- 4. Defaults Preview -->
-  <section id="defaults-preview">
-    <div class="feed-preview-inner">
-      <h2 class="feed-preview-heading">What's on by default</h2>
-      <p class="feed-preview-body">Lots of software now ships with AI features switched on. Companies don't always flag it, settings sometimes get reset after an update, and opting out is often only available to paying customers. We track the specific ones and where the toggle actually is.</p>
-      <ul class="feed-preview-list">
-
-        <li class="feed-preview-item">
-          <div class="defaults-preview-tags">
-            <span class="tag tag--on">On by default</span>
-            <span class="tag tag--tiered">Tiered opt-out</span>
-          </div>
-          <div>
-            <a href="ai-defaults.html" class="feed-title">GitHub Copilot</a>
-            <p class="defaults-preview-feature">Training on your interaction data</p>
-          </div>
-        </li>
-
-        <li class="feed-preview-item">
-          <div class="defaults-preview-tags">
-            <span class="tag tag--resets">Re-enables after updates</span>
-          </div>
-          <div>
-            <a href="ai-defaults.html" class="feed-title">Windows 11</a>
-            <p class="defaults-preview-feature">Recall, Copilot, Click To Do</p>
-          </div>
-        </li>
-
-        <li class="feed-preview-item">
-          <div class="defaults-preview-tags">
-            <span class="tag tag--on">On by default</span>
-            <span class="tag tag--tiered">Tiered opt-out</span>
-          </div>
-          <div>
-            <a href="ai-defaults.html" class="feed-title">Atlassian</a>
-            <p class="defaults-preview-feature">AI training data collection across Jira, Confluence, Rovo</p>
-          </div>
-        </li>
-
-      </ul>
-      <a href="ai-defaults.html" class="btn-primary">See the full list →</a>
-    </div>
-  </section>
-
-  <!-- 5. The Form -->
-  <section id="form">
-    <div class="form-inner">
-      <h2 class="form-heading">What should we cover?</h2>
-      <p class="form-subtext">Pick what you actually care about. That's the whole ask — takes about 10 seconds.</p>
-
-      <!-- Set action to your Formspree endpoint, e.g. https://formspree.io/f/XXXXXXXX -->
-      <form id="topic-form" action="https://formspree.io/f/mdavorwl" method="POST" novalidate>
-
-        <fieldset class="form-fieldset">
-          <legend class="form-legend">Pick what you care about <span class="form-required">*</span></legend>
-          <ul class="checkbox-list">
-            <li>
-              <input type="checkbox" id="topic-jobs" name="topics" value="AI & jobs / the labour market">
-              <label for="topic-jobs">AI &amp; jobs / the labour market</label>
-            </li>
-            <li>
-              <input type="checkbox" id="topic-economics" name="topics" value="The real economics">
-              <label for="topic-economics">The real economics (market size, the money, the bubble talk)</label>
-            </li>
-            <li>
-              <input type="checkbox" id="topic-power" name="topics" value="AI & power / politics / surveillance">
-              <label for="topic-power">AI &amp; power / politics / surveillance</label>
-            </li>
-            <li>
-              <input type="checkbox" id="topic-copyright" name="topics" value="Copyright, data, and who owns what">
-              <label for="topic-copyright">Copyright, data, and who owns what</label>
-            </li>
-            <li>
-              <input type="checkbox" id="topic-environment" name="topics" value="Environmental cost">
-              <label for="topic-environment">Environmental cost</label>
-            </li>
-            <li>
-              <input type="checkbox" id="topic-hype" name="topics" value="Hype-checking & broken promises">
-              <label for="topic-hype">Hype-checking &amp; broken promises</label>
-            </li>
-            <li>
-              <input type="checkbox" id="topic-important" name="topics" value="Just give me the important stuff">
-              <label for="topic-important">Just give me the important stuff</label>
-            </li>
-          </ul>
-          <p class="form-error" id="checkbox-error" hidden>Please pick at least one topic.</p>
-        </fieldset>
-
-        <div class="form-field">
-          <label for="worry" class="form-label">What worries you most about AI? <span class="form-optional">Optional</span></label>
-          <textarea id="worry" name="worry" rows="3" placeholder="Optional — one line is fine. Helps us write for you."></textarea>
-        </div>
-
-        <div class="form-field">
-          <label for="email" class="form-label">Want to hear from us? Drop an email. <span class="form-optional">Totally optional ✳</span></label>
-          <input type="email" id="email" name="email" placeholder="you@email.com — only if you want to">
-          <p class="form-helper">✳ Completely optional. We'll only ever email you when we've got something genuinely worth showing — and never anything else.</p>
-        </div>
-
-        <button type="submit" class="btn-form-submit">Send it in</button>
-        <p class="form-submit-error" id="submit-error" hidden>Something went wrong — please check your connection and try again.</p>
-      </form>
-
-      <!-- Success state — shown after submit, form hidden -->
-      <div id="form-success" hidden>
-        <p class="form-success-main">Got it — thanks for telling us what matters to you. If you left an email, you'll only hear from us when there's something real worth sharing.</p>
-        <p class="form-success-sub">Want to help shape it more? Send us an article worth reading: <a href="mailto:antibsai@gmail.com" class="form-success-link">antibsai@gmail.com</a>.</p>
+    <div class="mh-r">
+      <span class="lbl">The figure nobody headlines</span>
+      <div class="stat-num" id="counter">$1.82T</div>
+      <div class="mh-r-body">
+        <p class="desc">Anthropic and OpenAI combined: roughly the <b>whole world's</b> 2026 AI budget.</p>
+        <p class="src">Anthropic ≈ $965B + OpenAI ≈ $852B (May/Mar 2026 valuations) vs. ≈ $2.5T forecast global AI spend in 2026 (Gartner).</p>
+        <span class="badge">sourced · dated</span>
       </div>
     </div>
   </section>
 
-  <!-- 9. FAQ -->
-  <section id="faq">
-    <div class="faq-inner">
-      <h2 class="faq-heading">Questions</h2>
-      <div class="faq-list">
-
-        <details class="faq-item">
-          <summary class="faq-question">Are we actually anti-AI?</summary>
-          <p class="faq-answer">No — the name's half a joke. We're critical of the hype and honest about the harms, but we accept AI is here to stay. Clear eyes, not a crusade.</p>
-        </details>
-
-        <details class="faq-item">
-          <summary class="faq-question">Is this also just doom?</summary>
-          <p class="faq-answer">No. We skip the rage-bait. The aim is calm and informed, not anxious.</p>
-        </details>
-
-        <details class="faq-item">
-          <summary class="faq-question">What makes us different?</summary>
-          <p class="faq-answer">Numbers. We lead with data and sources instead of opinions and vibes.</p>
-        </details>
-
-        <details class="faq-item">
-          <summary class="faq-question">Do I have to give my email?</summary>
-          <p class="faq-answer">No. The only thing we ask is which topics you care about. Email is optional, and if you leave one we'll only use it when there's something real worth sending.</p>
-        </details>
-
-        <details class="faq-item">
-          <summary class="faq-question">Who's behind it?</summary>
-          <p class="faq-answer">A regular person tired of hype who started collecting the good, data-backed critical stuff. You're early enough to shape it.</p>
-        </details>
-
+  <!-- Featured -->
+  <section class="featured reveal" aria-labelledby="featured-heading">
+    <div class="feat-l">
+      <span class="feat-kicker">Featured · 9 Jun 2026</span>
+      <h2 id="featured-heading">The most capable model yet just shipped to everyone. Here are the numbers nobody's leading with.</h2>
+      <p class="feat-lede">Anthropic released Claude Fable 5, a model from a new tier they call Mythos-class. The launch post is full of capability claims. The parts worth tracking are the access, the price, and the catch.</p>
+      <p class="feat-body">The honest part is in the fine print. Anthropic says the safeguards are tuned to be cautious, so some harmless requests get caught and silently routed to Claude Opus 4.8. A near-identical model with the cyber safeguards removed, called Mythos 5, goes to a small set of government and infrastructure partners, not to you. The free ride on subscription plans is temporary by design too: available everywhere today, then rationed in two weeks because demand is hard to predict.</p>
+      <p class="feat-closer">None of that is a scandal. It's just the shape of a frontier launch once you read past the benchmark charts: priced to spread fast, gated where it's dangerous.</p>
+      <a class="feat-link" href="https://www.anthropic.com/news/claude-fable-5-mythos-5" target="_blank" rel="noopener">Read Anthropic's announcement →</a>
+    </div>
+    <div class="stat-cards">
+      <div class="stat-card">
+        <div class="s-num">$10 / $50</div>
+        <div class="s-cap">Per million input / output tokens. Less than half what the Mythos Preview model cost.</div>
+      </div>
+      <div class="stat-card">
+        <div class="s-num">&lt; 5%</div>
+        <div class="s-cap">Of sessions hit a safeguard that quietly hands your request to a smaller model.</div>
+      </div>
+      <div class="stat-card">
+        <div class="s-num">23 Jun</div>
+        <div class="s-cap">The date it gets pulled from Pro, Max, Team and Enterprise plans.</div>
       </div>
     </div>
   </section>
 
-  <!-- 10. Footer -->
-  <footer id="footer">
-    <div class="footer-inner">
+  <!-- Doors -->
+  <div class="doors">
+    <a class="door reveal" href="articles.html">
+      <span class="tag on">10 pieces</span>
+      <h3>Articles</h3>
+      <p>A hand-picked feed: articles, opinions, research. All on AI's actual impact.</p>
+      <span class="go">Browse the feed →</span>
+    </a>
+    <a class="door reveal" href="ai-defaults.html" style="transition-delay:.07s">
+      <span class="tag on">Tracked &amp; dated</span>
+      <h3>AI Defaults</h3>
+      <p>What ships switched on, and where the off-toggle actually hides.</p>
+      <span class="go">See what's enabled →</span>
+    </a>
+    <a class="door reveal" href="ai-exposure.html" style="transition-delay:.14s">
+      <span class="tag">Interactive</span>
+      <h3>Exposure Heatmap</h3>
+      <p>Which jobs and sectors face the most AI disruption, visualised.</p>
+      <span class="go">Explore the map →</span>
+    </a>
+  </div>
 
-      <div class="footer-brand">
-        <span class="footer-name">Anti-AI, AI Club</span>
-        <span class="footer-strapline">The numbers behind the hype. Critical, calm, not hateful.</span>
-      </div>
+  <!-- Form -->
+  <form class="form-strip reveal" id="form" action="https://formspree.io/f/mdavorwl" method="POST" novalidate style="transition-delay:.05s">
+    <h4>What should we cover?</h4>
 
-      <nav class="footer-nav" aria-label="Footer">
-        <a href="#hero">Home</a>
-        <a href="articles.html">Articles</a>
-        <a href="mailto:antibsai@gmail.com">Submit an article</a>
-        <a href="mailto:antibsai@gmail.com">Contact</a>
-      </nav>
+    <fieldset class="chips">
+      <legend class="sr-only">Pick what you want us to cover</legend>
+      <label class="chip">
+        <input type="checkbox" class="chip-input" name="topics" value="AI & jobs / the labour market">
+        AI &amp; jobs
+      </label>
+      <label class="chip">
+        <input type="checkbox" class="chip-input" name="topics" value="The real economics (market size, the money, the bubble talk)">
+        economics
+      </label>
+      <label class="chip">
+        <input type="checkbox" class="chip-input" name="topics" value="AI & power / politics / surveillance">
+        power &amp; surveillance
+      </label>
+      <label class="chip">
+        <input type="checkbox" class="chip-input" name="topics" value="Copyright, data, and who owns what">
+        copyright
+      </label>
+      <label class="chip">
+        <input type="checkbox" class="chip-input" name="topics" value="Environmental cost">
+        environment
+      </label>
+      <label class="chip">
+        <input type="checkbox" class="chip-input" name="topics" value="Hype-checking & broken promises">
+        hype-checking
+      </label>
+      <label class="chip">
+        <input type="checkbox" class="chip-input" name="topics" value="Just give me the important stuff">
+        just the essentials
+      </label>
+    </fieldset>
+    <p class="form-error" id="checkbox-error" hidden>Pick at least one topic.</p>
 
-      <!-- Add social links here once you've decided which platforms to use -->
-
-      <div class="footer-legal">
-        <p class="footer-microcopy">Any email you shared stays private. We won't spam you or pass it on.</p>
-        <div class="footer-legal-links">
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
-          <span>© 2026 Anti-AI, AI Club</span>
-        </div>
-      </div>
-
+    <div class="form-end">
+      <label class="sr-only" for="worry">What worries you most about AI? (optional)</label>
+      <input class="email" type="text" id="worry" name="worry" placeholder="what worries you about AI? — optional">
+      <label class="sr-only" for="email">Email (optional)</label>
+      <input class="email" type="email" id="email" name="email" placeholder="email — optional">
+      <button class="btn" type="submit">Send it in</button>
     </div>
+    <p class="form-submit-error" id="submit-error" hidden>Something went wrong, please check your connection and try again.</p>
+
+    <div id="form-success" hidden>
+      <p class="form-success-main">Got it, thanks for telling us what matters to you. If you left an email, you'll only hear from us when there's something real worth sharing.</p>
+      <p class="form-success-sub">Want to help shape it more? Send us an article worth reading: <a href="mailto:antibsai@gmail.com">antibsai@gmail.com</a>.</p>
+    </div>
+  </form>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span>Anti-AI, AI Club · the numbers behind the hype</span>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="index.html">Home</a>
+      <a href="articles.html">Articles</a>
+      <a href="mailto:antibsai@gmail.com">Submit</a>
+      <a href="mailto:antibsai@gmail.com">Contact</a>
+    </nav>
   </footer>
 
   <script src="script.js"></script>

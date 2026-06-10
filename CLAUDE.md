@@ -4,6 +4,8 @@ Project context for building the day-0 pre-launch landing page. Read this before
 
 > Section copy and the verified stats live in `copy.md`. Read `copy.md` before writing or editing any section. `index.html` is the source of truth for copy that's already built; `copy.md` holds the drafts and anything not yet built; this file holds the durable instructions. Colour usage rules (section backgrounds, accent rules, what to avoid) are in `colour-instructions.md` — read it before touching any colour or background.
 
+> `index.html` runs the new "paper" design system (dark-default with a light toggle), scoped under `body.redesign` — see Design tokens below. `articles.html`, `ai-defaults.html`, and `ai-exposure.html` still run the legacy light-only `--color-*` system and have not been migrated yet. Don't mix the two: new work on index.html uses paper tokens, new work on the other three pages uses legacy tokens until they're migrated.
+
 ## What this is
 
 A multipage pre-launch landing site for **Anti-AI, AI Club** — a small club for the *actual data* on AI. The site's one job: let an interested visitor weigh in on what we should cover, and optionally leave an email if they want to hear from us. No newsletter is committed to yet. The point right now is to test whether the idea lands and learn what people care about.
@@ -25,13 +27,44 @@ This governs every design and copy choice. No urgency tricks. No countdown timer
 
 - **Static HTML / CSS / JS only.** No framework, no build step, no backend.
 - Multipage: `index.html` (landing page) + `articles.html` (curated feed) + `ai-defaults.html` (AI defaults tracker) + `ai-exposure.html` (AI exposure heatmap). Mobile-first, responsive.
-- Shared topnav (`#site-nav`) on all four pages — sticky, brand left, links right. Links: Articles, AI Defaults, Heatmap, yellow "Weigh in" pill CTA.
+- Topnav, brand left, links right (Articles, AI Defaults, Heatmap, yellow "Weigh in" pill CTA), sticky on all four pages. `articles.html`, `ai-defaults.html`, and `ai-exposure.html` share the legacy `#site-nav` markup. `index.html` has its own redesigned `.nav` (paper system) with the same links plus a light/dark theme toggle — bring the other three pages onto this `.nav` when they migrate to the paper system.
 - `ai-exposure.html` renders an ECharts treemap (loaded from a pinned jsDelivr CDN URL) over data hardcoded in `data/ai-exposure.json` — no runtime fetch dependency. The JSON file is the canonical source of numbers and citations; the page's inline `DATA` object is a literal copy of it and must be kept in sync by hand whenever the JSON changes.
 - Form posts to Formspree. Endpoint is live: `https://formspree.io/f/mdavorwl`. Only Niklas manages the Formspree account; Claude Code only updates the `action` attribute if the URL ever changes.
 - The form stores topic checkboxes, optional worry text, and optional email. Email is NOT required and must never block submission.
 - Keep it lightweight. No heavy dependencies.
 
 ## Design tokens
+
+### Paper system (index.html — the new standard)
+
+Fonts: **Dongle** (headlines/display, `--fd`), **Poppins** (body/UI, `--fb`), **Spline Sans Mono** (labels, tags, mono UI text, `--fm`) — all loaded from Google Fonts.
+
+`index.html` is dark by default and ships a light/dark toggle. Tokens are CSS custom properties on `:root` (dark values) with an `html.theme-light` block overriding them for light mode. The active theme is persisted in `localStorage` (key `theme`) and applied via an inline `<head>` script that runs before paint, so there's no flash of the wrong theme.
+
+| Variable | Dark (default) | Light (`html.theme-light`) | Use |
+|---|---|---|---|
+| `--accent` | `#f4c430` | same | primary CTA / active chip |
+| `--accent-dim` | `#f0b800` | same | accent hover |
+| `--accent-ink` | `#1a1916` | same | text on `--accent` fills |
+| `--bg` | `#131210` | `#f4f1ea` | page background |
+| `--bg2` | `#1a1917` | `#edeae1` | secondary background (e.g. door hover) |
+| `--surface` | `#1e1d1a` | `#faf9f5` | raised panels (form strip, cards) |
+| `--panel-bg` | `#0c0b09` | `#1a1916` | the dark accent panel (masthead figure, footer) — stays dark in both themes |
+| `--panel-fg` | `#f4f1ea` | same | text on `--panel-bg` |
+| `--panel-dim` | `rgba(244,241,234,.6)` | same | secondary text on `--panel-bg` |
+| `--panel-rule` | `rgba(244,241,234,.12)` | same | borders on `--panel-bg` |
+| `--ink` | `#f4f1ea` | `#1a1916` | primary text |
+| `--ink2` | `#9c9890` | `#504e48` | secondary text |
+| `--ink3` | `#6a6760` | `#8a877f` | tertiary / placeholder text |
+| `--rule` / `--rule2` | low/high-opacity white | low/high-opacity black | hairlines, borders |
+
+`--px` / `--py` set section horizontal/vertical padding (`52px` / `60px`, reduced in the `@media (max-width: 900px)` block).
+
+**Scoping:** every paper-system rule in `styles.css` is prefixed `body.redesign` (only `index.html`'s `<body>` carries that class), so it can't leak onto the other three pages. This is a temporary rollout mechanism — when a page is migrated to the paper system, give it `<body class="redesign">`, rebuild its markup against the new atoms (`.btn`, `.tag`, `.mono`, `.eyebrow`, `.nav`/`.theme-toggle`, etc.), and once all four pages are migrated the `body.redesign` prefix can be dropped and the legacy tokens below retired.
+
+**Watch out for legacy ID/tag selectors:** the old stylesheet has some bare-tag and ID selectors (e.g. `footer { ... }`) from before the redesign. An ID selector like `#form` outranks a two-class `body.redesign .form-strip` rule regardless of source order — if a paper-system element keeps an old ID for JS hooks, check that no legacy selector targeting that ID still sets `background`/`color`.
+
+### Legacy system (articles.html, ai-defaults.html, ai-exposure.html — pending migration)
 
 Fonts: **Dongle** (headlines/display), **Poppins** (body/UI) — loaded from Google Fonts.
 
@@ -54,25 +87,24 @@ Grey utility variables (also in `styles.css` — use these, never hardcode hex):
 | `--color-text-ghost` | `#cccccc` | decorative elements (e.g. dash prefixes) |
 | `--color-text-dark-body` | `#aaaaaa` | body text on dark (ink) backgrounds |
 
-Full colour usage rules — section backgrounds, accent rules, what to avoid — are in `colour-instructions.md`.
+Full colour usage rules for the legacy system — section backgrounds, accent rules, what to avoid — are in `colour-instructions.md`. (Paper-system colour rules for index.html live alongside it there too.)
 
 ## Current build status
 
 All sections built. The site is at v0.1.
 
-**index.html**
+**index.html** — rebuilt on the paper system (`body.redesign`), dark by default with a light/dark toggle
 
 | Section | Status |
 |---|---|
-| Topnav | **Built** — sticky, shared across all four pages |
-| 1. Hero | **Built** |
-| 1b. Featured (Fable 5) | **Built** |
-| 2. Value Proposition | **Built** |
-| 3. Feed Preview | **Built** — 3 teasers + "Read all in the feed" CTA to articles.html |
-| 4. Defaults Preview | **Built** — 3 entries (GitHub Copilot, Windows 11, Atlassian) + "See the full list" CTA to ai-defaults.html |
-| 5. The Form | **Built** |
-| 6. FAQ | **Built** |
-| 7. Footer | **Built** |
+| Topnav | **Built** — own `.nav` (not the shared `#site-nav`), sticky, includes the theme toggle |
+| 1. Masthead | **Built** — split layout: headline + CTA on the left, animated `$1.82T` stat panel (always-dark `--panel-bg`) on the right |
+| 2. Featured (Fable 5) | **Built** — kept from the previous build, now with 3 stat cards |
+| 3. Doors | **Built** — 3 cards linking to articles.html, ai-defaults.html, ai-exposure.html (replaces the old separate Feed Preview and Defaults Preview sections) |
+| 4. Form strip | **Built** — compact chip-based topic picker + optional worry/email fields, single row on desktop |
+| 5. Footer | **Built** — minimal, dark |
+
+Value Proposition and FAQ were dropped from `index.html` in this rebuild (it's leaner and more content-focused now). Both are slated for a future `about.html`, not yet built — see "What still needs doing before launch".
 
 **articles.html**
 
@@ -107,6 +139,8 @@ All sections built. The site is at v0.1.
 
 ## What still needs doing before launch
 
+- **Build `about.html`**, with the FAQ (and consider the Value Prop pillars) that were cut from `index.html` during the paper-system rebuild — reskin them for the leaner frontpage rather than porting as-is
+- **Migrate `articles.html`, `ai-defaults.html`, `ai-exposure.html` to the paper system** — one page at a time, following the pattern established on `index.html` (see Design tokens). Until then they keep the legacy `--color-*` tokens and `#site-nav`
 - **Re-verify all stats** in `copy.md` and `data/ai-exposure.json` before going live — figures move fast
 - **Add an SRI hash** to the ECharts CDN `<script>` tag in `ai-exposure.html` (currently flagged with a comment to verify at jsDelivr before go-live)
 - **Final responsiveness pass** — mobile widths, section spacing; check all four pages
@@ -128,15 +162,14 @@ All sections built. The site is at v0.1.
 
 ## Sections (page order)
 
-**index.html**
-1. Hero
-1b. Featured — front-page story block (first news item to earn a full slot; sits between Hero and Value Prop)
-2. Value Proposition
-3. Feed Preview — 3 teasers linking to articles.html
-4. Defaults Preview — 3 entries (GitHub Copilot, Windows 11, Atlassian) linking to ai-defaults.html
-5. The Form (main conversion block)
-6. FAQ
-7. Footer
+**index.html** (paper system, `body.redesign`)
+1. Masthead — headline + CTA, plus the animated `$1.82T` stat panel
+1b. Featured — front-page story block (first news item to earn a full slot; sits between Masthead and Doors)
+2. Doors — 3 cards linking to articles.html, ai-defaults.html, ai-exposure.html
+3. Form strip — compact topic chips + optional worry/email fields (main conversion block)
+4. Footer
+
+Value Proposition and FAQ are no longer on `index.html`; both are slated for a future `about.html` (not yet built).
 
 **articles.html** — page title "Hand-picked articles"
 1. Feed — 10 items in 5 collapsible groups (default closed, `<details>`/`<summary>`). Groups: Articles & Opinion, Research & Policy, Industry, From the Web, Culture & Repos.
@@ -156,9 +189,9 @@ All sections built. The site is at v0.1.
 4. Caption / source notes (what colour does and doesn't mean, the separate 57/43 augmentation/automation aggregate, links to provenance)
 5. Footer
 
-All styles live in `styles.css`; none of the four pages has an inline `<style>` block. `ai-exposure.html` does carry an inline `<script>` block: it configures the ECharts treemap and holds a `DATA` object that is a literal, hand-kept-in-sync copy of `data/ai-exposure.json` (so the page renders with no runtime fetch).
+All styles live in `styles.css`; none of the four pages has a `<style>` block with substantial CSS. `index.html` carries one small inline `<script>` in `<head>` that applies the saved theme (`localStorage`, key `theme`) before paint to avoid a flash of the wrong theme — keep this minimal and synchronous. `ai-exposure.html` carries a separate inline `<script>` block that configures the ECharts treemap and holds a `DATA` object that is a literal, hand-kept-in-sync copy of `data/ai-exposure.json` (so the page renders with no runtime fetch).
 
-(Copy for index.html sections is in `copy.md`. Sections cut from the landing page — About/Story, Problem/Solution, What You'll Get, Social Proof, Pricing — are still in `copy.md` marked REMOVED, kept for reference. Articles feed copy, AI defaults copy, and AI exposure heatmap copy live in their respective HTML files directly; the heatmap's underlying numbers and source citations live in `data/ai-exposure.json`.)
+(Copy for index.html sections is in `copy.md`. Sections cut from the landing page — About/Story, Problem/Solution, What You'll Get, Social Proof, Pricing, Value Proposition, FAQ — are still in `copy.md` marked REMOVED, kept for reference for the future `about.html`. Articles feed copy, AI defaults copy, and AI exposure heatmap copy live in their respective HTML files directly; the heatmap's underlying numbers and source citations live in `data/ai-exposure.json`.)
 
 ## Standing rules
 

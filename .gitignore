@@ -216,3 +216,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local verification scratch space (Playwright screenshots, design bundles, etc.)
+.tmp_design/
