@@ -35,7 +35,7 @@ v0.1 — all sections built and live.
 | 1. Masthead | Built — headline + CTA, animated `$1.82T` stat panel |
 | 2. Featured (Fable 5) | Built |
 | 3. Doors (links to articles/AI Defaults/Heatmap) | Built |
-| 4. Form strip | Built |
+| 4. Form strip | Built — short lede under the heading explaining the form; accent left border + brief glow when landed on via the "Weigh in" anchor |
 | 5. Footer | Built |
 
 Value Proposition and FAQ were dropped from `index.html` in the paper-system rebuild; both are slated for a future `about.html` (not yet built).
@@ -80,3 +80,4 @@ Value Proposition and FAQ were dropped from `index.html` in the paper-system reb
 - **Keep articles.html fresh** — add new items as they come in, remove stale ones
 - **Keep ai-defaults.html fresh** — add new entries as they surface; re-verify toggle paths
 - **Keep ai-exposure.html fresh** — re-verify category and occupation figures periodically; update `data/ai-exposure.json` and the inline `DATA` copy together
+- **Remove dead legacy CSS in `styles.css`** — pre-redesign single-page rules (`#hero`, `#value-prop`, `#about`, `#faq`, `#topic-form`, `.form-inner`, `.checkbox-list`, etc.) that no current HTML references — see CLAUDE.md

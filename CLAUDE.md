@@ -62,7 +62,7 @@ Fonts: **Dongle** (headlines/display, `--fd`), **Poppins** (body/UI, `--fb`), **
 
 **Scoping:** every paper-system rule in `styles.css` is prefixed `body.redesign` (only `index.html`'s `<body>` carries that class), so it can't leak onto the other three pages. This is a temporary rollout mechanism — when a page is migrated to the paper system, give it `<body class="redesign">`, rebuild its markup against the new atoms (`.btn`, `.tag`, `.mono`, `.eyebrow`, `.nav`/`.theme-toggle`, etc.), and once all four pages are migrated the `body.redesign` prefix can be dropped and the legacy tokens below retired.
 
-**Watch out for legacy ID/tag selectors:** the old stylesheet has some bare-tag and ID selectors (e.g. `footer { ... }`) from before the redesign. An ID selector like `#form` outranks a two-class `body.redesign .form-strip` rule regardless of source order — if a paper-system element keeps an old ID for JS hooks, check that no legacy selector targeting that ID still sets `background`/`color`.
+**Watch out for legacy ID/tag selectors:** the old stylesheet has some bare-tag and ID selectors (e.g. `footer { background: var(--color-ink) }`) from before the redesign. An ID or bare-tag selector can outrank a two-class `body.redesign .foo` rule regardless of source order — if a paper-system element keeps an old ID/tag for JS hooks or anchors, check that no legacy selector targeting it still sets layout, `background`, or `color`. (One real instance of this — a leftover `#form { padding: 5rem 1.25rem }` silently overriding `.form-strip`'s padding — was found and removed.)
 
 ### Legacy system (articles.html, ai-defaults.html, ai-exposure.html — pending migration)
 
@@ -101,7 +101,7 @@ All sections built. The site is at v0.1.
 | 1. Masthead | **Built** — split layout: headline + CTA on the left, animated `$1.82T` stat panel (always-dark `--panel-bg`) on the right |
 | 2. Featured (Fable 5) | **Built** — kept from the previous build, now with 3 stat cards |
 | 3. Doors | **Built** — 3 cards linking to articles.html, ai-defaults.html, ai-exposure.html (replaces the old separate Feed Preview and Defaults Preview sections) |
-| 4. Form strip | **Built** — compact chip-based topic picker + optional worry/email fields, single row on desktop |
+| 4. Form strip | **Built** — compact chip-based topic picker + optional worry/email fields, single row on desktop. Heading has a short lede underneath (`.form-head`/`.form-lede`) explaining the form. Section has an accent left border and a brief `:target` glow (`redesign-form-arrive`) when landed on via a `#form` anchor (the nav/masthead "Weigh in" / "Tell us what to cover" CTAs); page also gets `scroll-behavior: smooth` and the section a `scroll-margin-top` so the jump clears the sticky nav |
 | 5. Footer | **Built** — minimal, dark |
 
 Value Proposition and FAQ were dropped from `index.html` in this rebuild (it's leaner and more content-focused now). Both are slated for a future `about.html`, not yet built — see "What still needs doing before launch".
@@ -149,6 +149,7 @@ Value Proposition and FAQ were dropped from `index.html` in this rebuild (it's l
 - **Keep articles.html fresh** — add new items as they come in, remove stale ones
 - **Keep ai-defaults.html fresh** — add new entries as they surface; re-verify toggle paths and dates per entry
 - **Keep ai-exposure.html fresh** — re-verify category and occupation figures against the source datasets periodically; update `data/ai-exposure.json` and the inline `DATA` copy together
+- **Remove dead legacy CSS in `styles.css`** — leftover rules from the pre-redesign single-page layout (`#hero`, `#value-prop`, `#about`, `#faq`, `#topic-form`, `.form-inner`, `.form-heading`, `.form-subtext`, `.form-fieldset`, `.checkbox-list`, `.form-field`, `.form-label`, `.form-helper`, `.btn-form-submit`, `.form-success-link`, the old `@keyframes fadeIn`, etc.) are no longer referenced by any HTML and are safe to delete. Don't treat them as a starting point for `about.html` — that page reskins the cut FAQ/Value Prop content against the paper system from scratch (see above)
 
 ## Contact / email
 

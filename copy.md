@@ -51,6 +51,7 @@ Three cards linking to the other pages.
 
 ### 3. Form strip (MAIN CONVERSION BLOCK)
 - **Heading:** What should we cover?
+- **Lede (under heading):** Pick what you'd want us to dig into. Takes ten seconds, no email required.
 - **Topic chips** (checkboxes; REQUIRED — at least one must be ticked). On-chip label, then the underlying submitted value:
   - "AI & jobs" → `AI & jobs / the labour market`
   - "economics" → `The real economics (market size, the money, the bubble talk)`
