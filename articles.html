@@ -27,7 +27,7 @@
     <section id="feed">
       <div class="feed-inner">
         <h1 class="feed-heading">Hand-picked articles</h1>
-        <p class="feed-subtext">Articles, research, tweets, and repos. Relevant and not sensational.</p>
+        <p class="feed-subtext">Articles, research, and conversations worth your time. Relevant and not sensational.</p>
 
         <details class="feed-group">
           <summary class="feed-group-heading">Articles &amp; Opinion</summary>
@@ -51,15 +51,6 @@
               </div>
             </li>
 
-            <li class="feed-item">
-              <span class="feed-tag">Article</span>
-              <div class="feed-body">
-                <a href="https://www.quandri.io/engineering-blog/mcp-is-dead" class="feed-title" target="_blank" rel="noopener">MCP is Dead</a>
-                <span class="feed-source">Quandri Engineering Blog</span>
-                <p class="feed-note">MCP picked up serious traction and then ran into serious problems. Someone who shipped it in production explains what went wrong.</p>
-              </div>
-            </li>
-
           </ol>
         </details>
 
@@ -77,27 +68,20 @@
             </li>
 
             <li class="feed-item">
+              <span class="feed-tag">Research</span>
+              <div class="feed-body">
+                <a href="https://www.anthropic.com/institute/recursive-self-improvement" class="feed-title" target="_blank" rel="noopener">When AI Builds Itself</a>
+                <span class="feed-source">Anthropic Institute</span>
+                <p class="feed-note">Anthropic's own numbers on how much of their AI development is now done by AI, and what that means for where human judgment still sits.</p>
+              </div>
+            </li>
+
+            <li class="feed-item">
               <span class="feed-tag">Policy</span>
               <div class="feed-body">
                 <a href="https://artificialintelligenceact.eu/article/4/" class="feed-title" target="_blank" rel="noopener">EU AI Act: Article 4 — AI Literacy</a>
                 <span class="feed-source">artificialintelligenceact.eu</span>
                 <p class="feed-note">The law says employers have to make sure workers can critically evaluate AI output. Most people don't know this is already in force.</p>
-              </div>
-            </li>
-
-          </ol>
-        </details>
-
-        <details class="feed-group">
-          <summary class="feed-group-heading">Industry</summary>
-          <ol class="feed-list">
-
-            <li class="feed-item">
-              <span class="feed-tag">Press release</span>
-              <div class="feed-body">
-                <a href="https://newsroom.accenture.com/news/2026/accenture-to-acquire-ookla-to-strengthen-network-intelligence-and-experience-with-data-and-ai-for-enterprises" class="feed-title" target="_blank" rel="noopener">Accenture to Acquire Ookla</a>
-                <span class="feed-source">Accenture Newsroom</span>
-                <p class="feed-note">Ookla runs Speedtest.net. Makes more sense once you think about what network performance data is worth to companies buying AI infrastructure.</p>
               </div>
             </li>
 
@@ -128,31 +112,66 @@
 
           </ol>
         </details>
+      </div>
+    </section>
 
-        <details class="feed-group">
-          <summary class="feed-group-heading">Culture &amp; Repos</summary>
-          <ol class="feed-list">
+    <section id="repos">
+      <div class="repos-inner">
+        <h2 class="repos-heading">Repos</h2>
+        <p class="repos-subtext">Repos worth a look, plus the odd video, separate from the feed above.</p>
 
-            <li class="feed-item">
-              <span class="feed-tag">Video</span>
-              <div class="feed-body">
-                <a href="https://www.youtube.com/watch?v=rAzT5lcezPs" class="feed-title" target="_blank" rel="noopener">Odysseus / PewDiePie</a>
-                <span class="feed-source">YouTube · <a href="https://github.com/pewdiepie-archdaemon/odysseus" class="feed-source" target="_blank" rel="noopener">GitHub repo</a></span>
-                <p class="feed-note">PewDiePie built an AI avatar that runs locally. More useful for thinking about where AI lands in mainstream culture than most op-eds about it.</p>
-              </div>
-            </li>
+        <div class="repos-grid">
 
-            <li class="feed-item">
-              <span class="feed-tag">Repo</span>
-              <div class="feed-body">
-                <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber" class="feed-title" target="_blank" rel="noopener">Open-LLM-VTuber</a>
-                <span class="feed-source">GitHub</span>
-                <p class="feed-note">Hands-free LLM interaction through a talking avatar. Nobody's calling it an accessibility tool, but it probably qualifies.</p>
-              </div>
-            </li>
+          <div class="repo-card">
+            <span class="repo-card-name">claude-plugins-official</span>
+            <p class="repo-card-note">Anthropic's official directory of Claude Code plugins, in-house and third-party.</p>
+            <div class="repo-card-links">
+              <a class="repo-pill" href="https://github.com/anthropics/claude-plugins-official" target="_blank" rel="noopener">Repo</a>
+            </div>
+          </div>
 
-          </ol>
-        </details>
+          <div class="repo-card">
+            <span class="repo-card-name">SkillSpector</span>
+            <p class="repo-card-note">Scans AI agent skills for vulnerability patterns before you install them, the check most people skip when adding a new skill to their agent.</p>
+            <div class="repo-card-links">
+              <a class="repo-pill" href="https://github.com/NVIDIA/SkillSpector" target="_blank" rel="noopener">Repo</a>
+            </div>
+          </div>
+
+          <div class="repo-card">
+            <span class="repo-card-name">claude-code-harness</span>
+            <p class="repo-card-note">Wraps Claude Code in a Plan, Work, Review, Release cycle with verification gates at each step, roughly the oversight you'd give a new hire.</p>
+            <div class="repo-card-links">
+              <a class="repo-pill" href="https://github.com/Chachamaru127/claude-code-harness" target="_blank" rel="noopener">Repo</a>
+            </div>
+          </div>
+
+          <div class="repo-card">
+            <span class="repo-card-name">chrome-devtools-mcp</span>
+            <p class="repo-card-note">Gives AI coding agents direct control of a live Chrome instance for debugging, performance traces, and network inspection, the same tools most developers already underuse.</p>
+            <div class="repo-card-links">
+              <a class="repo-pill" href="https://github.com/ChromeDevTools/chrome-devtools-mcp" target="_blank" rel="noopener">Repo</a>
+            </div>
+          </div>
+
+          <div class="repo-card">
+            <span class="repo-card-name">Open-LLM-VTuber</span>
+            <p class="repo-card-note">Hands-free LLM interaction through a talking avatar. Nobody's calling it an accessibility tool, but it probably qualifies.</p>
+            <div class="repo-card-links">
+              <a class="repo-pill" href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber" target="_blank" rel="noopener">Repo</a>
+            </div>
+          </div>
+
+          <div class="repo-card">
+            <span class="repo-card-name">odysseus</span>
+            <p class="repo-card-note">PewDiePie's AI avatar project that runs locally. More useful for thinking about where AI lands in mainstream culture than most op-eds about it.</p>
+            <div class="repo-card-links">
+              <a class="repo-pill" href="https://github.com/pewdiepie-archdaemon/odysseus" target="_blank" rel="noopener">Repo</a>
+              <a class="repo-pill" href="https://www.youtube.com/watch?v=rAzT5lcezPs" target="_blank" rel="noopener">YouTube</a>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
   </main>

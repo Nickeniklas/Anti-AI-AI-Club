@@ -45,7 +45,7 @@ Source: Anthropic, "Claude Fable 5 and Claude Mythos 5," 9 Jun 2026. All figures
 
 Three cards linking to the other pages.
 
-- **Articles** — tag: `10 pieces`. Body: A hand-picked feed: articles, opinions, research. All on AI's actual impact. Link: Browse the feed → (articles.html)
+- **Articles** — tag: `7 pieces`. Body: A hand-picked feed: articles, opinions, research. All on AI's actual impact. Link: Browse the feed → (articles.html)
 - **AI Defaults** — tag: `Tracked & dated`. Body: What ships switched on, and where the off-toggle actually hides. Link: See what's enabled → (ai-defaults.html)
 - **Exposure Heatmap** — tag: `Interactive`. Body: Which jobs and sectors face the most AI disruption, visualised. Link: Explore the map → (ai-exposure.html)
 

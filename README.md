@@ -9,7 +9,7 @@ A multipage static site. Landing page (`index.html`) lets visitors weigh in on w
 | File | Purpose |
 |---|---|
 | `index.html` | Landing page. Source of truth for copy that's already built. |
-| `articles.html` | "Hand-picked articles" page. 10 items in 5 collapsible category groups (`<details>`/`<summary>`). Default closed. |
+| `articles.html` | "Hand-picked articles" page. 7 items in 3 collapsible category groups (`<details>`/`<summary>`), default closed, plus a separate Repos section of small linked cards. |
 | `ai-defaults.html` | AI defaults tracker. One `<article class="entry">` per product. Coloured status tags (on/off/tiered/resets). All styles in `styles.css`. |
 | `ai-exposure.html` | AI exposure heatmap. ECharts treemap with an observed/theoretical toggle and drill-down into occupations. Data is hardcoded inline (no runtime fetch), kept in sync by hand with `data/ai-exposure.json`. |
 | `data/ai-exposure.json` | Canonical data and source citations for the exposure heatmap (`_meta.sources`, per-category observed/theoretical figures, occupation breakdowns). Edit here first, then mirror changes into the inline `DATA` object in `ai-exposure.html`. |
@@ -45,7 +45,8 @@ Value Proposition and FAQ were dropped from `index.html` in the paper-system reb
 | Section | Status |
 |---|---|
 | Topnav | Built |
-| Feed (10 items, 5 collapsible groups) | Built |
+| Feed (7 items, 3 collapsible groups) | Built |
+| Repos (6 small linked cards, separate from the feed) | Built |
 | Footer | Built |
 
 **ai-defaults.html**

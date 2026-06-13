@@ -111,7 +111,8 @@ Value Proposition and FAQ were dropped from `index.html` in this rebuild (it's l
 | Section | Status |
 |---|---|
 | Topnav | **Built** — shared |
-| Feed | **Built** — 10 items grouped into 5 collapsible `<details>` sections (Articles & Opinion, Research & Policy, Industry, From the Web, Culture & Repos). Each item: type tag, title, source, editorial note. Groups default closed. |
+| Feed | **Built** — 7 items grouped into 3 collapsible `<details>` sections (Articles & Opinion, Research & Policy, From the Web). Each item: type tag, title, source, editorial note. Groups default closed. |
+| Repos | **Built** — small cards, separate from the feed (`#repos`, `.repo-card`), currently 6 entries. Each card is a non-link container with `.repo-pill` link buttons (e.g. "Repo", "YouTube") for its destination(s) — needed because the odysseus card links to both a repo and a video |
 | Footer | **Built** |
 
 **ai-defaults.html**
@@ -173,8 +174,9 @@ Value Proposition and FAQ were dropped from `index.html` in this rebuild (it's l
 Value Proposition and FAQ are no longer on `index.html`; both are slated for a future `about.html` (not yet built).
 
 **articles.html** — page title "Hand-picked articles"
-1. Feed — 10 items in 5 collapsible groups (default closed, `<details>`/`<summary>`). Groups: Articles & Opinion, Research & Policy, Industry, From the Web, Culture & Repos.
-2. Footer
+1. Feed — 7 items in 3 collapsible groups (default closed, `<details>`/`<summary>`). Groups: Articles & Opinion, Research & Policy, From the Web.
+2. Repos — small cards (`#repos`, `.repo-card`) with `.repo-pill` link buttons, separate from the feed above
+3. Footer
 
 **ai-defaults.html** — page title "AI defaults — what's on, and how to turn it off"
 1. Header (h1, description, last-checked datestamp)
