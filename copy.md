@@ -24,11 +24,28 @@ Split layout: headline + CTA on the left (`.mh-l`), an always-dark stat panel on
 - **Right panel source line:** Anthropic ≈ $965B + OpenAI ≈ $852B (May/Mar 2026 valuations) vs. ≈ $2.5T forecast global AI spend in 2026 (Gartner).
 - **Right panel badge:** sourced · dated
 
-### 1b. Featured (front-page story) — Claude Fable 5
+### 1b. Featured (front-page story) — Fable/Mythos access recalled
 
-First news item to earn a front-page block. Sits between Masthead and Doors.
+Front-page block, sits between Masthead and Doors. Replaces the Claude Fable 5 launch story (9 Jun 2026), which moved to its own "Previously featured" section at the top of `articles.html`.
 
-- **Kicker:** Featured · 9 Jun 2026
+- **Kicker:** Featured · 13 Jun 2026
+- **Heading:** A frontier model got recalled over a request to fix code
+- **Lede:** The US government issued an export control directive forcing Anthropic to suspend all access to Fable 5 and Mythos 5, for every customer, citing national security.
+- **Body:** By Anthropic's own account the "jailbreak" behind the order was asking the model to read a codebase and fix any software flaws. Anthropic says the same capability is available from other public models, including GPT-5.5, and is used every day by the defenders who keep systems safe.
+- **Closer:** None of that is a scandal. It is just the shape of regulation arriving faster than the technical facts. The part worth tracking is the standard, because if fixing software flaws counts as a weapon, very little new gets deployed.
+- **CTA:** Read Anthropic's statement → (https://www.anthropic.com/news/fable-mythos-access)
+- **Stat cards:**
+  - **2** — Frontier models pulled offline for all users, while access to all other Anthropic models continued.
+  - **5:21pm** — When the directive arrived, with no specific detail of the national security concern.
+  - **0** — Universal jailbreaks found, after thousands of hours of pre-launch red-teaming.
+
+Source: Anthropic, "Fable/Mythos access," 13 Jun 2026. All figures pulled from that post.
+
+### 1c. Previously featured (articles.html) — Claude Fable 5
+
+Archived front-page story, now its own section at the top of `articles.html` (legacy `#featured` / `.featured-*` styles, with `.btn-primary` as the CTA). Content unchanged from when it ran on the front page.
+
+- **Kicker:** Previously featured · 9 Jun 2026
 - **Heading:** The most capable model yet just shipped to everyone. Here are the numbers nobody's leading with.
 - **Lede:** Anthropic released Claude Fable 5, a model from a new tier they call Mythos-class. The launch post is full of capability claims. The parts worth tracking are the access, the price, and the catch.
 - **Body:** The honest part is in the fine print. Anthropic says the safeguards are tuned to be cautious, so some harmless requests get caught and silently routed to Claude Opus 4.8. A near-identical model with the cyber safeguards removed, called Mythos 5, goes to a small set of government and infrastructure partners, not to you. The free ride on subscription plans is temporary by design too: available everywhere today, then rationed in two weeks because demand is hard to predict.

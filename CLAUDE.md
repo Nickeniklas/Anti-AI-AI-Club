@@ -99,7 +99,7 @@ All sections built. The site is at v0.1.
 |---|---|
 | Topnav | **Built** — own `.nav` (not the shared `#site-nav`), sticky, includes the theme toggle |
 | 1. Masthead | **Built** — split layout: headline + CTA on the left, animated `$1.82T` stat panel (always-dark `--panel-bg`) on the right |
-| 2. Featured (Fable 5) | **Built** — kept from the previous build, now with 3 stat cards |
+| 2. Featured | **Built** — rotating front-page story, 3 stat cards. When replaced with a new story, move the outgoing one to the "Previously featured" section at the top of articles.html (see below) |
 | 3. Doors | **Built** — 3 cards linking to articles.html, ai-defaults.html, ai-exposure.html (replaces the old separate Feed Preview and Defaults Preview sections) |
 | 4. Form strip | **Built** — compact chip-based topic picker + optional worry/email fields, single row on desktop. Heading has a short lede underneath (`.form-head`/`.form-lede`) explaining the form. Section has an accent left border and a brief `:target` glow (`redesign-form-arrive`) when landed on via a `#form` anchor (the nav/masthead "Weigh in" / "Tell us what to cover" CTAs); page also gets `scroll-behavior: smooth` and the section a `scroll-margin-top` so the jump clears the sticky nav |
 | 5. Footer | **Built** — minimal, dark |
@@ -111,6 +111,7 @@ Value Proposition and FAQ were dropped from `index.html` in this rebuild (it's l
 | Section | Status |
 |---|---|
 | Topnav | **Built** — shared |
+| Previously featured | **Built** — `#featured` / `.featured-*` (legacy styles, previously unused), `.btn-primary` CTA. Archives a past front-page Featured story (currently the Claude Fable 5 launch, 9 Jun 2026) when it's superseded by a new one on `index.html`. Sits above the Feed, its own full-width section with a green left-border accent |
 | Feed | **Built** — 7 items grouped into 3 collapsible `<details>` sections (Articles & Opinion, Research & Policy, From the Web). Each item: type tag, title, source, editorial note. Groups default closed. |
 | Repos | **Built** — small cards, separate from the feed (`#repos`, `.repo-card`), currently 6 entries. Each card is a non-link container with `.repo-pill` link buttons (e.g. "Repo", "YouTube") for its destination(s) — needed because the odysseus card links to both a repo and a video |
 | Footer | **Built** |
@@ -166,7 +167,7 @@ Value Proposition and FAQ were dropped from `index.html` in this rebuild (it's l
 
 **index.html** (paper system, `body.redesign`)
 1. Masthead — headline + CTA, plus the animated `$1.82T` stat panel
-1b. Featured — front-page story block (first news item to earn a full slot; sits between Masthead and Doors)
+1b. Featured — front-page story block, rotates as new stories earn the slot (sits between Masthead and Doors). When a story is replaced, move it verbatim into the "Previously featured" section at the top of articles.html (legacy `#featured`/`.featured-*` markup, `.btn-primary` CTA) and update copy.md sections 1b/1c to match
 2. Doors — 3 cards linking to articles.html, ai-defaults.html, ai-exposure.html
 3. Form strip — compact topic chips + optional worry/email fields (main conversion block)
 4. Footer
@@ -174,9 +175,10 @@ Value Proposition and FAQ were dropped from `index.html` in this rebuild (it's l
 Value Proposition and FAQ are no longer on `index.html`; both are slated for a future `about.html` (not yet built).
 
 **articles.html** — page title "Hand-picked articles"
-1. Feed — 7 items in 3 collapsible groups (default closed, `<details>`/`<summary>`). Groups: Articles & Opinion, Research & Policy, From the Web.
-2. Repos — small cards (`#repos`, `.repo-card`) with `.repo-pill` link buttons, separate from the feed above
-3. Footer
+1. Previously featured — archived past front-page Featured story (`#featured` / `.featured-*`), shown when a newer story has replaced it on `index.html`
+2. Feed — 7 items in 3 collapsible groups (default closed, `<details>`/`<summary>`). Groups: Articles & Opinion, Research & Policy, From the Web.
+3. Repos — small cards (`#repos`, `.repo-card`) with `.repo-pill` link buttons, separate from the feed above
+4. Footer
 
 **ai-defaults.html** — page title "AI defaults — what's on, and how to turn it off"
 1. Header (h1, description, last-checked datestamp)

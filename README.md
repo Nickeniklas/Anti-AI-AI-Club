@@ -33,7 +33,7 @@ v0.1 — all sections built and live.
 |---|---|
 | Topnav | Built — own `.nav`, includes the theme toggle |
 | 1. Masthead | Built — headline + CTA, animated `$1.82T` stat panel |
-| 2. Featured (Fable 5) | Built |
+| 2. Featured (rotating front-page story) | Built — when replaced, the outgoing story moves to the "Previously featured" section at the top of articles.html |
 | 3. Doors (links to articles/AI Defaults/Heatmap) | Built |
 | 4. Form strip | Built — short lede under the heading explaining the form; accent left border + brief glow when landed on via the "Weigh in" anchor |
 | 5. Footer | Built |
@@ -45,6 +45,7 @@ Value Proposition and FAQ were dropped from `index.html` in the paper-system reb
 | Section | Status |
 |---|---|
 | Topnav | Built |
+| Previously featured (archived front-page story) | Built |
 | Feed (7 items, 3 collapsible groups) | Built |
 | Repos (6 small linked cards, separate from the feed) | Built |
 | Footer | Built |
