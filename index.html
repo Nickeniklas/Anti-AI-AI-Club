@@ -67,6 +67,17 @@
     </div>
   </section>
 
+  <!-- Exposure teaser -->
+  <section class="exposure-teaser reveal" aria-labelledby="exposure-teaser-heading">
+    <div class="et-head">
+      <span class="eyebrow">Interactive · observed data</span>
+      <h2 id="exposure-teaser-heading">Where AI actually lands at work</h2>
+      <p class="et-lede">Not predictions. This is observed Claude usage across 22 occupational categories. The bigger the cell, the more exposure; the greener it is, the more of the theoretical potential is already in active use. Tap any cell to drill into individual jobs.</p>
+    </div>
+    <div id="exposure-teaser-chart" role="img" aria-label="Treemap of AI exposure across 22 occupational categories"></div>
+    <a class="feat-link" href="ai-exposure.html">Explore the full map →</a>
+  </section>
+
   <!-- Featured -->
   <section class="featured reveal" aria-labelledby="featured-heading">
     <div class="feat-l">
@@ -181,6 +192,10 @@
     </nav>
   </footer>
 
+  <!-- ECharts 5.5.1 — verify SRI hash at https://www.jsdelivr.com/package/npm/echarts before go-live -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+  <!-- Shared dataset (also used by the full heatmap on ai-exposure.html) -->
+  <script src="data/ai-exposure.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
