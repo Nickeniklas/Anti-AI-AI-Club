@@ -224,6 +224,14 @@
             padding: [6, 8],
             overflow: 'truncate',
             formatter: function (params) {
+              // Occupation cells (leaves) are sized/numbered by observed exposure even
+              // in theoretical mode, since there's no per-occupation theoretical figure.
+              // Drop the % there in theoretical mode so a bare observed number isn't
+              // misread as theoretical — the labelled value is still in the tooltip.
+              var isLeaf = params.data && params.data.extra && params.data.extra.parentName;
+              if (metric === 'theoretical' && isLeaf) {
+                return params.name;
+              }
               return params.name + '\n' + (params.value || 0).toFixed(1) + '%';
             }
           },
@@ -257,7 +265,7 @@
       var el = document.getElementById('metric-description');
       el.textContent = metric === 'observed'
         ? 'Cell size = share of tasks in each category where Claude is actively being used today.'
-        : 'Cell size = share of tasks AI could theoretically assist with, based on O*NET task analysis.';
+        : 'Cell size = share of tasks AI could theoretically assist with, based on O*NET task analysis. Individual occupations show no percentage in this view: the theoretical figure exists only at the category level. Hover any occupation for its observed value.';
     }
 
     document.querySelectorAll('.toggle-btn').forEach(function (btn) {

@@ -134,13 +134,16 @@ if (form) {
 }
 
 /* AI-exposure treemap — front-page teaser.
-   Compact, observed-metric-only version of the ai-exposure.html chart. Cell
-   fills (coral→green) are light pastels, so dark cell labels read on both
-   themes; only the gaps/tooltip track the paper tokens and repaint on toggle. */
+   A deliberately stripped-down snapshot of the ai-exposure.html chart: the top
+   TOP_N categories only, observed metric, no drill-down (the full page owns the
+   interactive version). Cell fills (coral→green) are light pastels, so dark cell
+   labels read on both themes; only the gaps/tooltip track the paper tokens and
+   repaint on toggle. */
 (function () {
   const el = document.getElementById('exposure-teaser-chart');
   if (!el || !window.echarts || !window.AI_EXPOSURE_DATA) return;
 
+  const TOP_N = 8;
   const DATA = window.AI_EXPOSURE_DATA;
   const CORAL = [255, 144, 99];
   const GREEN = [202, 239, 140];
@@ -151,21 +154,17 @@ if (form) {
     return `rgb(${mix(CORAL[0], GREEN[0])},${mix(CORAL[1], GREEN[1])},${mix(CORAL[2], GREEN[2])})`;
   };
 
-  const treeData = DATA.categories.map((cat) => {
-    const color = ratioToColor(cat.ratio);
-    return {
+  // Top N categories by observed exposure, flat (no children → no drill-down).
+  const treeData = DATA.categories
+    .slice()
+    .sort((a, b) => b.observed - a.observed)
+    .slice(0, TOP_N)
+    .map((cat) => ({
       name: cat.name,
       value: cat.observed,
-      itemStyle: { color },
-      extra: { observed: cat.observed, soc: cat.soc },
-      children: cat.children.map((occ) => ({
-        name: occ.name,
-        value: Math.max(occ.observed, 0.05),
-        itemStyle: { color },
-        extra: { observed: occ.observed, parentName: cat.name },
-      })),
-    };
-  });
+      itemStyle: { color: ratioToColor(cat.ratio) },
+      extra: { observed: cat.observed },
+    }));
 
   // Theme-dependent colours, re-read from the live paper tokens on each repaint.
   const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
@@ -187,13 +186,8 @@ if (form) {
     // The treemap's synthetic root node (the top "total" bar) has no extra — skip it.
     if (!x || x.observed === undefined) return '';
     const head = `font-family:Poppins,sans-serif;font-size:12px;color:${theme.ink}`;
-    if (x.parentName) {
-      return `<div style="${head}"><strong>${d.name}</strong>` +
-        `<br><span style="color:${theme.ink2}">Observed exposure: <strong>${x.observed.toFixed(1)}%</strong></span></div>`;
-    }
     return `<div style="${head}"><strong style="font-size:13px">${d.name}</strong>` +
-      `<br><span style="color:${theme.ink2}">Observed exposure: <strong>${x.observed}%</strong></span>` +
-      `<br><span style="color:${theme.ink2};font-size:10px">Tap to see individual occupations</span></div>`;
+      `<br><span style="color:${theme.ink2}">Observed exposure: <strong>${x.observed}%</strong></span></div>`;
   };
 
   const buildOption = () => ({
@@ -210,49 +204,23 @@ if (form) {
     series: [{
       type: 'treemap',
       roam: false,
-      nodeClick: 'zoomToNode',
+      nodeClick: false,
+      breadcrumb: { show: false },
       top: 0,
       left: 0,
       right: 0,
-      bottom: 28,
-      breadcrumb: {
-        show: true,
-        bottom: 2,
-        height: 24,
-        emptyItemWidth: 22,
-        itemStyle: {
-          color: '#f4c430',
-          borderWidth: 0,
-          shadowBlur: 0,
-          textStyle: { color: '#1a1916', fontFamily: 'Spline Sans Mono, monospace', fontSize: 10, fontWeight: '500' },
-        },
-      },
-      visibleMin: 200,
-      itemStyle: { borderColor: theme.gap, borderWidth: 2, gapWidth: 2 },
+      bottom: 0,
+      itemStyle: { borderColor: theme.gap, borderWidth: 4, gapWidth: 4 },
       emphasis: { itemStyle: { borderColor: theme.ink, borderWidth: 2 } },
       label: {
         show: true,
         fontFamily: 'Poppins, sans-serif',
-        fontSize: 11,
+        fontSize: 12,
         color: '#1a1916',
-        padding: [5, 7],
+        padding: [6, 8],
         overflow: 'truncate',
         formatter: (p) => p.name + '\n' + (p.value || 0).toFixed(1) + '%',
       },
-      upperLabel: {
-        show: true,
-        height: 24,
-        fontFamily: 'Poppins, sans-serif',
-        fontSize: 11,
-        fontWeight: '500',
-        color: '#1a1916',
-        backgroundColor: 'rgba(255,255,255,0.72)',
-        padding: [0, 8],
-      },
-      levels: [
-        { itemStyle: { borderWidth: 4, gapWidth: 4, borderColor: theme.gap } },
-        { itemStyle: { borderWidth: 2, gapWidth: 2, borderColor: theme.gap }, label: { fontSize: 10 } },
-      ],
       data: treeData,
     }],
   });
