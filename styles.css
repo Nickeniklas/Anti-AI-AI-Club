@@ -564,19 +564,22 @@ footer {
   line-height: 1.5;
 }
 
-.footer-nav {
+.footer-nav,
+.footer-social {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 1.5rem;
 }
 
-.footer-nav a {
+.footer-nav a,
+.footer-social a {
   font-size: 0.9rem;
   color: var(--color-rose);
   transition: opacity 0.15s ease;
 }
 
-.footer-nav a:hover {
+.footer-nav a:hover,
+.footer-social a:hover {
   opacity: 0.75;
 }
 
