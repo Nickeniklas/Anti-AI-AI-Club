@@ -43,7 +43,7 @@
     setTimeout(() => reveals.forEach((el) => el.classList.add('in')), 600);
   }
 
-  /* $1.82T counter animation */
+  /* "~4 days" counter animation */
   const counter = document.getElementById('counter');
   if (counter) {
     let hasRun = false;
@@ -54,15 +54,15 @@
       const duration = 1800;
       const interval = 16;
       const steps = Math.round(duration / interval);
-      const end = 1.82;
+      const end = 4;
       let step = 0;
 
-      counter.textContent = '$0.00T';
+      counter.textContent = '~0';
       const timer = setInterval(() => {
         step++;
         const progress = Math.min(step / steps, 1);
         const ease = 1 - Math.pow(1 - progress, 4);
-        counter.textContent = '$' + (end * ease).toFixed(2) + 'T';
+        counter.textContent = '~' + Math.round(end * ease);
         if (progress >= 1) clearInterval(timer);
       }, interval);
     };
@@ -132,3 +132,104 @@ if (form) {
     }
   });
 }
+
+/* AI-exposure treemap — front-page teaser.
+   A deliberately stripped-down snapshot of the ai-exposure.html chart: the top
+   TOP_N categories only, observed metric, no drill-down (the full page owns the
+   interactive version). Cell fills (coral→green) are light pastels, so dark cell
+   labels read on both themes; only the gaps/tooltip track the paper tokens and
+   repaint on toggle. */
+(function () {
+  const el = document.getElementById('exposure-teaser-chart');
+  if (!el || !window.echarts || !window.AI_EXPOSURE_DATA) return;
+
+  const TOP_N = 8;
+  const DATA = window.AI_EXPOSURE_DATA;
+  const CORAL = [255, 144, 99];
+  const GREEN = [202, 239, 140];
+
+  const ratioToColor = (ratio) => {
+    const t = Math.min(ratio / DATA.maxRatio, 1);
+    const mix = (a, b) => Math.round(a + t * (b - a));
+    return `rgb(${mix(CORAL[0], GREEN[0])},${mix(CORAL[1], GREEN[1])},${mix(CORAL[2], GREEN[2])})`;
+  };
+
+  // Top N categories by observed exposure, flat (no children → no drill-down).
+  const treeData = DATA.categories
+    .slice()
+    .sort((a, b) => b.observed - a.observed)
+    .slice(0, TOP_N)
+    .map((cat) => ({
+      name: cat.name,
+      value: cat.observed,
+      itemStyle: { color: ratioToColor(cat.ratio) },
+      extra: { observed: cat.observed },
+    }));
+
+  // Theme-dependent colours, re-read from the live paper tokens on each repaint.
+  const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  let theme = {};
+  const readTheme = () => {
+    theme = {
+      gap: css('--bg') || '#131210',
+      surface: css('--surface') || '#1e1d1a',
+      rule: css('--rule2') || 'rgba(244,241,234,.18)',
+      ink: css('--ink') || '#f4f1ea',
+      ink2: css('--ink2') || '#9c9890',
+    };
+  };
+  readTheme();
+
+  const tooltipFormatter = (info) => {
+    const d = info.data || {};
+    const x = d.extra;
+    // The treemap's synthetic root node (the top "total" bar) has no extra — skip it.
+    if (!x || x.observed === undefined) return '';
+    const head = `font-family:Poppins,sans-serif;font-size:12px;color:${theme.ink}`;
+    return `<div style="${head}"><strong style="font-size:13px">${d.name}</strong>` +
+      `<br><span style="color:${theme.ink2}">Observed exposure: <strong>${x.observed}%</strong></span></div>`;
+  };
+
+  const buildOption = () => ({
+    tooltip: {
+      show: true,
+      confine: true,
+      backgroundColor: theme.surface,
+      borderColor: theme.rule,
+      borderWidth: 1,
+      padding: [10, 14],
+      extraCssText: 'box-shadow:0 8px 24px rgba(0,0,0,0.28);border-radius:6px;',
+      formatter: tooltipFormatter,
+    },
+    series: [{
+      type: 'treemap',
+      roam: false,
+      nodeClick: false,
+      breadcrumb: { show: false },
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      itemStyle: { borderColor: theme.gap, borderWidth: 4, gapWidth: 4 },
+      emphasis: { itemStyle: { borderColor: theme.ink, borderWidth: 2 } },
+      label: {
+        show: true,
+        fontFamily: 'Poppins, sans-serif',
+        fontSize: 12,
+        color: '#1a1916',
+        padding: [6, 8],
+        overflow: 'truncate',
+        formatter: (p) => p.name + '\n' + (p.value || 0).toFixed(1) + '%',
+      },
+      data: treeData,
+    }],
+  });
+
+  const chart = echarts.init(el);
+  chart.setOption(buildOption());
+  window.addEventListener('resize', () => chart.resize());
+
+  // Repaint gaps/tooltip when the light/dark toggle flips the <html> class.
+  const mo = new MutationObserver(() => { readTheme(); chart.setOption(buildOption()); });
+  mo.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+})();
