@@ -1625,11 +1625,23 @@ body.redesign .stat-num {
   color: var(--accent);
   font-variant-numeric: tabular-nums;
 }
+body.redesign .stat-unit {
+  font-family: var(--fd);
+  font-weight: 700;
+  font-size: .5em;
+  letter-spacing: -.01em;
+  color: var(--panel-fg);
+}
 body.redesign .mh-r-body {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
+body.redesign .mh-r-link {
+  color: var(--panel-dim);
+  margin-top: 6px;
+}
+body.redesign .mh-r-link:hover { color: var(--panel-fg); gap: 10px; }
 body.redesign .mh-r .desc {
   font-size: 14px;
   color: var(--panel-dim);
@@ -1775,7 +1787,7 @@ body.redesign .stat-card .s-cap {
 /* ---- Doors ---- */
 body.redesign .doors {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   border-bottom: 1px solid var(--rule2);
 }
 body.redesign .door {

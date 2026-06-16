@@ -43,7 +43,7 @@
     setTimeout(() => reveals.forEach((el) => el.classList.add('in')), 600);
   }
 
-  /* $1.82T counter animation */
+  /* "~4 days" counter animation */
   const counter = document.getElementById('counter');
   if (counter) {
     let hasRun = false;
@@ -54,15 +54,15 @@
       const duration = 1800;
       const interval = 16;
       const steps = Math.round(duration / interval);
-      const end = 1.82;
+      const end = 4;
       let step = 0;
 
-      counter.textContent = '$0.00T';
+      counter.textContent = '~0';
       const timer = setInterval(() => {
         step++;
         const progress = Math.min(step / steps, 1);
         const ease = 1 - Math.pow(1 - progress, 4);
-        counter.textContent = '$' + (end * ease).toFixed(2) + 'T';
+        counter.textContent = '~' + Math.round(end * ease);
         if (progress >= 1) clearInterval(timer);
       }, interval);
     };

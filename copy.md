@@ -18,15 +18,19 @@ Split layout: headline + CTA on the left (`.mh-l`), an always-dark stat panel on
 - **H1:** Not anti-AI.<br>Anti-bullshit<br>about AI.
 - **Sub:** We track the data most coverage skips: sourced, dated, updated.
 - **CTA:** Tell us what to cover → (links to `#form`)
-- **Right panel label:** The figure nobody headlines
-- **Animated stat (`#counter`):** $1.82T
-- **Right panel description:** Anthropic and OpenAI combined: roughly the **whole world's** 2026 AI budget.
-- **Right panel source line:** Anthropic ≈ $965B + OpenAI ≈ $852B (May/Mar 2026 valuations) vs. ≈ $2.5T forecast global AI spend in 2026 (Gartner).
-- **Right panel badge:** sourced · dated
+- **Right panel label:** Live, then recalled
+- **Animated stat (`#counter` + `.stat-unit`):** ~4 days (counts up `~0 → ~4`, with "days" as a smaller static unit)
+- **Right panel description:** Fable 5 shipped to **everyone** on 9 June. By the 13th a US export-control order had pulled it for every customer.
+- **Right panel source line:** Launch: Anthropic, 9 Jun 2026. Recall directive: 13 Jun 2026, 5:21pm, citing national security. The cited "jailbreak" was a request to read a codebase and fix software flaws.
+- **Right panel link:** Read Anthropic's statement → (https://www.anthropic.com/news/fable-mythos-access)
 
-### 1b. Featured (front-page story) — Fable/Mythos access recalled
+The right panel is now a "mini-hero" for the Fable/Mythos recall story (it replaced the old `$1.82T` Anthropic+OpenAI valuation stat, which is preserved under "Verified stats" below). The full Featured section that previously carried this story was removed from `index.html` so the masthead doesn't duplicate it — see 1b.
 
-Front-page block, sits between Masthead and Doors. Replaces the Claude Fable 5 launch story (9 Jun 2026), which moved to its own "Previously featured" section at the top of `articles.html`.
+### 1b. Featured (front-page story) — Fable/Mythos access recalled — REMOVED from index.html
+
+This full Featured section was **removed from `index.html`**: its story is now told by the masthead right-panel mini-hero (see 1, the "~4 days" stat). Copy kept here for reference and as the source if it's later archived to the "Previously featured" section of `articles.html`. The stat cards below are not currently rendered anywhere.
+
+Was a front-page block between Masthead and Doors. Replaced the Claude Fable 5 launch story (9 Jun 2026), which moved to its own "Previously featured" section at the top of `articles.html`.
 
 - **Kicker:** Featured · 13 Jun 2026
 - **Heading:** A frontier model got recalled over a request to fix code
