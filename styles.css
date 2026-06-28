@@ -2329,6 +2329,87 @@ body.redesign .entry .how strong { color: var(--ink); }
 body.redesign .entry .src { font-family: var(--fm); font-size: 12px; color: var(--ink3); }
 body.redesign .entry .src a { color: var(--ink2); text-decoration: underline; }
 
+/* ---- AI exposure heatmap (ai-exposure.html) ---- */
+body.redesign .exposure-wrap {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: var(--py) var(--px);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+body.redesign .exposure-wrap header.page-head h1 { font-size: clamp(40px, 8vw, 64px); }
+body.redesign .exposure-controls { display: flex; flex-direction: column; gap: .6rem; }
+body.redesign .metric-toggle { display: flex; gap: .5rem; flex-wrap: wrap; }
+body.redesign .toggle-btn {
+  font-family: var(--fb);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 9px 18px;
+  border: 1px solid var(--rule2);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink2);
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
+}
+body.redesign .toggle-btn:hover { border-color: var(--ink); color: var(--ink); }
+body.redesign .toggle-btn--active,
+body.redesign .toggle-btn--active:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+body.redesign .metric-description { font-family: var(--fm); font-size: 12px; color: var(--ink3); line-height: 1.5; }
+body.redesign .exposure-legend-bar { display: flex; flex-direction: column; gap: .4rem; }
+body.redesign .legend-gradient-track {
+  width: 220px;
+  height: 10px;
+  background: linear-gradient(to right, var(--color-coral), var(--color-green));
+  border-radius: 999px;
+}
+body.redesign .legend-labels {
+  display: flex;
+  justify-content: space-between;
+  width: 220px;
+  font-family: var(--fm);
+  font-size: 10px;
+  color: var(--ink3);
+}
+body.redesign .legend-note { font-size: 13px; color: var(--ink2); line-height: 1.6; max-width: 60ch; }
+/* The ECharts treemap is intentionally a light artifact (white cell gaps), so its
+   container keeps an always-light surface (--panel-fg is the one fixed light cream
+   token) in both themes — the chart reads as a self-contained light panel on the
+   dark page rather than white gridlines floating on black. */
+body.redesign #exposure-chart {
+  width: 100%;
+  height: clamp(540px, 82vh, 1040px);
+  background: var(--panel-fg);
+  border: 1px solid var(--rule2);
+  border-radius: 10px;
+  overflow: hidden;
+}
+body.redesign .exposure-caption {
+  display: flex;
+  flex-direction: column;
+  gap: .85rem;
+  max-width: 740px;
+  padding-top: .5rem;
+  border-top: 1px solid var(--rule2);
+}
+body.redesign .exposure-caption p { font-size: 14px; color: var(--ink2); line-height: 1.7; }
+body.redesign .exposure-source {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule2);
+}
+body.redesign .exposure-source p { font-size: 12px; color: var(--ink3); line-height: 1.65; }
+body.redesign .exposure-source strong { color: var(--ink2); }
+body.redesign .exposure-source a { color: var(--ink2); text-decoration: underline; text-underline-offset: 2px; }
+body.redesign .exposure-source a:hover { color: var(--ink); }
+
 /* ---- Scroll reveal ---- */
 body.redesign .reveal {
   opacity: 0;

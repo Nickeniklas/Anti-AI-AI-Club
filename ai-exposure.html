@@ -6,24 +6,47 @@
   <title>AI exposure heatmap — Anti-AI, AI Club</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&family=Poppins:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <script>
+    // Applied before paint to avoid a light/dark flash. Default is dark.
+    (function () {
+      try {
+        if (localStorage.getItem('theme') === 'light') {
+          document.documentElement.classList.add('theme-light');
+        }
+      } catch (e) {}
+    })();
+  </script>
   <!-- ECharts 5.5.1 — verify SRI hash at https://www.jsdelivr.com/package/npm/echarts before go-live -->
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
   <!-- Shared dataset (also used by the front-page teaser on index.html) -->
   <script src="data/ai-exposure.js"></script>
 </head>
-<body>
+<body class="redesign">
 
-  <nav id="site-nav">
-    <div class="nav-inner">
-      <a href="index.html" class="nav-brand">Anti-AI, AI Club</a>
-      <ul class="nav-links">
-        <li><a href="articles.html">Articles</a></li>
-        <li><a href="ai-defaults.html">AI Defaults</a></li>
-        <li><a href="ai-exposure.html" aria-current="page">Heatmap</a></li>
-        <li><a href="index.html#form" class="nav-cta">Weigh in</a></li>
-      </ul>
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      <span class="brand-dot" aria-hidden="true"></span>
+      Anti-AI, AI Club
+    </a>
+    <ul class="nav-links">
+      <li><a href="articles.html">Articles</a></li>
+      <li><a href="ai-defaults.html">AI Defaults</a></li>
+      <li><a href="ai-exposure.html" aria-current="page">Heatmap</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button type="button" class="theme-toggle" id="theme-toggle">
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+        </svg>
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <span class="sr-only">Toggle light / dark theme</span>
+      </button>
+      <a href="index.html#form" class="btn">Weigh in</a>
     </div>
   </nav>
 
@@ -69,29 +92,15 @@
     </div>
   </main>
 
-  <footer id="footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <span class="footer-name">Anti-AI, AI Club</span>
-        <span class="footer-strapline">The numbers behind the hype. Critical, calm, not hateful.</span>
-      </div>
-      <nav class="footer-nav" aria-label="Footer">
-        <a href="index.html">Home</a>
-        <a href="mailto:antibsai@gmail.com">Submit an article</a>
-        <a href="mailto:antibsai@gmail.com">Contact</a>
-      </nav>
-      <nav class="footer-social" aria-label="Social">
-        <a href="https://www.instagram.com/antibsai/" target="_blank" rel="noopener">Instagram</a>
-      </nav>
-      <div class="footer-legal">
-        <p class="footer-microcopy">Any email you shared stays private. We won't spam you or pass it on.</p>
-        <div class="footer-legal-links">
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
-          <span>© 2026 Anti-AI, AI Club</span>
-        </div>
-      </div>
-    </div>
+  <footer class="footer">
+    <span>Anti-AI, AI Club · the numbers behind the hype</span>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="index.html">Home</a>
+      <a href="articles.html">Articles</a>
+      <a href="mailto:antibsai@gmail.com">Submit</a>
+      <a href="mailto:antibsai@gmail.com">Contact</a>
+      <a href="https://www.instagram.com/antibsai/" target="_blank" rel="noopener">Instagram</a>
+    </nav>
   </footer>
 
   <script>
@@ -285,5 +294,6 @@
   }());
   </script>
 
+  <script src="script.js"></script>
 </body>
 </html>
