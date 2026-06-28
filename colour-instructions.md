@@ -1,11 +1,11 @@
 
 ## Colour usage
 
-This file covers two colour systems: the **paper system** for `index.html` (the new standard — dark by default, with a light toggle) and the **legacy system** for `articles.html`, `ai-defaults.html`, and `ai-exposure.html` (light-only, pending migration to the paper system). In both systems, use only the CSS custom properties defined in `styles.css` — never hardcode hex values directly.
+All four pages now use the **paper system** (dark by default, with a light toggle) — this is the only colour system to design with. The **legacy system** notes below are kept for reference only: no page renders it any more, and its component CSS is dead pending deletion, but a few of its colour *tokens* (`--color-coral`/`-green`/`-yellow`/`-rose`) are still referenced by paper-system rules (the AI-defaults status tags and the exposure legend gradient). In every case, use only the CSS custom properties defined in `styles.css` — never hardcode hex values directly.
 
 ---
 
-## Paper system (index.html)
+## Paper system (all pages)
 
 Tokens are listed in full in `CLAUDE.md` → Design tokens (`:root` for dark/default, `html.theme-light` for the light overrides). Both themes are real, supported themes — check contrast in both, not just the default dark one.
 
@@ -38,9 +38,9 @@ Tokens are listed in full in `CLAUDE.md` → Design tokens (`:root` for dark/def
 
 ---
 
-## Legacy system (articles.html, ai-defaults.html, ai-exposure.html)
+## Legacy system (retired — reference only)
 
-The palette is defined in `styles.css` as CSS custom properties. Use only those variables in HTML and CSS — never hardcode hex values directly.
+No page uses this system any more (all four migrated to the paper system above). Kept for reference while the dead legacy CSS awaits deletion. The palette is defined in `styles.css` as CSS custom properties.
 
 ### The rule of five sections
 

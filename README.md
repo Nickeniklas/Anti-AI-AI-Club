@@ -1,8 +1,8 @@
 # Anti-AI, AI Club — Pre-launch landing page
 
-A multipage static site. Landing page (`index.html`) lets visitors weigh in on what to cover and optionally leave an email; it runs a new dark-by-default "paper" design system with a light/dark toggle. It also embeds a compact, non-interactive preview of the exposure treemap (the eight most-exposed categories) that links through to the full page. Articles page (`articles.html`) is a curated feed of links worth reading. AI Defaults page (`ai-defaults.html`) tracks AI features that ship enabled by default, with instructions for turning them off. AI Exposure page (`ai-exposure.html`) is an interactive treemap showing where AI shows up across occupational categories, sourced from the Anthropic Economic Index. No framework, no build step.
+A multipage static site. Landing page (`index.html`) lets visitors weigh in on what to cover and optionally leave an email. It also embeds a compact, non-interactive preview of the exposure treemap (the eight most-exposed categories) that links through to the full page. Articles page (`articles.html`) is a curated feed of links worth reading. AI Defaults page (`ai-defaults.html`) tracks AI features that ship enabled by default, with instructions for turning them off. AI Exposure page (`ai-exposure.html`) is an interactive treemap showing where AI shows up across occupational categories, sourced from the Anthropic Economic Index. No framework, no build step.
 
-`articles.html`, `ai-defaults.html`, and `ai-exposure.html` still run the older light-only design system and haven't been migrated to the paper system yet — see CLAUDE.md for the rollout plan.
+All four pages run the dark-by-default "paper" design system with a shared light/dark toggle (the choice persists across pages via `localStorage`). The older light-only design system has been retired; its dead CSS is slated for removal — see CLAUDE.md.
 
 ## File map
 
@@ -14,8 +14,8 @@ A multipage static site. Landing page (`index.html`) lets visitors weigh in on w
 | `ai-exposure.html` | AI exposure heatmap. ECharts treemap with an observed/theoretical toggle and drill-down into occupations. Reads its data from the shared `data/ai-exposure.js` (no runtime fetch). In theoretical view, occupation cells hide their `%` (the theoretical figure only exists at the category level); the observed value is still in the tooltip. |
 | `data/ai-exposure.js` | Shared dataset (`window.AI_EXPOSURE_DATA`) loaded by both `ai-exposure.html` and the `index.html` preview. A literal copy of the numbers in `data/ai-exposure.json`. |
 | `data/ai-exposure.json` | Canonical data and source citations for the exposure heatmap (`_meta.sources`, per-category observed/theoretical figures, occupation breakdowns). Edit here first, then mirror changes into `data/ai-exposure.js`. |
-| `styles.css` | All styles for all pages. CSS custom properties for every token — no hardcoded hex. Two token systems live side by side: the new "paper" tokens (`body.redesign`, index.html, dark/light) and the legacy `--color-*` tokens (other three pages). |
-| `script.js` | Theme toggle, scroll reveal, masthead counter animation, the form's validation + async submit handler, and the front-page exposure treemap preview (top 8 categories, observed only, no drill-down, repaints on theme toggle). |
+| `styles.css` | All styles for all pages. CSS custom properties for every token — no hardcoded hex. The "paper" tokens (dark/light) drive every page; all rules are still prefixed `body.redesign` (a now-redundant rollout artifact). Dead legacy component CSS and most `--color-*` tokens remain pending deletion, though a few legacy colour tokens (coral/green/yellow/rose) are still referenced by the defaults status tags and the exposure legend. |
+| `script.js` | Loaded by all four pages. Theme toggle, nav sticky state, scroll reveal, masthead counter animation, the form's validation + async submit handler, and the front-page exposure treemap preview (top 8 categories, observed only, no drill-down, repaints on theme toggle). Each block guards on the elements it needs, so index-only logic no-ops on the other pages. |
 | `copy.md` | Landing page section copy and verified stats. Read before editing any text. |
 | `CLAUDE.md` | Durable instructions for Claude Code. Positioning, rules, build order. |
 | `colour-instructions.md` | Colour usage rules. Section backgrounds, accent rules, what to avoid. |
@@ -26,9 +26,9 @@ No build step. Open `index.html`, `articles.html`, `ai-defaults.html`, or `ai-ex
 
 ## Current build status
 
-v0.1 — all sections built and live.
+v0.1 — all sections built and live. All four pages run the paper design system (dark by default with a shared light/dark toggle).
 
-**index.html** (paper design system, dark by default with a light/dark toggle)
+**index.html**
 
 | Section | Status |
 |---|---|
@@ -48,7 +48,7 @@ Value Proposition and FAQ were dropped from `index.html` in the paper-system reb
 | Topnav | Built |
 | Previously featured (archived front-page story) | Built |
 | Feed (7 items, 3 collapsible groups) | Built |
-| Repos (6 small linked cards, separate from the feed) | Built |
+| Repos (8 small linked cards, separate from the feed) | Built |
 | Footer | Built |
 
 **ai-defaults.html**
@@ -73,14 +73,13 @@ Value Proposition and FAQ were dropped from `index.html` in the paper-system reb
 
 ## What still needs doing before launch
 
-- **Build `about.html`** with the FAQ (and consider the Value Prop pillars) cut from `index.html` during the paper-system rebuild — reskin for the leaner frontpage
-- **Migrate `articles.html`, `ai-defaults.html`, `ai-exposure.html`** to the paper design system, one page at a time (see CLAUDE.md → Design tokens)
+- **Build `about.html`** with the FAQ (and consider the Value Prop pillars) cut from `index.html` during the paper-system rebuild — reskin for the leaner frontpage. It's the only page not yet built
 - **Re-verify all stats** in `copy.md` and `data/ai-exposure.json` — figures move fast; check sources before going live
 - **Add an SRI hash** to the ECharts CDN `<script>` tags (now in both `ai-exposure.html` and `index.html` — flagged with a comment to verify at jsDelivr before go-live)
 - **Final responsiveness pass** — mobile widths, section spacing; check all four pages
-- **Add more social links to footer** — Instagram is live in all four footers; add others if/when more platforms are chosen
+- **Add more social links to footer** — Instagram is live in all four footers (paper `.foot-links`); add others if/when more platforms are chosen
 - **Privacy and Terms pages** — footer links point to `#` on all pages
 - **Keep articles.html fresh** — add new items as they come in, remove stale ones
 - **Keep ai-defaults.html fresh** — add new entries as they surface; re-verify toggle paths
 - **Keep ai-exposure.html fresh** — re-verify category and occupation figures periodically; update `data/ai-exposure.json` and `data/ai-exposure.js` together (the front-page preview reads the same shared file, so both pages update at once)
-- **Remove dead legacy CSS in `styles.css`** — pre-redesign single-page rules (`#hero`, `#value-prop`, `#about`, `#faq`, `#topic-form`, `.form-inner`, `.checkbox-list`, etc.) that no current HTML references — see CLAUDE.md
+- **Remove dead legacy CSS in `styles.css`** — now a bigger job since all pages migrated: the pre-redesign single-page rules *and* the legacy component CSS superseded by the `body.redesign` versions (old `#site-nav`, the `.footer-*` footer, bare `#feed`/`#repos`/`#featured`/`.entry*`/`.exposure-*`/etc.). Keep the coral/green/yellow/rose colour tokens (still referenced). Full list and caveats in CLAUDE.md

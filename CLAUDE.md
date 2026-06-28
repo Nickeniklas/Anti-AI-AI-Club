@@ -4,7 +4,7 @@ Project context for building the day-0 pre-launch landing page. Read this before
 
 > Section copy and the verified stats live in `copy.md`. Read `copy.md` before writing or editing any section. `index.html` is the source of truth for copy that's already built; `copy.md` holds the drafts and anything not yet built; this file holds the durable instructions. Colour usage rules (section backgrounds, accent rules, what to avoid) are in `colour-instructions.md` — read it before touching any colour or background.
 
-> `index.html` runs the new "paper" design system (dark-default with a light toggle), scoped under `body.redesign` — see Design tokens below. `articles.html`, `ai-defaults.html`, and `ai-exposure.html` still run the legacy light-only `--color-*` system and have not been migrated yet. Don't mix the two: new work on index.html uses paper tokens, new work on the other three pages uses legacy tokens until they're migrated.
+> **All four pages now run the "paper" design system** (dark-default with a light toggle), scoped under `body.redesign` — see Design tokens below. The legacy light-only `--color-*` system is retired as a *layout* system: its component rules (`#site-nav`, `.footer-inner`, the old `#feed`/`#repos`/`.exposure-*`/`.entry` rules, etc.) are now dead and unreferenced. A handful of legacy *colour tokens* (`--color-coral`/`-green`/`-yellow`/`-rose`) are still used on purpose — by the AI-defaults status tags and the exposure legend gradient — so don't delete the token definitions, only the dead component CSS (see "What still needs doing"). All new work uses paper tokens.
 
 ## What this is
 
@@ -27,7 +27,7 @@ This governs every design and copy choice. No urgency tricks. No countdown timer
 
 - **Static HTML / CSS / JS only.** No framework, no build step, no backend.
 - Multipage: `index.html` (landing page) + `articles.html` (curated feed) + `ai-defaults.html` (AI defaults tracker) + `ai-exposure.html` (AI exposure heatmap). Mobile-first, responsive.
-- Topnav, brand left, links right (Articles, AI Defaults, Heatmap, yellow "Weigh in" pill CTA), sticky on all four pages. `articles.html`, `ai-defaults.html`, and `ai-exposure.html` share the legacy `#site-nav` markup. `index.html` has its own redesigned `.nav` (paper system) with the same links plus a light/dark theme toggle — bring the other three pages onto this `.nav` when they migrate to the paper system.
+- Topnav, brand left, links right (Articles, AI Defaults, Heatmap, yellow "Weigh in" pill CTA), sticky on all four pages. All four pages now share the same paper-system `.nav` markup (brand + `.brand-dot`, `.nav-links`, `.nav-actions` with the `#theme-toggle` button and the `.btn` "Weigh in" CTA) and the same minimal paper `.footer`. The "Weigh in" CTA points to `#form` on index.html and `index.html#form` on the other three. Each page marks its own link with `aria-current="page"`.
 - `ai-exposure.html` renders an ECharts treemap (loaded from a pinned jsDelivr CDN URL) over data in `data/ai-exposure.js` — no runtime fetch dependency. `data/ai-exposure.js` defines `window.AI_EXPOSURE_DATA` and is loaded by both `ai-exposure.html` (full chart) and `index.html` (front-page preview), so there is one shared copy, not one per page. `data/ai-exposure.json` is the canonical source of numbers and citations; `data/ai-exposure.js` is a literal copy of it and must be kept in sync by hand whenever the JSON changes.
 - `index.html` embeds a compact, non-interactive preview of the exposure treemap between the masthead and the Doors: top 8 categories by observed exposure, observed metric only, no drill-down. It loads the same pinned ECharts CDN build and `data/ai-exposure.js`; the chart setup lives in `script.js` and repaints its gaps/tooltip when the theme toggle flips. Note this means the ~1MB ECharts library now loads on the landing page too (same cached CDN build as the heatmap page).
 - Form posts to Formspree. Endpoint is live: `https://formspree.io/f/mdavorwl`. Only Niklas manages the Formspree account; Claude Code only updates the `action` attribute if the URL ever changes.
@@ -61,13 +61,16 @@ Fonts: **Dongle** (headlines/display, `--fd`), **Poppins** (body/UI, `--fb`), **
 
 `--px` / `--py` set section horizontal/vertical padding (`52px` / `60px`, reduced in the `@media (max-width: 900px)` block).
 
-**Scoping:** every paper-system rule in `styles.css` is prefixed `body.redesign` (only `index.html`'s `<body>` carries that class), so it can't leak onto the other three pages. This is a temporary rollout mechanism — when a page is migrated to the paper system, give it `<body class="redesign">`, rebuild its markup against the new atoms (`.btn`, `.tag`, `.mono`, `.eyebrow`, `.nav`/`.theme-toggle`, etc.), and once all four pages are migrated the `body.redesign` prefix can be dropped and the legacy tokens below retired.
+**Scoping:** every paper-system rule in `styles.css` is prefixed `body.redesign`. This was a rollout mechanism while pages migrated one at a time; **all four pages now carry `<body class="redesign">`**, so the prefix is no longer doing any isolating work and could be dropped in a future cleanup pass (a mechanical find/replace, low priority). Build new components from the paper atoms (`.btn`, `.tag`, `.mono`, `.eyebrow`, `.nav`/`.theme-toggle`, `--px`/`--py`, `--surface`, `--ink*`, `--rule*`).
 
 **Watch out for legacy ID/tag selectors:** the old stylesheet has some bare-tag and ID selectors (e.g. `footer { background: var(--color-ink) }`) from before the redesign. An ID or bare-tag selector can outrank a two-class `body.redesign .foo` rule regardless of source order — if a paper-system element keeps an old ID/tag for JS hooks or anchors, check that no legacy selector targeting it still sets layout, `background`, or `color`. (One real instance of this — a leftover `#form { padding: 5rem 1.25rem }` silently overriding `.form-strip`'s padding — was found and removed.)
 
-### Legacy system (articles.html, ai-defaults.html, ai-exposure.html — pending migration)
+### Legacy system (retired — token definitions partly still referenced)
 
-Fonts: **Dongle** (headlines/display), **Poppins** (body/UI) — loaded from Google Fonts.
+No page renders the legacy layout system any more (all four are on the paper system). The legacy *component* CSS in `styles.css` is dead and slated for deletion. The colour **tokens** below are still defined and a few are still referenced from paper-system rules, so they stay until the cleanup is finished:
+
+- **Still in use:** `--color-coral` / `--color-green` / `--color-yellow` / `--color-rose` — the four AI-defaults status-tag fills (their distinct meaning is load-bearing) and the exposure legend gradient (`--color-coral`→`--color-green`).
+- **No longer referenced:** `--color-yellow-light`, `--color-ink`, `--color-bg`, and the grey utility vars (`--color-text-*`) — safe to remove with the dead component CSS.
 
 Palette (defined as CSS custom properties in `styles.css`):
 | Variable | Hex | Use |
@@ -88,7 +91,7 @@ Grey utility variables (also in `styles.css` — use these, never hardcode hex):
 | `--color-text-ghost` | `#cccccc` | decorative elements (e.g. dash prefixes) |
 | `--color-text-dark-body` | `#aaaaaa` | body text on dark (ink) backgrounds |
 
-Full colour usage rules for the legacy system — section backgrounds, accent rules, what to avoid — are in `colour-instructions.md`. (Paper-system colour rules for index.html live alongside it there too.)
+Colour usage rules for both systems — paper (all pages) and the retired legacy palette, kept for reference — are in `colour-instructions.md`. Read the paper-system section before touching any colour.
 
 ## Current build status
 
@@ -98,7 +101,7 @@ All sections built. The site is at v0.1.
 
 | Section | Status |
 |---|---|
-| Topnav | **Built** — own `.nav` (not the shared `#site-nav`), sticky, includes the theme toggle |
+| Topnav | **Built** — paper `.nav`, sticky, includes the theme toggle (the same `.nav` all four pages now use) |
 | 1. Masthead | **Built** — split layout: headline + CTA on the left, an always-dark `--panel-bg` "mini-hero" panel on the right. The right panel carries the **current featured story** as a single headline stat (a `.stat-num` figure with a smaller `.stat-unit`, animated by the `#counter` JS) + label + description + source line + a link out to the story. Currently the Fable/Mythos recall ("~4 days"). This replaced the old `$1.82T` valuation figure-panel **and** the separate full Featured section — see "Featured story rotation" below |
 | 2. Exposure teaser | **Built** — `.exposure-teaser` section between Masthead and Doors: eyebrow, heading, lede, a compact ECharts treemap (`#exposure-teaser-chart`), and an "Explore the full map" link to ai-exposure.html. Shows the top 8 categories by observed exposure, observed metric only, **no drill-down** (deliberately a snapshot, not a duplicate of the full page). Cell fills are light coral→green pastels so dark labels read on both themes; only the gaps and tooltip track the paper tokens and repaint via a `MutationObserver` on the `<html>` theme class. Logic lives in `script.js`; data from the shared `data/ai-exposure.js` |
 | 3. Doors | **Built** — 2 cards linking to articles.html and ai-defaults.html (the Heatmap is represented by the exposure teaser above, so it has no door). Replaces the old separate Feed Preview and Defaults Preview sections |
@@ -109,52 +112,54 @@ All sections built. The site is at v0.1.
 
 Value Proposition and FAQ were dropped from `index.html` in this rebuild (it's leaner and more content-focused now). Both are slated for a future `about.html`, not yet built — see "What still needs doing before launch".
 
-**articles.html**
+**articles.html** — on the paper system (`body.redesign`)
 
 | Section | Status |
 |---|---|
-| Topnav | **Built** — shared |
-| Previously featured | **Built** — `#featured` / `.featured-*` (legacy styles, previously unused), `.btn-primary` CTA. Archives a past front-page Featured story (currently the Claude Fable 5 launch, 9 Jun 2026) when it's superseded by a new one on `index.html`. Sits above the Feed, its own full-width section with a green left-border accent |
+| Topnav | **Built** — paper `.nav` with the theme toggle (same as index.html) |
+| Previously featured | **Built** — `#featured` / `.featured-*` markup, re-skinned under `body.redesign` (accent left-border, paper stat cards, `.btn` CTA). Archives a past front-page Featured story (currently the Claude Fable 5 launch, 9 Jun 2026) when it's superseded by a new one on `index.html`. Sits above the Feed, its own full-width section |
 | Feed | **Built** — 7 items grouped into 3 collapsible `<details>` sections (Articles & Opinion, Research & Policy, From the Web). Each item: type tag, title, source, editorial note. Groups default closed. |
-| Repos | **Built** — small cards, separate from the feed (`#repos`, `.repo-card`), currently 6 entries. Each card is a non-link container with `.repo-pill` link buttons (e.g. "Repo", "YouTube") for its destination(s) — needed because the odysseus card links to both a repo and a video |
-| Footer | **Built** |
+| Repos | **Built** — small cards, separate from the feed (`#repos`, `.repo-card`), currently 8 entries. Each card is a non-link container with `.repo-pill` link buttons (e.g. "Repo", "YouTube") for its destination(s) — needed because the odysseus card links to both a repo and a video |
+| Footer | **Built** — minimal paper `.footer` |
 
-**ai-defaults.html**
+**ai-defaults.html** — on the paper system (`body.redesign`)
 
 | Section | Status |
 |---|---|
-| Topnav | **Built** — shared |
+| Topnav | **Built** — paper `.nav` with the theme toggle |
 | Header | **Built** — page h1, description, "last checked" datestamp |
-| Legend | **Built** — 4 tag types: On by default (coral), Off by default (green), Opt-out is tiered (yellow), Can re-enable after updates (rose) |
+| Legend | **Built** — 4 tag types, paper `.tag` base with the four legacy colours kept as solid fills (dark text) so they stay distinct and read in both themes: On by default (coral), Off by default (green), Opt-out is tiered (yellow), Can re-enable after updates (rose) |
 | Pattern note | **Built** — callout explaining the two recurring patterns (update resets, tiered opt-out) |
 | Entries | **Built** — 5 entries: Windows 11, GitHub Copilot, Atlassian, Microsoft SharePoint, Google Chrome & Search |
 | Footer | **Built** |
 
-**ai-exposure.html**
+**ai-exposure.html** — on the paper system (`body.redesign`)
 
 | Section | Status |
 |---|---|
-| Topnav | **Built** — shared |
+| Topnav | **Built** — paper `.nav` with the theme toggle |
 | Header | **Built** — page h1, description |
 | Toggle | **Built** — switches the treemap between observed and theoretical exposure. Buttons are always active (never disabled). Clicking while drilled into a category resets the view to root and applies the new metric — this is intentional UX, not a bug. Do not re-add disable/greyed-out logic: ECharts breadcrumb clicks don't emit events that can reliably re-enable buttons, so the only correct state is always-on. |
 | Legend | **Built** — colour scale from coral (potential largely untapped) to green (AI already highly active), keyed to the observed/theoretical ratio |
-| Chart | **Built** — Apache ECharts treemap with drill-down (`nodeClick: 'zoomToNode'`) and breadcrumb navigation; data comes from the shared `data/ai-exposure.js` (`window.AI_EXPOSURE_DATA`), itself a copy of `data/ai-exposure.json`, so the page has no runtime fetch dependency. **Theoretical-mode label rule:** occupation cells (leaves) hide their `%` when the toggle is on theoretical, because the theoretical figure only exists at the category level and the occupation cells are still sized/numbered by observed — a bare observed number under a "theoretical" frame would be misread. The labelled observed value stays in the tooltip, and the metric-description line explains the omission. Do not "restore" leaf percentages in theoretical view |
+| Chart | **Built** — Apache ECharts treemap with drill-down (`nodeClick: 'zoomToNode'`) and breadcrumb navigation; data comes from the shared `data/ai-exposure.js` (`window.AI_EXPOSURE_DATA`), itself a copy of `data/ai-exposure.json`, so the page has no runtime fetch dependency. **The treemap itself was deliberately left light** (its cell gaps are white, set in the inline ECharts config) when the page migrated to paper — by design, not a TODO. To make that read as intentional on the dark page, `#exposure-chart`'s container has an always-light background (`var(--panel-fg)`, the one fixed light-cream token) + border/radius, so the chart sits as a self-contained light panel in both themes. Don't spend effort theming the ECharts internals dark unless asked. **Theoretical-mode label rule:** occupation cells (leaves) hide their `%` when the toggle is on theoretical, because the theoretical figure only exists at the category level and the occupation cells are still sized/numbered by observed — a bare observed number under a "theoretical" frame would be misread. The labelled observed value stays in the tooltip, and the metric-description line explains the omission. Do not "restore" leaf percentages in theoretical view |
 | Caption / source notes | **Built** — explains what the colour does and doesn't mean, the separate 57/43 augmentation/automation aggregate, and links back to `_meta.sources` for provenance |
 | Footer | **Built** |
 
 ## What still needs doing before launch
 
-- **Build `about.html`**, with the FAQ (and consider the Value Prop pillars) that were cut from `index.html` during the paper-system rebuild — reskin them for the leaner frontpage rather than porting as-is
-- **Migrate `articles.html`, `ai-defaults.html`, `ai-exposure.html` to the paper system** — one page at a time, following the pattern established on `index.html` (see Design tokens). Until then they keep the legacy `--color-*` tokens and `#site-nav`
+- **Build `about.html`**, with the FAQ (and consider the Value Prop pillars) that were cut from `index.html` during the paper-system rebuild — reskin them for the leaner frontpage rather than porting as-is. It's the only page not yet built; start it from the paper atoms
 - **Re-verify all stats** in `copy.md` and `data/ai-exposure.json` before going live — figures move fast
 - **Add an SRI hash** to the ECharts CDN `<script>` tags — now in **both** `ai-exposure.html` and `index.html` (each flagged with a comment to verify at jsDelivr before go-live)
 - **Final responsiveness pass** — mobile widths, section spacing; check all four pages
-- **Add more social links to footer** — Instagram is live in all four footers (`https://www.instagram.com/antibsai/`; paper `.foot-links` on index.html, legacy `.footer-social` nav on the other three). Add others if/when Niklas picks more platforms
+- **Add more social links to footer** — Instagram is live in all four footers (`https://www.instagram.com/antibsai/`, in the paper `.foot-links` nav on every page). Add others if/when Niklas picks more platforms
 - **Privacy and Terms pages** — footer links point to `#` on all pages
 - **Keep articles.html fresh** — add new items as they come in, remove stale ones
 - **Keep ai-defaults.html fresh** — add new entries as they surface; re-verify toggle paths and dates per entry
 - **Keep ai-exposure.html fresh** — re-verify category and occupation figures against the source datasets periodically; update `data/ai-exposure.json` and `data/ai-exposure.js` together (the front-page preview reads the same shared file, so both pages refresh at once)
-- **Remove dead legacy CSS in `styles.css`** — leftover rules from the pre-redesign single-page layout (`#hero`, `#value-prop`, `#about`, `#faq`, `#topic-form`, `.form-inner`, `.form-heading`, `.form-subtext`, `.form-fieldset`, `.checkbox-list`, `.form-field`, `.form-label`, `.form-helper`, `.btn-form-submit`, `.form-success-link`, the old `@keyframes fadeIn`, etc.) are no longer referenced by any HTML and are safe to delete. Don't treat them as a starting point for `about.html` — that page reskins the cut FAQ/Value Prop content against the paper system from scratch (see above)
+- **Remove dead legacy CSS in `styles.css`** (now a bigger job, since all pages migrated). Two batches, both unreferenced by any HTML and safe to delete:
+  1. Pre-redesign single-page rules: `#hero`, `#value-prop`, `#about`, `#faq`, `#topic-form`, `.form-inner`, `.form-heading`, `.form-subtext`, `.form-fieldset`, `.checkbox-list`, `.form-field`, `.form-label`, `.form-helper`, `.btn-form-submit`, `.form-success-link`, the old `@keyframes fadeIn`, etc.
+  2. Legacy *component* rules superseded by the `body.redesign` versions: the old `#site-nav` block, the legacy `#footer`/`.footer-inner`/`.footer-brand`/`.footer-nav`/`.footer-social`/`.footer-legal`/`.footer-microcopy` footer, and the bare (non-`body.redesign`) `#feed`/`#repos`/`#featured`/`.feed-*`/`.repos-*`/`.repo-*`/`.featured-*`/`.btn-primary`/`.defaults-wrap`/`.page-head`/`.entry*`/`.legend`/`.tag--*`/`.pattern-note`/`.add-note`/`.exposure-*`/`.metric-*`/`.toggle-btn*`/`.legend-*` rules. **Keep the `--color-coral`/`-green`/`-yellow`/`-rose` token definitions** — the paper-system status tags and exposure gradient still reference them. After deleting, drop the now-unused `--color-yellow-light`/`-ink`/`-bg`/`-text-*` tokens too, and consider dropping the now-redundant `body.redesign` selector prefix sitewide.
+  - Don't treat any of this as a starting point for `about.html` — that page reskins the cut FAQ/Value Prop content against the paper atoms from scratch (see above)
 
 ## Contact / email
 
@@ -197,7 +202,7 @@ Value Proposition and FAQ are no longer on `index.html`; both are slated for a f
 4. Caption / source notes (what colour does and doesn't mean, the separate 57/43 augmentation/automation aggregate, links to provenance)
 5. Footer
 
-All styles live in `styles.css`; none of the four pages has a `<style>` block with substantial CSS. `index.html` carries one small inline `<script>` in `<head>` that applies the saved theme (`localStorage`, key `theme`) before paint to avoid a flash of the wrong theme — keep this minimal and synchronous. The dataset for both treemaps lives in `data/ai-exposure.js` (`window.AI_EXPOSURE_DATA`), loaded as an external script; `ai-exposure.html` carries a separate inline `<script>` block that configures the full ECharts treemap from it, while the `index.html` front-page preview is configured in `script.js`. `data/ai-exposure.js` is a literal, hand-kept-in-sync copy of `data/ai-exposure.json` (so both pages render with no runtime fetch).
+All styles live in `styles.css`; none of the four pages has a `<style>` block with substantial CSS. **All four pages** now carry the same small inline `<head>` `<script>` that applies the saved theme (`localStorage`, key `theme`) before paint to avoid a flash of the wrong theme — keep this minimal and synchronous, and identical across pages. All four also load `script.js` before `</body>` (it powers the theme toggle, nav `.stuck` state, and `.reveal` animations; every block guards on the elements it needs, so the index-only form/counter/teaser logic harmlessly no-ops elsewhere). The dataset for both treemaps lives in `data/ai-exposure.js` (`window.AI_EXPOSURE_DATA`), loaded as an external script; `ai-exposure.html` carries a separate inline `<script>` block that configures the full ECharts treemap from it, while the `index.html` front-page preview is configured in `script.js`. `data/ai-exposure.js` is a literal, hand-kept-in-sync copy of `data/ai-exposure.json` (so both pages render with no runtime fetch).
 
 (Copy for index.html sections is in `copy.md`. Sections cut from the landing page — About/Story, Problem/Solution, What You'll Get, Social Proof, Pricing, Value Proposition, FAQ — are still in `copy.md` marked REMOVED, kept for reference for the future `about.html`. Articles feed copy, AI defaults copy, and AI exposure heatmap copy live in their respective HTML files directly; the heatmap's underlying numbers and source citations live in `data/ai-exposure.json`.)
 
