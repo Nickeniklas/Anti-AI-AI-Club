@@ -29,7 +29,7 @@ This governs every design and copy choice. No urgency tricks. No countdown timer
 - Multipage: `index.html` (landing page) + `articles.html` (curated feed) + `ai-defaults.html` (AI defaults tracker) + `ai-exposure.html` (AI exposure heatmap). Mobile-first, responsive.
 - Topnav, brand left, links right (Articles, AI Defaults, Heatmap, yellow "Weigh in" pill CTA), sticky on all four pages. `articles.html`, `ai-defaults.html`, and `ai-exposure.html` share the legacy `#site-nav` markup. `index.html` has its own redesigned `.nav` (paper system) with the same links plus a light/dark theme toggle — bring the other three pages onto this `.nav` when they migrate to the paper system.
 - `ai-exposure.html` renders an ECharts treemap (loaded from a pinned jsDelivr CDN URL) over data in `data/ai-exposure.js` — no runtime fetch dependency. `data/ai-exposure.js` defines `window.AI_EXPOSURE_DATA` and is loaded by both `ai-exposure.html` (full chart) and `index.html` (front-page preview), so there is one shared copy, not one per page. `data/ai-exposure.json` is the canonical source of numbers and citations; `data/ai-exposure.js` is a literal copy of it and must be kept in sync by hand whenever the JSON changes.
-- `index.html` embeds a compact, non-interactive preview of the exposure treemap between the masthead and Featured: top 8 categories by observed exposure, observed metric only, no drill-down. It loads the same pinned ECharts CDN build and `data/ai-exposure.js`; the chart setup lives in `script.js` and repaints its gaps/tooltip when the theme toggle flips. Note this means the ~1MB ECharts library now loads on the landing page too (same cached CDN build as the heatmap page).
+- `index.html` embeds a compact, non-interactive preview of the exposure treemap between the masthead and the Doors: top 8 categories by observed exposure, observed metric only, no drill-down. It loads the same pinned ECharts CDN build and `data/ai-exposure.js`; the chart setup lives in `script.js` and repaints its gaps/tooltip when the theme toggle flips. Note this means the ~1MB ECharts library now loads on the landing page too (same cached CDN build as the heatmap page).
 - Form posts to Formspree. Endpoint is live: `https://formspree.io/f/mdavorwl`. Only Niklas manages the Formspree account; Claude Code only updates the `action` attribute if the URL ever changes.
 - The form stores topic checkboxes, optional worry text, and optional email. Email is NOT required and must never block submission.
 - Keep it lightweight. No heavy dependencies.
@@ -99,12 +99,13 @@ All sections built. The site is at v0.1.
 | Section | Status |
 |---|---|
 | Topnav | **Built** — own `.nav` (not the shared `#site-nav`), sticky, includes the theme toggle |
-| 1. Masthead | **Built** — split layout: headline + CTA on the left, animated `$1.82T` stat panel (always-dark `--panel-bg`) on the right |
-| 2. Exposure teaser | **Built** — `.exposure-teaser` section between Masthead and Featured: eyebrow, heading, lede, a compact ECharts treemap (`#exposure-teaser-chart`), and an "Explore the full map" link to ai-exposure.html. Shows the top 8 categories by observed exposure, observed metric only, **no drill-down** (deliberately a snapshot, not a duplicate of the full page). Cell fills are light coral→green pastels so dark labels read on both themes; only the gaps and tooltip track the paper tokens and repaint via a `MutationObserver` on the `<html>` theme class. Logic lives in `script.js`; data from the shared `data/ai-exposure.js` |
-| 3. Featured | **Built** — rotating front-page story, 3 stat cards. When replaced with a new story, move the outgoing one to the "Previously featured" section at the top of articles.html (see below) |
-| 4. Doors | **Built** — 3 cards linking to articles.html, ai-defaults.html, ai-exposure.html (replaces the old separate Feed Preview and Defaults Preview sections) |
-| 5. Form strip | **Built** — compact chip-based topic picker + optional worry/email fields, single row on desktop. Heading has a short lede underneath (`.form-head`/`.form-lede`) explaining the form. Section has an accent left border and a brief `:target` glow (`redesign-form-arrive`) when landed on via a `#form` anchor (the nav/masthead "Weigh in" / "Tell us what to cover" CTAs); page also gets `scroll-behavior: smooth` and the section a `scroll-margin-top` so the jump clears the sticky nav |
-| 6. Footer | **Built** — minimal, dark |
+| 1. Masthead | **Built** — split layout: headline + CTA on the left, an always-dark `--panel-bg` "mini-hero" panel on the right. The right panel carries the **current featured story** as a single headline stat (a `.stat-num` figure with a smaller `.stat-unit`, animated by the `#counter` JS) + label + description + source line + a link out to the story. Currently the Fable/Mythos recall ("~4 days"). This replaced the old `$1.82T` valuation figure-panel **and** the separate full Featured section — see "Featured story rotation" below |
+| 2. Exposure teaser | **Built** — `.exposure-teaser` section between Masthead and Doors: eyebrow, heading, lede, a compact ECharts treemap (`#exposure-teaser-chart`), and an "Explore the full map" link to ai-exposure.html. Shows the top 8 categories by observed exposure, observed metric only, **no drill-down** (deliberately a snapshot, not a duplicate of the full page). Cell fills are light coral→green pastels so dark labels read on both themes; only the gaps and tooltip track the paper tokens and repaint via a `MutationObserver` on the `<html>` theme class. Logic lives in `script.js`; data from the shared `data/ai-exposure.js` |
+| 3. Doors | **Built** — 2 cards linking to articles.html and ai-defaults.html (the Heatmap is represented by the exposure teaser above, so it has no door). Replaces the old separate Feed Preview and Defaults Preview sections |
+| 4. Form strip | **Built** — compact chip-based topic picker + optional worry/email fields, single row on desktop. Heading has a short lede underneath (`.form-head`/`.form-lede`) explaining the form. Section has an accent left border and a brief `:target` glow (`redesign-form-arrive`) when landed on via a `#form` anchor (the nav/masthead "Weigh in" / "Tell us what to cover" CTAs); page also gets `scroll-behavior: smooth` and the section a `scroll-margin-top` so the jump clears the sticky nav |
+| 5. Footer | **Built** — minimal, dark; includes an Instagram link (https://www.instagram.com/antibsai/) |
+
+**Featured story rotation:** the current featured story lives in the masthead right panel as a mini-hero (headline stat + label + blurb + link), not in a separate full section anymore. When a new story earns the slot, rewrite that right panel and move the outgoing story into the "Previously featured" section at the top of `articles.html` (legacy `#featured`/`.featured-*` markup, `.btn-primary` CTA), then update `copy.md` sections 1/1b/1c to match. Pick a "headline stat" for the new story that the `#counter` animation can count up to (currently `~4` days). The old full Featured section's three stat cards no longer render anywhere; if a story needs that depth, archive it to `articles.html` rather than re-adding the section to `index.html`.
 
 Value Proposition and FAQ were dropped from `index.html` in this rebuild (it's leaner and more content-focused now). Both are slated for a future `about.html`, not yet built — see "What still needs doing before launch".
 
@@ -148,7 +149,7 @@ Value Proposition and FAQ were dropped from `index.html` in this rebuild (it's l
 - **Re-verify all stats** in `copy.md` and `data/ai-exposure.json` before going live — figures move fast
 - **Add an SRI hash** to the ECharts CDN `<script>` tags — now in **both** `ai-exposure.html` and `index.html` (each flagged with a comment to verify at jsDelivr before go-live)
 - **Final responsiveness pass** — mobile widths, section spacing; check all four pages
-- **Add social links to footer** — placeholder comment in all HTML files; Niklas decides which platforms
+- **Add more social links to footer** — Instagram is live in all four footers (`https://www.instagram.com/antibsai/`; paper `.foot-links` on index.html, legacy `.footer-social` nav on the other three). Add others if/when Niklas picks more platforms
 - **Privacy and Terms pages** — footer links point to `#` on all pages
 - **Keep articles.html fresh** — add new items as they come in, remove stale ones
 - **Keep ai-defaults.html fresh** — add new entries as they surface; re-verify toggle paths and dates per entry
@@ -168,12 +169,11 @@ Value Proposition and FAQ were dropped from `index.html` in this rebuild (it's l
 ## Sections (page order)
 
 **index.html** (paper system, `body.redesign`)
-1. Masthead — headline + CTA, plus the animated `$1.82T` stat panel
-1a. Exposure teaser — compact, non-interactive preview of the exposure treemap (top 8 categories, observed only, no drill-down), linking to ai-exposure.html (sits between Masthead and Featured)
-1b. Featured — front-page story block, rotates as new stories earn the slot (sits between the Exposure teaser and Doors). When a story is replaced, move it verbatim into the "Previously featured" section at the top of articles.html (legacy `#featured`/`.featured-*` markup, `.btn-primary` CTA) and update copy.md sections 1b/1c to match
-2. Doors — 3 cards linking to articles.html, ai-defaults.html, ai-exposure.html
-3. Form strip — compact topic chips + optional worry/email fields (main conversion block)
-4. Footer
+1. Masthead — headline + CTA on the left; right panel is a mini-hero for the current featured story (animated headline stat via `#counter`, label, blurb, link out). Rotates as new stories earn the slot; archive the outgoing one to articles.html "Previously featured" and update copy.md sections 1/1b/1c (see "Featured story rotation" above)
+2. Exposure teaser — compact, non-interactive preview of the exposure treemap (top 8 categories, observed only, no drill-down), linking to ai-exposure.html (sits between Masthead and Doors)
+3. Doors — 2 cards linking to articles.html and ai-defaults.html (no Heatmap door; the exposure teaser covers it)
+4. Form strip — compact topic chips + optional worry/email fields (main conversion block)
+5. Footer
 
 Value Proposition and FAQ are no longer on `index.html`; both are slated for a future `about.html` (not yet built).
 

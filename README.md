@@ -33,12 +33,11 @@ v0.1 — all sections built and live.
 | Section | Status |
 |---|---|
 | Topnav | Built — own `.nav`, includes the theme toggle |
-| 1. Masthead | Built — headline + CTA, animated `$1.82T` stat panel |
+| 1. Masthead | Built — headline + CTA on the left; right panel is a mini-hero for the current featured story (animated headline stat, label, blurb, link out — currently the Fable/Mythos recall, "~4 days"). Rotates as new stories earn the slot; the outgoing one is archived to articles.html "Previously featured" |
 | 2. Exposure teaser | Built — compact preview of the exposure treemap (top 8 categories, observed only, no drill-down); links to the full heatmap page |
-| 3. Featured (rotating front-page story) | Built — when replaced, the outgoing story moves to the "Previously featured" section at the top of articles.html |
-| 4. Doors (links to articles/AI Defaults/Heatmap) | Built |
-| 5. Form strip | Built — short lede under the heading explaining the form; accent left border + brief glow when landed on via the "Weigh in" anchor |
-| 6. Footer | Built |
+| 3. Doors (links to Articles + AI Defaults) | Built — 2 cards; no Heatmap door (the exposure teaser covers it) |
+| 4. Form strip | Built — short lede under the heading explaining the form; accent left border + brief glow when landed on via the "Weigh in" anchor |
+| 5. Footer | Built — includes an Instagram link |
 
 Value Proposition and FAQ were dropped from `index.html` in the paper-system rebuild; both are slated for a future `about.html` (not yet built).
 
@@ -79,7 +78,7 @@ Value Proposition and FAQ were dropped from `index.html` in the paper-system reb
 - **Re-verify all stats** in `copy.md` and `data/ai-exposure.json` — figures move fast; check sources before going live
 - **Add an SRI hash** to the ECharts CDN `<script>` tags (now in both `ai-exposure.html` and `index.html` — flagged with a comment to verify at jsDelivr before go-live)
 - **Final responsiveness pass** — mobile widths, section spacing; check all four pages
-- **Add social links to footer** — placeholder comment in all HTML files; platforms TBD
+- **Add more social links to footer** — Instagram is live in all four footers; add others if/when more platforms are chosen
 - **Privacy and Terms pages** — footer links point to `#` on all pages
 - **Keep articles.html fresh** — add new items as they come in, remove stale ones
 - **Keep ai-defaults.html fresh** — add new entries as they surface; re-verify toggle paths

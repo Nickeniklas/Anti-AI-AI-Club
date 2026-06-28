@@ -13,9 +13,9 @@ Tokens are listed in full in `CLAUDE.md` → Design tokens (`:root` for dark/def
 
 | Section | Background | Notes |
 |---|---|---|
-| Nav, Masthead (left), Featured, Doors | `--bg` (page background) | `--bg2` is used for subtle hover states (e.g. a door card on hover), not as a section background |
-| Masthead right panel (the `$1.82T` figure) | `--panel-bg` | **Stays dark in both themes** — the one fixed-dark panel, and the masthead's visual anchor |
-| Form strip, stat cards | `--surface` | A step apart from `--bg` — lighter than `--bg` in dark mode, "more white" than `--bg` in light mode |
+| Nav, Masthead (left), Exposure teaser, Doors | `--bg` (page background) | `--bg2` is used for subtle hover states (e.g. a door card on hover), not as a section background |
+| Masthead right panel (the featured-story mini-hero, currently the "~4 days" stat) | `--panel-bg` | **Stays dark in both themes** — the one fixed-dark panel, and the masthead's visual anchor |
+| Form strip | `--surface` | A step apart from `--bg` — lighter than `--bg` in dark mode, "more white" than `--bg` in light mode |
 | Footer | `--panel-bg` | Stays dark in both themes, same as the masthead panel — ties the top and bottom of the page together |
 
 ### Accent and CTAs

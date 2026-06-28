@@ -64,11 +64,10 @@ Source: Anthropic, "Claude Fable 5 and Claude Mythos 5," 9 Jun 2026. All figures
 
 ### 2. Doors
 
-Three cards linking to the other pages.
+Two cards linking to the other content pages. (The Heatmap has no door: it's surfaced by the exposure teaser section above the Doors, which links to ai-exposure.html.)
 
 - **Articles** — tag: `7 pieces`. Body: A hand-picked feed: articles, opinions, research. All on AI's actual impact. Link: Browse the feed → (articles.html)
 - **AI Defaults** — tag: `Tracked & dated`. Body: What ships switched on, and where the off-toggle actually hides. Link: See what's enabled → (ai-defaults.html)
-- **Exposure Heatmap** — tag: `Interactive`. Body: Which jobs and sectors face the most AI disruption, visualised. Link: Explore the map → (ai-exposure.html)
 
 ### 3. Form strip (MAIN CONVERSION BLOCK)
 - **Heading:** What should we cover?
@@ -92,7 +91,7 @@ Three cards linking to the other pages.
 
 ### 4. Footer
 - Brand line: Anti-AI, AI Club · the numbers behind the hype
-- Links: Home · Articles · Submit (mailto: antibsai@gmail.com) · Contact (mailto: antibsai@gmail.com)
+- Links: Home · Articles · Submit (mailto: antibsai@gmail.com) · Contact (mailto: antibsai@gmail.com) · Instagram (https://www.instagram.com/antibsai/)
 
 ---
 
