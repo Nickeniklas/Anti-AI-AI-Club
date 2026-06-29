@@ -108,7 +108,7 @@ All sections built. The site is at v0.1.
 | 4. Form strip | **Built** — compact chip-based topic picker + optional worry/email fields, single row on desktop. Heading has a short lede underneath (`.form-head`/`.form-lede`) explaining the form. Section has an accent left border and a brief `:target` glow (`redesign-form-arrive`) when landed on via a `#form` anchor (the nav/masthead "Weigh in" / "Tell us what to cover" CTAs); page also gets `scroll-behavior: smooth` and the section a `scroll-margin-top` so the jump clears the sticky nav |
 | 5. Footer | **Built** — minimal, dark; includes an Instagram link (https://www.instagram.com/antibsai/) |
 
-**Featured story rotation:** the current featured story lives in the masthead right panel as a mini-hero (headline stat + label + blurb + link), not in a separate full section anymore. When a new story earns the slot, rewrite that right panel and move the outgoing story into the "Previously featured" section at the top of `articles.html` (legacy `#featured`/`.featured-*` markup, `.btn-primary` CTA), then update `copy.md` sections 1/1b/1c to match. Pick a "headline stat" for the new story that the `#counter` animation can count up to (currently `~4` days). The old full Featured section's three stat cards no longer render anywhere; if a story needs that depth, archive it to `articles.html` rather than re-adding the section to `index.html`.
+**Featured story rotation:** the current featured story lives in the masthead right panel as a mini-hero (headline stat + label + blurb + link), not in a separate full section anymore. When a new story earns the slot, rewrite that right panel and move the outgoing story into the **Posts** section (`#posts`) at the top of `articles.html` (`.featured-*` markup, `.btn` CTA), then update `copy.md` sections 1/1b/1c to match. Pick a "headline stat" for the new story that the `#counter` animation can count up to (currently `~4` days). The old full Featured section's three stat cards no longer render anywhere; if a story needs that depth, archive it to `articles.html` rather than re-adding the section to `index.html`.
 
 Value Proposition and FAQ were dropped from `index.html` in this rebuild (it's leaner and more content-focused now). Both are slated for a future `about.html`, not yet built — see "What still needs doing before launch".
 
@@ -117,9 +117,10 @@ Value Proposition and FAQ were dropped from `index.html` in this rebuild (it's l
 | Section | Status |
 |---|---|
 | Topnav | **Built** — paper `.nav` with the theme toggle (same as index.html) |
-| Previously featured | **Built** — `#featured` / `.featured-*` markup, re-skinned under `body.redesign` (accent left-border, paper stat cards, `.btn` CTA). Archives a past front-page Featured story (currently the Claude Fable 5 launch, 9 Jun 2026) when it's superseded by a new one on `index.html`. Sits above the Feed, its own full-width section |
-| Feed | **Built** — 7 items grouped into 3 collapsible `<details>` sections (Articles & Opinion, Research & Policy, From the Web). Each item: type tag, title, source, editorial note. Groups default closed. |
-| Repos | **Built** — small cards, separate from the feed (`#repos`, `.repo-card`), currently 8 entries. Each card is a non-link container with `.repo-pill` link buttons (e.g. "Repo", "YouTube") for its destination(s) — needed because the odysseus card links to both a repo and a video |
+| Page header | **Built** — paper `.page-head` (h1 "Articles" + one-line lede). Neutral umbrella over the two sections below |
+| Posts | **Built** — `#posts` / `.featured-*` markup, re-skinned under `body.redesign` (accent left-border, paper stat cards, `.btn` CTA). Holds our **own** write-ups; archives a past front-page Featured story (currently the Claude Fable 5 launch, 9 Jun 2026) when it's superseded by a new one on `index.html`. Has a `.feed-inner` heading ("Posts" + subtext). Will hold more original pieces over time; split into its own nav tab once there are 3–4 (see "What still needs doing"). The section id was renamed `#featured`→`#posts`; the two `body.redesign #posts` section-shell rules in `styles.css` were updated to match |
+| Worth reading (Feed) | **Built** — `#feed`, heading "Worth reading". 7 **external** hand-picked items grouped into 3 collapsible `<details>` sections (Articles & Opinion, Research & Policy, From the Web). Each item: type tag, title, source, editorial note. Groups default closed. |
+| Repos | **Built** — a sub-group of "Worth reading" (`#repos`, `.repo-card`, `<h3>` heading), currently 8 entries. Each card is a non-link container with `.repo-pill` link buttons (e.g. "Repo", "YouTube") for its destination(s) — needed because the odysseus card links to both a repo and a video |
 | Footer | **Built** — minimal paper `.footer` |
 
 **ai-defaults.html** — on the paper system (`body.redesign`)
@@ -174,7 +175,7 @@ Value Proposition and FAQ were dropped from `index.html` in this rebuild (it's l
 ## Sections (page order)
 
 **index.html** (paper system, `body.redesign`)
-1. Masthead — headline + CTA on the left; right panel is a mini-hero for the current featured story (animated headline stat via `#counter`, label, blurb, link out). Rotates as new stories earn the slot; archive the outgoing one to articles.html "Previously featured" and update copy.md sections 1/1b/1c (see "Featured story rotation" above)
+1. Masthead — headline + CTA on the left; right panel is a mini-hero for the current featured story (animated headline stat via `#counter`, label, blurb, link out). Rotates as new stories earn the slot; archive the outgoing one to the articles.html "Posts" section and update copy.md sections 1/1b/1c (see "Featured story rotation" above)
 2. Exposure teaser — compact, non-interactive preview of the exposure treemap (top 8 categories, observed only, no drill-down), linking to ai-exposure.html (sits between Masthead and Doors)
 3. Doors — 2 cards linking to articles.html and ai-defaults.html (no Heatmap door; the exposure teaser covers it)
 4. Form strip — compact topic chips + optional worry/email fields (main conversion block)
@@ -182,11 +183,12 @@ Value Proposition and FAQ were dropped from `index.html` in this rebuild (it's l
 
 Value Proposition and FAQ are no longer on `index.html`; both are slated for a future `about.html` (not yet built).
 
-**articles.html** — page title "Hand-picked articles"
-1. Previously featured — archived past front-page Featured story (`#featured` / `.featured-*`), shown when a newer story has replaced it on `index.html`
-2. Feed — 7 items in 3 collapsible groups (default closed, `<details>`/`<summary>`). Groups: Articles & Opinion, Research & Policy, From the Web.
-3. Repos — small cards (`#repos`, `.repo-card`) with `.repo-pill` link buttons, separate from the feed above
-4. Footer
+**articles.html** — page title "Articles". One page, two buckets: what we wrote vs what we found
+1. Page header — `.page-head` (h1 "Articles" + lede)
+2. Posts — our **own** write-ups (`#posts` / `.featured-*`); the archive slot for a past front-page Featured story once a newer one replaces it on `index.html`
+3. Worth reading (Feed) — 7 **external** hand-picked items in 3 collapsible groups (default closed, `<details>`/`<summary>`). Groups: Articles & Opinion, Research & Policy, From the Web.
+4. Repos — small cards (`#repos`, `.repo-card`) with `.repo-pill` link buttons, a sub-group of "Worth reading"
+5. Footer
 
 **ai-defaults.html** — page title "AI defaults — what's on, and how to turn it off"
 1. Header (h1, description, last-checked datestamp)

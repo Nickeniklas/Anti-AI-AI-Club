@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hand-picked articles — Anti-AI, AI Club</title>
+  <title>Articles — Anti-AI, AI Club</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&family=Poppins:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -47,10 +47,23 @@
   </nav>
 
   <main>
-    <section id="featured">
-      <div class="featured-inner">
-        <span class="featured-kicker">Previously featured · 9 Jun 2026</span>
-        <h2 class="featured-heading">The most capable model yet just shipped to everyone. Here are the numbers nobody's leading with.</h2>
+    <header class="page-head">
+      <div class="page-head-inner">
+        <h1>Articles</h1>
+        <p>Our own posts based on credible sources, and others we believe are worth reading.</p>
+      </div>
+    </header>
+
+    <section id="posts">
+      <div class="feed-inner">
+        <div class="feed-head">
+          <span class="eyebrow">Written by us</span>
+          <h2 class="feed-heading">Posts</h2>
+          <p class="feed-subtext">Our own posts, based on credible sources.</p>
+        </div>
+        <div class="featured-inner">
+        <span class="featured-kicker">Post · 9 Jun 2026</span>
+        <h3 class="featured-heading">The most capable model yet just shipped to everyone. Here are the numbers nobody's leading with.</h3>
         <p class="featured-lede">Anthropic released Claude Fable 5, a model from a new tier they call Mythos-class. The launch post is full of capability claims. The parts worth tracking are the access, the price, and the catch.</p>
         <p class="featured-body">The honest part is in the fine print. Anthropic says the safeguards are tuned to be cautious, so some harmless requests get caught and silently routed to Claude Opus 4.8. A near-identical model with the cyber safeguards removed, called Mythos 5, goes to a small set of government and infrastructure partners, not to you. The free ride on subscription plans is temporary by design too: available everywhere today, then rationed in two weeks because demand is hard to predict.</p>
         <div class="featured-stats">
@@ -69,13 +82,17 @@
         </div>
         <p class="featured-takeaway">None of that is a scandal. It's just the shape of a frontier launch once you read past the benchmark charts: priced to spread fast, gated where it's dangerous.</p>
         <a class="btn" href="https://www.anthropic.com/news/claude-fable-5-mythos-5" target="_blank" rel="noopener">Read Anthropic's announcement →</a>
+        </div>
       </div>
     </section>
 
     <section id="feed">
       <div class="feed-inner">
-        <h1 class="feed-heading">Hand-picked articles</h1>
-        <p class="feed-subtext">Articles, research, and conversations worth your time. Relevant and not sensational.</p>
+        <div class="feed-head">
+          <span class="eyebrow">Found around the web</span>
+          <h2 class="feed-heading">Worth reading</h2>
+          <p class="feed-subtext">Articles, research, and conversations worth your time.</p>
+        </div>
 
         <details class="feed-group">
           <summary class="feed-group-heading">Articles &amp; Opinion</summary>
@@ -165,8 +182,8 @@
 
     <section id="repos">
       <div class="repos-inner">
-        <h2 class="repos-heading">Repos</h2>
-        <p class="repos-subtext">Repos worth a look, plus the odd video, separate from the feed above.</p>
+        <h3 class="repos-heading">Repos</h3>
+        <p class="repos-subtext">Open-source projects and tools worth a look.</p>
 
         <div class="repos-grid">
 

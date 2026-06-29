@@ -28,9 +28,9 @@ The right panel is now a "mini-hero" for the Fable/Mythos recall story (it repla
 
 ### 1b. Featured (front-page story) — Fable/Mythos access recalled — REMOVED from index.html
 
-This full Featured section was **removed from `index.html`**: its story is now told by the masthead right-panel mini-hero (see 1, the "~4 days" stat). Copy kept here for reference and as the source if it's later archived to the "Previously featured" section of `articles.html`. The stat cards below are not currently rendered anywhere.
+This full Featured section was **removed from `index.html`**: its story is now told by the masthead right-panel mini-hero (see 1, the "~4 days" stat). Copy kept here for reference and as the source if it's later archived to the "Posts" section of `articles.html`. The stat cards below are not currently rendered anywhere.
 
-Was a front-page block between Masthead and Doors. Replaced the Claude Fable 5 launch story (9 Jun 2026), which moved to its own "Previously featured" section at the top of `articles.html`.
+Was a front-page block between Masthead and Doors. Replaced the Claude Fable 5 launch story (9 Jun 2026), which moved to the "Posts" section at the top of `articles.html`.
 
 - **Kicker:** Featured · 13 Jun 2026
 - **Heading:** A frontier model got recalled over a request to fix code
@@ -45,11 +45,11 @@ Was a front-page block between Masthead and Doors. Replaced the Claude Fable 5 l
 
 Source: Anthropic, "Fable/Mythos access," 13 Jun 2026. All figures pulled from that post.
 
-### 1c. Previously featured (articles.html) — Claude Fable 5
+### 1c. Posts (articles.html) — Claude Fable 5
 
-Archived front-page story, now its own section at the top of `articles.html` (legacy `#featured` / `.featured-*` styles, with `.btn-primary` as the CTA). Content unchanged from when it ran on the front page.
+Archived front-page story, now the first item in the **Posts** section at the top of `articles.html` (`#posts` / `.featured-*` styles, with `.btn` as the CTA). Posts holds our own write-ups; this is one. Content unchanged from when it ran on the front page.
 
-- **Kicker:** Previously featured · 9 Jun 2026
+- **Kicker:** Post · 9 Jun 2026
 - **Heading:** The most capable model yet just shipped to everyone. Here are the numbers nobody's leading with.
 - **Lede:** Anthropic released Claude Fable 5, a model from a new tier they call Mythos-class. The launch post is full of capability claims. The parts worth tracking are the access, the price, and the catch.
 - **Body:** The honest part is in the fine print. Anthropic says the safeguards are tuned to be cautious, so some harmless requests get caught and silently routed to Claude Opus 4.8. A near-identical model with the cyber safeguards removed, called Mythos 5, goes to a small set of government and infrastructure partners, not to you. The free ride on subscription plans is temporary by design too: available everywhere today, then rationed in two weeks because demand is hard to predict.

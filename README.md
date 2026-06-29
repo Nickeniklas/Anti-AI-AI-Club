@@ -9,7 +9,7 @@ All four pages run the dark-by-default "paper" design system with a shared light
 | File | Purpose |
 |---|---|
 | `index.html` | Landing page. Source of truth for copy that's already built. Loads ECharts + `data/ai-exposure.js` for the front-page treemap preview. |
-| `articles.html` | "Hand-picked articles" page. 7 items in 3 collapsible category groups (`<details>`/`<summary>`), default closed, plus a separate Repos section of small linked cards. |
+| `articles.html` | "Articles" page, two buckets: a **Posts** section (our own write-ups, `#posts`) and a **Worth reading** section (7 hand-picked external items in 3 collapsible `<details>`/`<summary>` groups, default closed) with a Repos sub-group of small linked cards. |
 | `ai-defaults.html` | AI defaults tracker. One `<article class="entry">` per product. Coloured status tags (on/off/tiered/resets). All styles in `styles.css`. |
 | `ai-exposure.html` | AI exposure heatmap. ECharts treemap with an observed/theoretical toggle and drill-down into occupations. Reads its data from the shared `data/ai-exposure.js` (no runtime fetch). In theoretical view, occupation cells hide their `%` (the theoretical figure only exists at the category level); the observed value is still in the tooltip. |
 | `data/ai-exposure.js` | Shared dataset (`window.AI_EXPOSURE_DATA`) loaded by both `ai-exposure.html` and the `index.html` preview. A literal copy of the numbers in `data/ai-exposure.json`. |
@@ -33,7 +33,7 @@ v0.1 — all sections built and live. All four pages run the paper design system
 | Section | Status |
 |---|---|
 | Topnav | Built — own `.nav`, includes the theme toggle |
-| 1. Masthead | Built — headline + CTA on the left; right panel is a mini-hero for the current featured story (animated headline stat, label, blurb, link out — currently the Fable/Mythos recall, "~4 days"). Rotates as new stories earn the slot; the outgoing one is archived to articles.html "Previously featured" |
+| 1. Masthead | Built — headline + CTA on the left; right panel is a mini-hero for the current featured story (animated headline stat, label, blurb, link out — currently the Fable/Mythos recall, "~4 days"). Rotates as new stories earn the slot; the outgoing one is archived to the articles.html "Posts" section |
 | 2. Exposure teaser | Built — compact preview of the exposure treemap (top 8 categories, observed only, no drill-down); links to the full heatmap page |
 | 3. Doors (links to Articles + AI Defaults) | Built — 2 cards; no Heatmap door (the exposure teaser covers it) |
 | 4. Form strip | Built — short lede under the heading explaining the form; accent left border + brief glow when landed on via the "Weigh in" anchor |
@@ -46,9 +46,10 @@ Value Proposition and FAQ were dropped from `index.html` in the paper-system reb
 | Section | Status |
 |---|---|
 | Topnav | Built |
-| Previously featured (archived front-page story) | Built |
-| Feed (7 items, 3 collapsible groups) | Built |
-| Repos (8 small linked cards, separate from the feed) | Built |
+| Page header (h1 "Articles" + lede) | Built |
+| Posts — our own write-ups (`#posts`; archive slot for a past front-page story) | Built |
+| Worth reading — Feed (7 external items, 3 collapsible groups) | Built |
+| Repos (8 small linked cards, sub-group of Worth reading) | Built |
 | Footer | Built |
 
 **ai-defaults.html**

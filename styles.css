@@ -2018,13 +2018,13 @@ body.redesign .foot-links a:hover { color: var(--panel-fg); }
    ================================================================ */
 
 /* ---- Section shells ---- */
-body.redesign #featured,
+body.redesign #posts,
 body.redesign #feed,
 body.redesign #repos {
   background: var(--bg);
   padding: var(--py) var(--px);
 }
-body.redesign #featured,
+body.redesign #posts,
 body.redesign #feed { border-bottom: 1px solid var(--rule2); }
 
 body.redesign .feed-inner,
@@ -2116,7 +2116,9 @@ body.redesign .featured-inner .btn { align-self: flex-start; margin-top: 8px; }
 body.redesign .feed-heading {
   font-family: var(--fd);
   font-weight: 700;
-  font-size: clamp(34px, 6vw, 56px);
+  /* Smaller than the page-head h1 ("Articles") so the page title outranks the
+     two section headings ("Posts" / "Worth reading") instead of matching them. */
+  font-size: clamp(28px, 4.5vw, 40px);
   line-height: 1;
   letter-spacing: -.02em;
   color: var(--ink);
@@ -2127,6 +2129,14 @@ body.redesign .feed-subtext {
   line-height: 1.7;
   margin-top: -1.5rem;
 }
+/* Section heading cluster (eyebrow + heading + subtext), kept tight together
+   so it reads as one block within the 2.5rem-gap .feed-inner */
+body.redesign .feed-head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+body.redesign .feed-head .feed-subtext { margin-top: 0; }
 body.redesign .feed-group-heading {
   font-family: var(--fd);
   font-weight: 700;
@@ -2265,6 +2275,17 @@ body.redesign .page-head h1 {
   color: var(--ink);
 }
 body.redesign .page-head p { font-size: 15px; color: var(--ink2); line-height: 1.75; max-width: 64ch; }
+/* articles.html: a bare page-head dropped straight into <main> (no .defaults-wrap/
+   .exposure-wrap container). Give it the same section padding + 760px centred inner
+   as the sections below, so its text aligns with them instead of hugging the edge. */
+body.redesign main > .page-head { padding: var(--py) var(--px) 0; }
+body.redesign .page-head-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 body.redesign .last-checked { font-family: var(--fm); font-size: 12px; color: var(--ink3); letter-spacing: .02em; }
 body.redesign .legend { display: flex; flex-wrap: wrap; gap: 8px; }
 /* Four status colours stay distinct (load-bearing meaning); solid fills read in both themes */
